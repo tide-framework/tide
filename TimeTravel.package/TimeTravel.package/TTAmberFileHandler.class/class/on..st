@@ -1,5 +1,5 @@
 instance creation
-on: aFileReference
+on: aPath
 	^ self new
-		fileReference: aFileReference;
+		path: aPath;
 		yourself
