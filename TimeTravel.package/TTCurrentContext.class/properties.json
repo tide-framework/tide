@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "TTCurrentContext",
+	"pools" : [
+		 ],
+	"super" : "TTDynamicVariable",
+	"type" : "normal" }

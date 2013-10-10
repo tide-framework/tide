@@ -1,0 +1,16 @@
+{
+	"category" : "TimeTravel-Examples",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"label",
+		"completed",
+		"list" ],
+	"name" : "TTTodoItem",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

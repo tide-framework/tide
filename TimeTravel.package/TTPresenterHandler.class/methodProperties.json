@@ -1,0 +1,16 @@
+{
+	"class" : {
+		"on:" : "NicolasPetton 9/18/2012 19:10" },
+	"instance" : {
+		"contextForRequest:" : "NicolasPetton 10/18/2012 14:35",
+		"handleCallback:data:" : "NicolasPetton 9/19/2012 15:13",
+		"handleCallbackForRequest:" : "NicolasPetton 9/19/2012 14:49",
+		"handleRequest:" : "NicolasPetton 10/18/2012 14:39",
+		"rootPresenter" : "NicolasPetton 7/26/2012 17:32",
+		"rootPresenterClass" : "NicolasPetton 7/26/2012 12:22",
+		"rootPresenterClass:" : "NicolasPetton 7/26/2012 12:22",
+		"sessionForRequest:" : "NicolasPetton 10/18/2012 14:38",
+		"sessionIdFromRequest:" : "NicolasPetton 10/18/2012 14:40",
+		"sessionIfFromCookies:" : "NicolasPetton 10/18/2012 14:40",
+		"sessionManager" : "NicolasPetton 10/18/2012 14:40",
+		"withContext:do:" : "NicolasPetton 10/18/2012 14:38" } }

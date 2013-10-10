@@ -1,0 +1,18 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"callbacks" : "NicolasPetton 7/26/2012 17:40",
+		"createdOn" : "NicolasPetton 10/17/2012 17:32",
+		"defaultExpirySeconds" : "NicolasPetton 10/17/2012 16:57",
+		"expirySeconds" : "NicolasPetton 10/17/2012 16:57",
+		"expirySeconds:" : "NicolasPetton 10/17/2012 17:09",
+		"id" : "NicolasPetton 7/26/2012 17:28",
+		"initialize" : "NicolasPetton 10/17/2012 16:55",
+		"isExpired" : "NicolasPetton 10/18/2012 16:38",
+		"modifiedOn" : "NicolasPetton 10/17/2012 16:55",
+		"rootPresenterFor:" : "NicolasPetton 9/18/2012 20:26",
+		"rootPresenters" : "NicolasPetton 7/26/2012 17:32",
+		"session" : "NicolasPetton 7/26/2012 17:50",
+		"setModifiedOn" : "NicolasPetton 10/17/2012 16:56",
+		"urlForCallback:" : "NicolasPetton 10/18/2012 14:37" } }

@@ -1,0 +1,16 @@
+{
+	"category" : "TimeTravel-Server",
+	"classinstvars" : [
+		"default" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"sessionManager",
+		"handlers",
+		"preferences" ],
+	"name" : "TTDispatcher",
+	"pools" : [
+		 ],
+	"super" : "TTContextObject",
+	"type" : "normal" }

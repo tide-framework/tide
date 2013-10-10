@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "TTAnswerCallback",
+	"pools" : [
+		 ],
+	"super" : "TTCallback",
+	"type" : "normal" }

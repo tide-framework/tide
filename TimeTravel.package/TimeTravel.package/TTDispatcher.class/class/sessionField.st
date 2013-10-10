@@ -1,0 +1,3 @@
+accessing
+sessionField
+	^ '_session'

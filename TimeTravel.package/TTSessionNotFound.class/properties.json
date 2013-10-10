@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "TTSessionNotFound",
+	"pools" : [
+		 ],
+	"super" : "Error",
+	"type" : "normal" }

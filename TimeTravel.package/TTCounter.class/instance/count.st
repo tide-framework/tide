@@ -1,0 +1,4 @@
+accessing
+count
+	<state>
+	^ count

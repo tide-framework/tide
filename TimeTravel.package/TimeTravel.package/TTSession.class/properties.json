@@ -1,0 +1,19 @@
+{
+	"category" : "TimeTravel-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"id",
+		"rootPresenters",
+		"callbacks",
+		"createdOn",
+		"modifiedOn",
+		"expirySeconds" ],
+	"name" : "TTSession",
+	"pools" : [
+		 ],
+	"super" : "TTContextObject",
+	"type" : "normal" }

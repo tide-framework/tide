@@ -1,0 +1,3 @@
+accessing
+server
+	^ TTServer current

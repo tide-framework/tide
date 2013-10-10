@@ -1,0 +1,15 @@
+{
+	"category" : "TimeTravel-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"sessions",
+		"sessionExpirationProcess" ],
+	"name" : "TTSessionManager",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"fileReference" ],
+	"name" : "TTAmberFileHandler",
+	"pools" : [
+		 ],
+	"super" : "TTHandler",
+	"type" : "normal" }

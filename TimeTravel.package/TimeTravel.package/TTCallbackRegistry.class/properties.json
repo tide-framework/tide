@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"callbacks" ],
+	"name" : "TTCallbackRegistry",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

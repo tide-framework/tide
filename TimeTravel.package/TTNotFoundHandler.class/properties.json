@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "TTNotFoundHandler",
+	"pools" : [
+		 ],
+	"super" : "TTHandler",
+	"type" : "normal" }
