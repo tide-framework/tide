@@ -1,3 +1,3 @@
 evaluating
 value: aCollection
-	  ^ messageSend valueWithPossibleArguments: (aCollection ifNil: [ #() ])
+	  ^ messageSend valueWithEnoughArguments: (aCollection ifNil: [ #() ])

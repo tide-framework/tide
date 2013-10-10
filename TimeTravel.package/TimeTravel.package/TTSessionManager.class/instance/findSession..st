@@ -4,7 +4,7 @@ findSession: anId
 	
 	session := sessions 
 		at: anId 
-		ifAbsent: [ self sessionNotFound ].
-	session isExpired ifTrue: [ self sessionNotFound ].
+		ifAbsent: [ ^ self newSession ].
+	session isExpired ifTrue: [ ^ self newSession ].
 	
 	^ session
