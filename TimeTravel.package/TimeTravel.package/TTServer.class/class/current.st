@@ -1,3 +1,3 @@
 accessing
 current
-	^ current ifNil: [ current := super new ]
+	^ current ifNil: [ current := self new ]
