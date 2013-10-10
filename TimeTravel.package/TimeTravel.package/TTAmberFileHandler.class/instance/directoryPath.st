@@ -1,0 +1,3 @@
+accessing
+directoryPath
+	^ directoryPath ifNil: [ '' ]

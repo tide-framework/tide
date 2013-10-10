@@ -1,3 +1,3 @@
 accessing
 fileReference
-	^ path asFileReference 
+	^ directoryPath asFileReference 
