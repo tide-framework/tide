@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Examples' properties: #{}!
+Smalltalk current createPackage: 'TimeTravel-Amber-Examples'!
 Widget subclass: #T2CounterWidget
 	instanceVariableNames: 'counter header'
 	package: 'TimeTravel-Amber-Examples'!

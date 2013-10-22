@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Exceptions' properties: #{}!
+Smalltalk current createPackage: 'TimeTravel-Amber-Exceptions'!
 Error subclass: #T2RequestError
 	instanceVariableNames: 'xhr'
 	package: 'TimeTravel-Amber-Exceptions'!

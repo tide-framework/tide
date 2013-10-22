@@ -17,7 +17,13 @@
   }});
 
   require(
-        ["amber/devel"],
+        [
+  		"amber/devel", 
+  		"timetravel/TimeTravel-Amber-Core",
+  		"timetravel/TimeTravel-Amber-Exceptions",
+  		"timetravel/TimeTravel-Amber-Examples",
+  		"timetravel/TimeTravel-Amber-Tests"
+  	],
         function (smalltalk) {
             smalltalk.defaultAmdNamespace = "timetravel";
             smalltalk.initialize();

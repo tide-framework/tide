@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Tests' properties: #{}!
+Smalltalk current createPackage: 'TimeTravel-Amber-Tests'!
 TestCase subclass: #T2ClientTest
 	instanceVariableNames: 'client'
 	package: 'TimeTravel-Amber-Tests'!
@@ -18,7 +18,7 @@ tearDown
 !T2ClientTest methodsFor: 'tests'!
 
 testForwarding
-	| client |
+	"| client |"
 	client := T2Proxy client: (T2Client new).
 
 	self should: [ client count ] raise: MessageNotUnderstood.	

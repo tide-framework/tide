@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Core' properties: #{}!
+Smalltalk current createPackage: 'TimeTravel-Amber-Core'!
 Object subclass: #T2Action
 	instanceVariableNames: 'promise resolved'
 	package: 'TimeTravel-Amber-Core'!
@@ -164,6 +164,10 @@ future
 	^ promise
 !
 
+newJavaScriptObject
+	<return {}>
+!
+
 path
 	^ path
 !
@@ -215,9 +219,9 @@ connect
 initialize
 	super initialize.
 	"Primitive JS object. I need it because I'm keeping JSON data"
-	state := <{}>. 
-	actions := <{}>.
-	children := <{}>
+	state := self newJavaScriptObject. 
+	actions := self newJavaScriptObject.
+	children := self newJavaScriptObject
 ! !
 
 !T2Client methodsFor: 'testing'!
@@ -397,7 +401,7 @@ inheritedSelectors
 
 	methods := self basicAt: 'inheritedMethods'.
 	selectors := #().
-	<for(var selector in methods) {selectors.push(selector)}>.
+"	<for(var selector in methods) {selectors.push(selector)}>."
 
 	selectors := selectors 
 		reject: [ :each | self class methodDictionary keys includes: each ].
@@ -425,7 +429,6 @@ doesNotUnderstand: aMessage
 
 initialize
 	super initialize.
-	self inheritedSelectors do: [ :each | <self[each._asSelector()] = undefined> ]
 ! !
 
 !T2Proxy class methodsFor: 'instance creation'!
@@ -446,15 +449,5 @@ on: aPath
 	^ self basicNew
 		xxxClient: (T2Client on: aPath);
 		initialize
-! !
-
-!JSObjectProxy methodsFor: '*TimeTravel-Amber-Core'!
-
-keysAndValuesDo: aBlock
-	<
-		for(var key in self['@jsObject']) {
-			aBlock._value_value_(key, self['@jsObject'][key]);
-		}
-	>
 ! !
 
