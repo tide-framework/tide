@@ -1,4 +1,4 @@
-define("timetravel/TimeTravel-Amber-Tests", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/SUnit", "amber_core/TimeTravel-Amber-Core"], function(smalltalk,nil,_st){
+define("timetravel/TimeTravel-Amber-Tests", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/SUnit", "timetravel/TimeTravel-Amber-Core"], function(smalltalk,nil,_st){
 smalltalk.addPackage('TimeTravel-Amber-Tests');
 smalltalk.packages["TimeTravel-Amber-Tests"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
