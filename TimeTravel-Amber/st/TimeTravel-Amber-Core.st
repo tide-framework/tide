@@ -97,10 +97,22 @@ sessionNotFound
 	T2SessionNotFound signal
 ! !
 
+!T2RequestAction methodsFor: 'private'!
+
+newClientFromJson: json
+	self client promisedValue: (T2Proxy client: (T2Client fromJson: json))
+!
+
+updateClientFromJson: json
+	self client updateFromJson: json
+! !
+
 !T2RequestAction methodsFor: 'resolving'!
 
-handleResponse: json
-	self client updateFromJson: json
+handleResponse: json status: aNumber
+	^ aNumber == 200 
+		ifTrue: [ self updateClientFromJson: json ]
+		ifFalse: [ self newClientFromJson: json ]
 !
 
 request: aString
@@ -110,8 +122,8 @@ request: aString
 			'type' -> 'POST'.
 			'dataType' -> 'json'.
 			'data' -> #{ 'arguments' -> self data }.
-			'success' -> [ :json |
-				self handleResponse: json.
+			'success' -> [ :json :textStatus :xhr |
+				self handleResponse: json status: xhr status.
 				self beResolved ].
 			'error' -> [ :ex |
 				ex status = 408 
@@ -122,16 +134,6 @@ request: aString
 
 resolve
 	self request: self requestUrl
-! !
-
-T2RequestAction subclass: #T2ChildAction
-	instanceVariableNames: ''
-	package: 'TimeTravel-Amber-Core'!
-
-!T2ChildAction methodsFor: 'resolving'!
-
-handleResponse: json
-	self client promisedValue: (T2Proxy client: (T2Client fromJson: json))
 ! !
 
 Object subclass: #T2Client
@@ -199,9 +201,6 @@ handleFutureMessage: aMessage
 
 	(actions at: selector) 
 		ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].
-
-	(children at: selector) 
-		ifNotNil: [ ^ self future setChildActionFromMessage: aMessage ].
 
 	^ self doesNotUnderstand: aMessage
 !
@@ -318,19 +317,6 @@ setAction: anAction
 ! !
 
 !T2Promise methodsFor: 'actions'!
-
-setChildActionFromMessage: aMessage
-	| url data |
-	url := self client children at: aMessage selector.
-	data := JSON stringify: (aMessage arguments ifNil: [ #() ]).
-	url 
-		ifNil: [ self error: 'Unable to resolve promise' ]
-		ifNotNil: [ 
-			self setAction: ((T2ChildAction on: self)
-				requestUrl: url;
-				data: data;
-				yourself) ]
-!
 
 setRequestActionFromMessage: aMessage
 	| url data |

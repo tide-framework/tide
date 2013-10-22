@@ -2,12 +2,13 @@
 	"class" : {
 		"registerAt:" : "NicolasPetton 9/18/2012 19:10" },
 	"instance" : {
-		"actions" : "NicolasPetton 9/19/2012 14:42",
+		"actions" : "NicolasPetton 10/22/2013 23:12",
+		"actionsFor:" : "NicolasPetton 10/22/2013 23:10",
 		"answer" : "NicolasPetton 9/19/2012 18:56",
-		"answer:" : "NicolasPetton 9/19/2012 18:44",
-		"callback:" : "NicolasPetton 9/19/2012 14:29",
-		"callbackAnswer:" : "NicolasPetton 9/19/2012 18:53",
-		"children" : "NicolasPetton 9/19/2012 18:53",
+		"answer:" : "NicolasPetton 10/23/2013 00:01",
+		"asPresenter" : "NicolasPetton 10/22/2013 23:20",
 		"handleRequest:" : "NicolasPetton 9/19/2012 18:56",
-		"jsonWriteOn:" : "NicolasPetton 9/19/2012 18:58",
-		"state" : "NicolasPetton 9/19/2012 14:51" } }
+		"isNewPresenter:" : "NicolasPetton 10/22/2013 23:56",
+		"jsonWriteOn:" : "NicolasPetton 10/23/2013 00:55",
+		"state" : "NicolasPetton 10/22/2013 23:12",
+		"stateFor:" : "NicolasPetton 10/22/2013 23:11" } }

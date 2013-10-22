@@ -225,17 +225,42 @@ smalltalk.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "handleResponse:",
+selector: "handleResponse:status:",
 category: 'resolving',
-fn: function (json){
+fn: function (json,aNumber){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self._client())._updateFromJson_(json);
-return self}, function($ctx1) {$ctx1.fill(self,"handleResponse:",{json:json},smalltalk.T2RequestAction)})},
-args: ["json"],
-source: "handleResponse: json\x0a\x09self client updateFromJson: json",
-messageSends: ["updateFromJson:", "client"],
+var $2,$1;
+$2=_st(aNumber).__eq_eq((200));
+if(smalltalk.assert($2)){
+$1=self._updateClientFromJson_(json);
+} else {
+$1=self._newClientFromJson_(json);
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"handleResponse:status:",{json:json,aNumber:aNumber},smalltalk.T2RequestAction)})},
+args: ["json", "aNumber"],
+source: "handleResponse: json status: aNumber\x0a\x09^ aNumber == 200 \x0a\x09\x09ifTrue: [ self updateClientFromJson: json ]\x0a\x09\x09ifFalse: [ self newClientFromJson: json ]",
+messageSends: ["ifTrue:ifFalse:", "==", "updateClientFromJson:", "newClientFromJson:"],
 referencedClasses: []
+}),
+smalltalk.T2RequestAction);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "newClientFromJson:",
+category: 'private',
+fn: function (json){
+var self=this;
+function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
+function $T2Client(){return smalltalk.T2Client||(typeof T2Client=="undefined"?nil:T2Client)}
+return smalltalk.withContext(function($ctx1) { 
+_st(self._client())._promisedValue_(_st($T2Proxy())._client_(_st($T2Client())._fromJson_(json)));
+return self}, function($ctx1) {$ctx1.fill(self,"newClientFromJson:",{json:json},smalltalk.T2RequestAction)})},
+args: ["json"],
+source: "newClientFromJson: json\x0a\x09self client promisedValue: (T2Proxy client: (T2Client fromJson: json))",
+messageSends: ["promisedValue:", "client", "client:", "fromJson:"],
+referencedClasses: ["T2Proxy", "T2Client"]
 }),
 smalltalk.T2RequestAction);
 
@@ -247,11 +272,11 @@ fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-_st(jQuery)._ajax_options_(self._requestUrl(),smalltalk.HashedCollection._from_(["type".__minus_gt("POST"),"dataType".__minus_gt("json"),"data".__minus_gt(smalltalk.HashedCollection._from_(["arguments".__minus_gt(self._data())])),"success".__minus_gt((function(json){
+_st(jQuery)._ajax_options_(self._requestUrl(),smalltalk.HashedCollection._from_(["type".__minus_gt("POST"),"dataType".__minus_gt("json"),"data".__minus_gt(smalltalk.HashedCollection._from_(["arguments".__minus_gt(self._data())])),"success".__minus_gt((function(json,textStatus,xhr){
 return smalltalk.withContext(function($ctx2) {
-self._handleResponse_(json);
+self._handleResponse_status_(json,_st(xhr)._status());
 return self._beResolved();
-}, function($ctx2) {$ctx2.fillBlock({json:json},$ctx1,1)})})),"error".__minus_gt((function(ex){
+}, function($ctx2) {$ctx2.fillBlock({json:json,textStatus:textStatus,xhr:xhr},$ctx1,1)})})),"error".__minus_gt((function(ex){
 return smalltalk.withContext(function($ctx2) {
 $1=_st(_st(ex)._status()).__eq((408));
 if(smalltalk.assert($1)){
@@ -262,8 +287,8 @@ return self._requestError_(ex);
 }, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,2)})}))]));
 return self}, function($ctx1) {$ctx1.fill(self,"request:",{aString:aString},smalltalk.T2RequestAction)})},
 args: ["aString"],
-source: "request: aString\x0a\x09jQuery \x0a\x09\x09ajax: self requestUrl\x0a\x09\x09options: #{\x0a\x09\x09\x09'type' -> 'POST'.\x0a\x09\x09\x09'dataType' -> 'json'.\x0a\x09\x09\x09'data' -> #{ 'arguments' -> self data }.\x0a\x09\x09\x09'success' -> [ :json |\x0a\x09\x09\x09\x09self handleResponse: json.\x0a\x09\x09\x09\x09self beResolved ].\x0a\x09\x09\x09'error' -> [ :ex |\x0a\x09\x09\x09\x09ex status = 408 \x0a\x09\x09\x09\x09\x09ifTrue: [ self sessionNotFound ]\x0a\x09\x09\x09\x09\x09ifFalse: [ self requestError: ex ] ]\x0a\x09\x09}",
-messageSends: ["ajax:options:", "requestUrl", "->", "data", "handleResponse:", "beResolved", "ifTrue:ifFalse:", "=", "status", "sessionNotFound", "requestError:"],
+source: "request: aString\x0a\x09jQuery \x0a\x09\x09ajax: self requestUrl\x0a\x09\x09options: #{\x0a\x09\x09\x09'type' -> 'POST'.\x0a\x09\x09\x09'dataType' -> 'json'.\x0a\x09\x09\x09'data' -> #{ 'arguments' -> self data }.\x0a\x09\x09\x09'success' -> [ :json :textStatus :xhr |\x0a\x09\x09\x09\x09self handleResponse: json status: xhr status.\x0a\x09\x09\x09\x09self beResolved ].\x0a\x09\x09\x09'error' -> [ :ex |\x0a\x09\x09\x09\x09ex status = 408 \x0a\x09\x09\x09\x09\x09ifTrue: [ self sessionNotFound ]\x0a\x09\x09\x09\x09\x09ifFalse: [ self requestError: ex ] ]\x0a\x09\x09}",
+messageSends: ["ajax:options:", "requestUrl", "->", "data", "handleResponse:status:", "status", "beResolved", "ifTrue:ifFalse:", "=", "sessionNotFound", "requestError:"],
 referencedClasses: []
 }),
 smalltalk.T2RequestAction);
@@ -355,26 +380,21 @@ referencedClasses: ["T2SessionNotFound"]
 }),
 smalltalk.T2RequestAction);
 
-
-
-smalltalk.addClass('T2ChildAction', smalltalk.T2RequestAction, [], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
-selector: "handleResponse:",
-category: 'resolving',
+selector: "updateClientFromJson:",
+category: 'private',
 fn: function (json){
 var self=this;
-function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
-function $T2Client(){return smalltalk.T2Client||(typeof T2Client=="undefined"?nil:T2Client)}
 return smalltalk.withContext(function($ctx1) { 
-_st(self._client())._promisedValue_(_st($T2Proxy())._client_(_st($T2Client())._fromJson_(json)));
-return self}, function($ctx1) {$ctx1.fill(self,"handleResponse:",{json:json},smalltalk.T2ChildAction)})},
+_st(self._client())._updateFromJson_(json);
+return self}, function($ctx1) {$ctx1.fill(self,"updateClientFromJson:",{json:json},smalltalk.T2RequestAction)})},
 args: ["json"],
-source: "handleResponse: json\x0a\x09self client promisedValue: (T2Proxy client: (T2Client fromJson: json))",
-messageSends: ["promisedValue:", "client", "client:", "fromJson:"],
-referencedClasses: ["T2Proxy", "T2Client"]
+source: "updateClientFromJson: json\x0a\x09self client updateFromJson: json",
+messageSends: ["updateFromJson:", "client"],
+referencedClasses: []
 }),
-smalltalk.T2ChildAction);
+smalltalk.T2RequestAction);
 
 
 
@@ -487,7 +507,7 @@ fn: function (aMessage){
 var self=this;
 var selector;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5,$6,$7;
+var $1,$2,$3,$4,$5;
 selector=_st(_st(aMessage)._selector())._asString();
 $1=_st(self["@state"])._at_(selector);
 if(($receiver = $1) == nil || $receiver == null){
@@ -503,19 +523,12 @@ $3;
 $4=_st(self._future())._setRequestActionFromMessage_(aMessage);
 return $4;
 };
-$5=_st(self["@children"])._at_(selector);
-if(($receiver = $5) == nil || $receiver == null){
-$5;
-} else {
-$6=_st(self._future())._setChildActionFromMessage_(aMessage);
-return $6;
-};
-$7=self._doesNotUnderstand_(aMessage);
-return $7;
+$5=self._doesNotUnderstand_(aMessage);
+return $5;
 }, function($ctx1) {$ctx1.fill(self,"handleFutureMessage:",{aMessage:aMessage,selector:selector},smalltalk.T2Client)})},
 args: ["aMessage"],
-source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09(children at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setChildActionFromMessage: aMessage ].\x0a\x0a\x09^ self doesNotUnderstand: aMessage",
-messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "setChildActionFromMessage:", "doesNotUnderstand:"],
+source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self doesNotUnderstand: aMessage",
+messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "doesNotUnderstand:"],
 referencedClasses: []
 }),
 smalltalk.T2Client);
@@ -1018,44 +1031,6 @@ args: ["anAction"],
 source: "setAction: anAction\x0a\x09action := anAction.\x0a\x09self travel",
 messageSends: ["travel"],
 referencedClasses: []
-}),
-smalltalk.T2Promise);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "setChildActionFromMessage:",
-category: 'actions',
-fn: function (aMessage){
-var self=this;
-var url,data;
-function $JSON(){return smalltalk.JSON||(typeof JSON=="undefined"?nil:JSON)}
-function $T2ChildAction(){return smalltalk.T2ChildAction||(typeof T2ChildAction=="undefined"?nil:T2ChildAction)}
-return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$2,$4,$5,$6;
-url=_st(_st(self._client())._children())._at_(_st(aMessage)._selector());
-$1=$JSON();
-$3=_st(aMessage)._arguments();
-if(($receiver = $3) == nil || $receiver == null){
-$2=[];
-} else {
-$2=$3;
-};
-data=_st($1)._stringify_($2);
-$4=url;
-if(($receiver = $4) == nil || $receiver == null){
-self._error_("Unable to resolve promise");
-} else {
-$5=_st($T2ChildAction())._on_(self);
-_st($5)._requestUrl_(url);
-_st($5)._data_(data);
-$6=_st($5)._yourself();
-self._setAction_($6);
-};
-return self}, function($ctx1) {$ctx1.fill(self,"setChildActionFromMessage:",{aMessage:aMessage,url:url,data:data},smalltalk.T2Promise)})},
-args: ["aMessage"],
-source: "setChildActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client children at: aMessage selector.\x0a\x09data := JSON stringify: (aMessage arguments ifNil: [ #() ]).\x0a\x09url \x0a\x09\x09ifNil: [ self error: 'Unable to resolve promise' ]\x0a\x09\x09ifNotNil: [ \x0a\x09\x09\x09self setAction: ((T2ChildAction on: self)\x0a\x09\x09\x09\x09requestUrl: url;\x0a\x09\x09\x09\x09data: data;\x0a\x09\x09\x09\x09yourself) ]",
-messageSends: ["at:", "children", "client", "selector", "stringify:", "ifNil:", "arguments", "ifNil:ifNotNil:", "error:", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
-referencedClasses: ["JSON", "T2ChildAction"]
 }),
 smalltalk.T2Promise);
 

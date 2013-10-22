@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Presenters",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"model" ],
+	"name" : "TTModelPresenter",
+	"pools" : [
+		 ],
+	"super" : "TTPresenter",
+	"type" : "normal" }
