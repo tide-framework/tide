@@ -1215,25 +1215,22 @@ smalltalk.T2Proxy);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "inheritedSelectors",
-category: 'accessing',
+category: 'private',
 fn: function (){
 var self=this;
-var selectors,methods;
+function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-methods=self._basicAt_("inheritedMethods");
-selectors=[];
-selectors=_st(selectors)._reject_((function(each){
+$1=_st(_st(self._class())._allSelectors())._reject_((function(each){
 return smalltalk.withContext(function($ctx2) {
-return _st(_st(_st(self._class())._methodDictionary())._keys())._includes_(each);
+return _st(_st(_st($T2Proxy())._methodDictionary())._keys())._includes_(each);
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
-$1=selectors;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{selectors:selectors,methods:methods},smalltalk.T2Proxy)})},
+}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{},smalltalk.T2Proxy)})},
 args: [],
-source: "inheritedSelectors\x0a\x09| selectors methods |\x0a\x0a\x09methods := self basicAt: 'inheritedMethods'.\x0a\x09selectors := #().\x0a\x22\x09<for(var selector in methods) {selectors.push(selector)}>.\x22\x0a\x0a\x09selectors := selectors \x0a\x09\x09reject: [ :each | self class methodDictionary keys includes: each ].\x0a\x0a\x09^ selectors",
-messageSends: ["basicAt:", "reject:", "includes:", "keys", "methodDictionary", "class"],
-referencedClasses: []
+source: "inheritedSelectors\x0a\x09^ self class allSelectors\x0a\x09\x09reject: [ :each | T2Proxy methodDictionary keys includes: each ]",
+messageSends: ["reject:", "allSelectors", "class", "includes:", "keys", "methodDictionary"],
+referencedClasses: ["T2Proxy"]
 }),
 smalltalk.T2Proxy);
 
@@ -1247,8 +1244,24 @@ return smalltalk.withContext(function($ctx1) {
 smalltalk.T2Proxy.superclass.fn.prototype._initialize.apply(_st(self), []);
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.T2Proxy)})},
 args: [],
-source: "initialize\x0a\x09super initialize.",
+source: "initialize\x0a\x09super initialize.\x0a\x09\x22self inheritedSelectors do: [ :each |\x0a\x09\x09self removeSelector: each asSelector ]\x22",
 messageSends: ["initialize"],
+referencedClasses: []
+}),
+smalltalk.T2Proxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "removeSelector:",
+category: 'private',
+fn: function (aString){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+delete self[aString];;
+return self}, function($ctx1) {$ctx1.fill(self,"removeSelector:",{aString:aString},smalltalk.T2Proxy)})},
+args: ["aString"],
+source: "removeSelector: aString\x0a\x09<delete self[aString];>",
+messageSends: [],
 referencedClasses: []
 }),
 smalltalk.T2Proxy);

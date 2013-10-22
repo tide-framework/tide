@@ -396,19 +396,6 @@ Object subclass: #T2Proxy
 
 !T2Proxy methodsFor: 'accessing'!
 
-inheritedSelectors
-	| selectors methods |
-
-	methods := self basicAt: 'inheritedMethods'.
-	selectors := #().
-"	<for(var selector in methods) {selectors.push(selector)}>."
-
-	selectors := selectors 
-		reject: [ :each | self class methodDictionary keys includes: each ].
-
-	^ selectors
-!
-
 xxxClient
 	^ client
 !
@@ -429,6 +416,19 @@ doesNotUnderstand: aMessage
 
 initialize
 	super initialize.
+	"self inheritedSelectors do: [ :each |
+		self removeSelector: each asSelector ]"
+! !
+
+!T2Proxy methodsFor: 'private'!
+
+inheritedSelectors
+	^ self class allSelectors
+		reject: [ :each | T2Proxy methodDictionary keys includes: each ]
+!
+
+removeSelector: aString
+	<delete self[aString];>
 ! !
 
 !T2Proxy class methodsFor: 'instance creation'!
