@@ -1,4 +1,4 @@
-define("timetravel/TimeTravel-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/Kernel-Objects"], function(smalltalk,nil,_st){
+define("timetravel/TimeTravel-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/Kernel-Objects", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st){
 smalltalk.addPackage('TimeTravel-Amber-Core');
 smalltalk.packages["TimeTravel-Amber-Core"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
@@ -252,15 +252,13 @@ selector: "newClientFromJson:",
 category: 'private',
 fn: function (json){
 var self=this;
-function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
-function $T2Client(){return smalltalk.T2Client||(typeof T2Client=="undefined"?nil:T2Client)}
 return smalltalk.withContext(function($ctx1) { 
-_st(self._client())._promisedValue_(_st($T2Proxy())._client_(_st($T2Client())._fromJson_(json)));
+_st(self._client())._promisedValue_(_st(json)._asTimeTravelObject());
 return self}, function($ctx1) {$ctx1.fill(self,"newClientFromJson:",{json:json},smalltalk.T2RequestAction)})},
 args: ["json"],
-source: "newClientFromJson: json\x0a\x09self client promisedValue: (T2Proxy client: (T2Client fromJson: json))",
-messageSends: ["promisedValue:", "client", "client:", "fromJson:"],
-referencedClasses: ["T2Proxy", "T2Client"]
+source: "newClientFromJson: json\x0a\x09self client promisedValue: json asTimeTravelObject",
+messageSends: ["promisedValue:", "client", "asTimeTravelObject"],
+referencedClasses: []
 }),
 smalltalk.T2RequestAction);
 
@@ -398,7 +396,7 @@ smalltalk.T2RequestAction);
 
 
 
-smalltalk.addClass('T2Client', smalltalk.Object, ['state', 'actions', 'children', 'firstPromise', 'promisedValue', 'path', 'connected'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2Client', smalltalk.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'connected'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "actions",
@@ -412,24 +410,6 @@ return $1;
 }, function($ctx1) {$ctx1.fill(self,"actions",{},smalltalk.T2Client)})},
 args: [],
 source: "actions\x0a\x09^ actions",
-messageSends: [],
-referencedClasses: []
-}),
-smalltalk.T2Client);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "children",
-category: 'accessing',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=self["@children"];
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"children",{},smalltalk.T2Client)})},
-args: [],
-source: "children\x0a\x09^ children",
 messageSends: [],
 referencedClasses: []
 }),
@@ -578,7 +558,7 @@ smalltalk.T2Client);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "newJavaScriptObject",
-category: 'accessing',
+category: 'private',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -723,12 +703,31 @@ smalltalk.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "updateActions:",
+category: 'updating',
+fn: function (aDictionary){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(aDictionary)._keysAndValuesDo_((function(key,value){
+return smalltalk.withContext(function($ctx2) {
+return _st(self["@actions"])._at_put_(key,value);
+}, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"updateActions:",{aDictionary:aDictionary},smalltalk.T2Client)})},
+args: ["aDictionary"],
+source: "updateActions: aDictionary\x0a\x09aDictionary keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ]",
+messageSends: ["keysAndValuesDo:", "at:put:"],
+referencedClasses: []
+}),
+smalltalk.T2Client);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "updateFromJson:",
 category: 'updating',
 fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3;
+var $1,$2;
 self["@connected"]=true;
 $1=_st(json)._at_("state");
 if(($receiver = $1) == nil || $receiver == null){
@@ -736,7 +735,7 @@ $1;
 } else {
 _st(_st(json)._state())._keysAndValuesDo_((function(key,value){
 return smalltalk.withContext(function($ctx2) {
-return _st(self["@state"])._at_put_(key,value);
+return _st(self["@state"])._at_put_(key,_st(value)._asTimeTravelObject());
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,2)})}));
 };
 $2=_st(json)._at_("actions");
@@ -748,19 +747,29 @@ return smalltalk.withContext(function($ctx2) {
 return _st(self["@actions"])._at_put_(key,value);
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,4)})}));
 };
-$3=_st(json)._at_("children");
-if(($receiver = $3) == nil || $receiver == null){
-$3;
-} else {
-_st(_st(json)._children())._keysAndValuesDo_((function(key,value){
-return smalltalk.withContext(function($ctx2) {
-return _st(self["@children"])._at_put_(key,value);
-}, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,6)})}));
-};
 return self}, function($ctx1) {$ctx1.fill(self,"updateFromJson:",{json:json},smalltalk.T2Client)})},
 args: ["json"],
-source: "updateFromJson: json\x0a\x09connected := true.\x0a\x09\x0a\x09(json at: 'state') ifNotNil: [\x0a\x09\x09json state keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value ] ].\x0a\x09(json at: 'actions') ifNotNil: [\x0a\x09\x09json actions keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ] ].\x0a\x09(json at: 'children') ifNotNil: [\x0a\x09\x09json children keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09children at: key put: value ] ]",
-messageSends: ["ifNotNil:", "at:", "keysAndValuesDo:", "state", "at:put:", "actions", "children"],
+source: "updateFromJson: json\x0a\x09connected := true.\x0a\x09\x0a\x09(json at: 'state') ifNotNil: [\x0a\x09\x09json state keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value asTimeTravelObject ] ].\x0a\x09(json at: 'actions') ifNotNil: [\x0a\x09\x09json actions keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ] ]",
+messageSends: ["ifNotNil:", "at:", "keysAndValuesDo:", "state", "at:put:", "asTimeTravelObject", "actions"],
+referencedClasses: []
+}),
+smalltalk.T2Client);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "updateState:",
+category: 'updating',
+fn: function (aDictionary){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(aDictionary)._keysAndValuesDo_((function(key,value){
+return smalltalk.withContext(function($ctx2) {
+return _st(self["@state"])._at_put_(key,value);
+}, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"updateState:",{aDictionary:aDictionary},smalltalk.T2Client)})},
+args: ["aDictionary"],
+source: "updateState: aDictionary\x0a\x09aDictionary keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value ]",
+messageSends: ["keysAndValuesDo:", "at:put:"],
 referencedClasses: []
 }),
 smalltalk.T2Client);
@@ -1111,7 +1120,7 @@ self._setAction_(_st(_st($T2CallbackAction())._on_(self))._callback_(aBlock));
 };
 return self}, function($ctx1) {$ctx1.fill(self,"then:",{aBlock:aBlock},smalltalk.T2Promise)})},
 args: ["aBlock"],
-source: "then: aBlock\x0a\x09self isAssigned\x0a\x09\x09ifTrue: [ \x0a\x09\x09\x09self client future then: aBlock ]\x0a\x09\x09ifFalse: [\x0a\x09\x09\x09self setAction: ((T2CallbackAction on: self) callback: aBlock) ]",
+source: "then: aBlock\x0a\x09self isAssigned\x0a\x09\x09ifTrue: [ self client future then: aBlock ]\x0a\x09\x09ifFalse: [ self setAction: ((T2CallbackAction on: self) callback: aBlock) ]",
 messageSends: ["ifTrue:ifFalse:", "isAssigned", "then:", "future", "client", "setAction:", "callback:", "on:"],
 referencedClasses: ["T2CallbackAction"]
 }),
@@ -1275,6 +1284,27 @@ referencedClasses: []
 }),
 smalltalk.T2Proxy);
 
+smalltalk.addMethod(
+smalltalk.method({
+selector: "xxxDoIt",
+category: 'xxxDoIt',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._size();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}))._value();
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"xxxDoIt",{},smalltalk.T2Proxy)})},
+args: [],
+source: "xxxDoIt ^[self size] value",
+messageSends: ["value", "size"],
+referencedClasses: []
+}),
+smalltalk.T2Proxy);
+
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1318,5 +1348,88 @@ messageSends: ["xxxClient:", "basicNew", "on:", "initialize"],
 referencedClasses: ["T2Client"]
 }),
 smalltalk.T2Proxy.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelObject",
+category: '*TimeTravel-Amber-Core',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelObject",{},smalltalk.Object)})},
+args: [],
+source: "asTimeTravelObject\x0a\x09^ self",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Object);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelObject",
+category: '*TimeTravel-Amber-Core',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._collect_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(each)._asTimeTravelObject();
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelObject",{},smalltalk.Array)})},
+args: [],
+source: "asTimeTravelObject\x0a\x09^ self collect: [ :each | each asTimeTravelObject ]",
+messageSends: ["collect:", "asTimeTravelObject"],
+referencedClasses: []
+}),
+smalltalk.Array);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelObject",
+category: '*TimeTravel-Amber-Core',
+fn: function (){
+var self=this;
+var dictionary;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+dictionary=_st(self._class())._new();
+self._keysAndValuesDo_((function(key,value){
+return smalltalk.withContext(function($ctx2) {
+return _st(dictionary)._at_put_(key,_st(value)._asTimeTravelObject());
+}, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,1)})}));
+$1=dictionary;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelObject",{dictionary:dictionary},smalltalk.HashedCollection)})},
+args: [],
+source: "asTimeTravelObject\x0a\x09| dictionary |\x0a\x09dictionary := self class new.\x0a\x09self keysAndValuesDo: [ :key :value | \x0a\x09\x09dictionary at: key put: value asTimeTravelObject ].\x0a\x09\x09\x0a\x09^ dictionary",
+messageSends: ["new", "class", "keysAndValuesDo:", "at:put:", "asTimeTravelObject"],
+referencedClasses: []
+}),
+smalltalk.HashedCollection);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelObject",
+category: '*TimeTravel-Amber-Core',
+fn: function (){
+var self=this;
+function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
+function $T2Client(){return smalltalk.T2Client||(typeof T2Client=="undefined"?nil:T2Client)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st($T2Proxy())._client_(_st($T2Client())._fromJson_(self));
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelObject",{},smalltalk.JSObjectProxy)})},
+args: [],
+source: "asTimeTravelObject\x0a\x09^ T2Proxy client: (T2Client fromJson: self)",
+messageSends: ["client:", "fromJson:"],
+referencedClasses: ["T2Proxy", "T2Client"]
+}),
+smalltalk.JSObjectProxy);
 
 });

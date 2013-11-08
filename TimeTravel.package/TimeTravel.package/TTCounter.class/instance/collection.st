@@ -1,4 +1,4 @@
 accessing
 collection
 	<action>
-	^ #(1 2 3)
+	^ {1. 3. true. self}

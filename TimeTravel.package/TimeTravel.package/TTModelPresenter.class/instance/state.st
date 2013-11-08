@@ -1,3 +1,3 @@
 accessing
 state 
-	^ self stateFor: self model
+	^ super state, (self stateFor: self model)

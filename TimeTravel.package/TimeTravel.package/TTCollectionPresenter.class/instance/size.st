@@ -1,4 +1,4 @@
 accessing
 size
 	<state>
-	^ self collection size
+	^ self model size

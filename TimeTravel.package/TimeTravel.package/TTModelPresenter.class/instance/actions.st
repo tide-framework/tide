@@ -1,3 +1,3 @@
 accessing
 actions 
-	^ self actionsFor: self model
+	^ super actions, (self actionsFor: self model)

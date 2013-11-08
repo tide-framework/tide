@@ -1,4 +1,4 @@
-accessing
+actions
 contents
 	<action>
-	^ self collection
+	^ TTLiteralCollectionPresenter on: self model

@@ -100,7 +100,7 @@ sessionNotFound
 !T2RequestAction methodsFor: 'private'!
 
 newClientFromJson: json
-	self client promisedValue: (T2Proxy client: (T2Client fromJson: json))
+	self client promisedValue: json asTimeTravelObject
 !
 
 updateClientFromJson: json
@@ -137,17 +137,13 @@ resolve
 ! !
 
 Object subclass: #T2Client
-	instanceVariableNames: 'state actions children firstPromise promisedValue path connected'
+	instanceVariableNames: 'state actions firstPromise promisedValue path connected'
 	package: 'TimeTravel-Amber-Core'!
 
 !T2Client methodsFor: 'accessing'!
 
 actions
 	^ actions
-!
-
-children
-	^ children
 !
 
 flushPromises
@@ -164,10 +160,6 @@ future
 		ifNotNil: [ firstPromise next: promise ].
 
 	^ promise
-!
-
-newJavaScriptObject
-	<return {}>
 !
 
 path
@@ -223,6 +215,12 @@ initialize
 	children := self newJavaScriptObject
 ! !
 
+!T2Client methodsFor: 'private'!
+
+newJavaScriptObject
+	<return {}>
+! !
+
 !T2Client methodsFor: 'testing'!
 
 isConnected
@@ -240,18 +238,25 @@ update
 	self future then: [ connected := true ]
 !
 
+updateActions: aDictionary
+	aDictionary keysAndValuesDo: [ :key :value |
+			actions at: key put: value ]
+!
+
 updateFromJson: json
 	connected := true.
 	
 	(json at: 'state') ifNotNil: [
 		json state keysAndValuesDo: [ :key :value |
-			state at: key put: value ] ].
+			state at: key put: value asTimeTravelObject ] ].
 	(json at: 'actions') ifNotNil: [
 		json actions keysAndValuesDo: [ :key :value |
-			actions at: key put: value ] ].
-	(json at: 'children') ifNotNil: [
-		json children keysAndValuesDo: [ :key :value |
-			children at: key put: value ] ]
+			actions at: key put: value ] ]
+!
+
+updateState: aDictionary
+	aDictionary keysAndValuesDo: [ :key :value |
+			state at: key put: value ]
 ! !
 
 !T2Client class methodsFor: 'instance creation'!
@@ -333,10 +338,8 @@ setRequestActionFromMessage: aMessage
 
 then: aBlock
 	self isAssigned
-		ifTrue: [ 
-			self client future then: aBlock ]
-		ifFalse: [
-			self setAction: ((T2CallbackAction on: self) callback: aBlock) ]
+		ifTrue: [ self client future then: aBlock ]
+		ifFalse: [ self setAction: ((T2CallbackAction on: self) callback: aBlock) ]
 ! !
 
 !T2Promise methodsFor: 'testing'!
@@ -417,6 +420,11 @@ removeSelector: aString
 	<delete self[aString];>
 ! !
 
+!T2Proxy methodsFor: 'xxxDoIt'!
+
+xxxDoIt ^[self size] value
+! !
+
 !T2Proxy class methodsFor: 'instance creation'!
 
 client: aClient
@@ -435,5 +443,34 @@ on: aPath
 	^ self basicNew
 		xxxClient: (T2Client on: aPath);
 		initialize
+! !
+
+!Object methodsFor: '*TimeTravel-Amber-Core'!
+
+asTimeTravelObject
+	^ self
+! !
+
+!Array methodsFor: '*TimeTravel-Amber-Core'!
+
+asTimeTravelObject
+	^ self collect: [ :each | each asTimeTravelObject ]
+! !
+
+!HashedCollection methodsFor: '*TimeTravel-Amber-Core'!
+
+asTimeTravelObject
+	| dictionary |
+	dictionary := self class new.
+	self keysAndValuesDo: [ :key :value | 
+		dictionary at: key put: value asTimeTravelObject ].
+		
+	^ dictionary
+! !
+
+!JSObjectProxy methodsFor: '*TimeTravel-Amber-Core'!
+
+asTimeTravelObject
+	^ T2Proxy client: (T2Client fromJson: self)
 ! !
 
