@@ -1,3 +1,0 @@
-accessing
-sessionField
-	^ '_session'

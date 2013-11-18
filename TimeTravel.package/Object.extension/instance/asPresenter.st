@@ -1,3 +1,3 @@
-*timetravel-presenters
+*TimeTravel-Handlers
 asPresenter
 	^ self presenterClass on: self

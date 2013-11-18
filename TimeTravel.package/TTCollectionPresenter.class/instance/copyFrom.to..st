@@ -1,4 +1,4 @@
 actions
-copyFrom: first to: last
+copyFrom: start to: stop
 	<action>
-	^ self copyFrom: first to: last
+	^ TTLiteralCollectionPresenter on: (self model copyFrom: start to: stop)

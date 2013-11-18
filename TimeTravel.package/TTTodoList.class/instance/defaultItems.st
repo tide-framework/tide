@@ -1,3 +1,0 @@
-defaults
-defaultItems
-	^ OrderedCollection new

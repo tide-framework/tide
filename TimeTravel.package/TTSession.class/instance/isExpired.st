@@ -1,3 +1,3 @@
 testing
 isExpired
-	^ self modifiedOn + self expirySeconds  < TimeStamp now
+	^ (self modifiedOn + (Duration seconds: self expirySeconds)) asSeconds < DateAndTime now asSeconds 

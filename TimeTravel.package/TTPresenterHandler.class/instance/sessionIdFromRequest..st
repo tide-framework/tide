@@ -1,5 +1,7 @@
 request handling
 sessionIdFromRequest: aRequest
-	^ aRequest uri 
-		queryAt: self dispatcher sessionField 
-		ifAbsent: [ self sessionIfFromCookies: aRequest cookies ]
+	^ self dispatcher useCookies 
+		ifFalse: [ aRequest uri 
+			queryAt: self dispatcher sessionField
+			ifAbsent: [ nil ] ] 
+		ifTrue: [ self sessionIdFromCookies: aRequest cookies ]

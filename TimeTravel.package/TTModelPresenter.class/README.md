@@ -1,1 +1,0 @@
-I am an empty presenter holding a model. My subclasses should expose relevant methods of the model.

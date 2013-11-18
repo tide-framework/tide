@@ -4,13 +4,12 @@
 		"initialize" : "NicolasPetton 10/17/2012 17:09",
 		"startUp" : "NicolasPetton 10/17/2012 17:01" },
 	"instance" : {
-		"findSession:" : "NicolasPetton 10/17/2012 18:14",
+		"findSession:" : "NicolasPetton 10/10/2013 15:56",
 		"initialize" : "NicolasPetton 7/26/2012 17:26",
 		"newSession" : "NicolasPetton 7/26/2012 17:27",
 		"removeAllSessions" : "NicolasPetton 7/26/2012 18:01",
 		"removeExpiredSession" : "NicolasPetton 10/17/2012 17:07",
 		"removeSession:" : "NicolasPetton 10/17/2012 17:34",
-		"sessionNotFound" : "NicolasPetton 10/17/2012 18:15",
 		"sessions" : "NicolasPetton 7/26/2012 18:02",
 		"startSessionExpirationProcess" : "NicolasPetton 10/17/2012 17:08",
 		"stopSessionExpirationProcess" : "NicolasPetton 10/17/2012 17:07" } }

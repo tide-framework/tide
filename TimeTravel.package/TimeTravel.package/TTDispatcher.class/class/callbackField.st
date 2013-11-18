@@ -1,3 +1,0 @@
-accessing
-callbackField
-	^ '_callback'

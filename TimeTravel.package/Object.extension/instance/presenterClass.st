@@ -1,3 +1,3 @@
-*timetravel-presenters
+*TimeTravel-Handlers
 presenterClass
-	^ TTModelPresenter 
+	^ TTModelPresenter

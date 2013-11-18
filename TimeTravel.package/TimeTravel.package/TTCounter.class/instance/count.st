@@ -1,4 +1,0 @@
-accessing
-count
-	<state>
-	^ count

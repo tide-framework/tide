@@ -1,9 +1,22 @@
 request handling
 handleCallback: aCallback data: data
+	| answer response entity statusLine |
 	
-	aCallback value: data.
+	answer := aCallback value: data.
 	
-	self respond: (ZnResponse ok: ((ZnStringEntity 
-		type: ZnMimeType applicationJson)
-		string: aCallback receiver asJsonString;
-		yourself))
+	entity := (ZnStringEntity type: ZnMimeType applicationJson)
+		string: answer asPresenter asJsonString;
+		yourself.
+	
+	"TODO: encapsulate properly"
+	statusLine := answer == aCallback receiver
+		ifTrue: [ ZnStatusLine ok ]
+		ifFalse:  [ ZnStatusLine created ].
+	
+	response := ZnResponse new
+		statusLine: statusLine;
+		headers: ZnHeaders defaultResponseHeaders;
+		entity: entity;
+		yourself.
+	
+	 self respond: response

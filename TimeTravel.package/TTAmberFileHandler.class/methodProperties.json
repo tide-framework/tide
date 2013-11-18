@@ -1,11 +1,13 @@
 {
 	"class" : {
-		"on:" : "NicolasPetton 9/18/2012 19:09" },
+		 },
 	"instance" : {
+		"directoryPath" : "NicolasPetton 10/10/2013 15:32",
+		"directoryPath:" : "NicolasPetton 10/10/2013 15:33",
 		"fileForRequest:" : "NicolasPetton 9/18/2012 19:14",
-		"fileReference" : "NicolasPetton 9/18/2012 19:11",
-		"fileReference:" : "NicolasPetton 9/18/2012 19:11",
-		"handleGetRequest:" : "NicolasPetton 9/18/2012 19:18",
+		"fileReference" : "NicolasPetton 10/10/2013 15:32",
+		"handleGetRequest:" : "NicolasPetton 10/22/2013 21:09",
 		"handlePutRequest:" : "NicolasPetton 9/18/2012 19:39",
 		"handleRequest:" : "NicolasPetton 9/18/2012 18:58",
+		"isBinary:" : "NicolasPetton 10/22/2013 21:09",
 		"mimeTypeForFile:" : "NicolasPetton 9/18/2012 19:15" } }

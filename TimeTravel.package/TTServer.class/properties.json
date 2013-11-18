@@ -2,7 +2,8 @@
 	"category" : "TimeTravel-Server",
 	"classinstvars" : [
 		"server",
-		"current" ],
+		"current",
+		"serverStarted" ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",

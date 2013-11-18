@@ -4,7 +4,7 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "NicolasPetton 5/4/2013 16:36",
+	"commentStamp" : "",
 	"instvars" : [
 		"model" ],
 	"name" : "TTModelPresenter",

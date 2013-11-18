@@ -1,3 +1,0 @@
-*TimeTravel-Presenters
-presenterClass
-	^ TTLiteralPresenter

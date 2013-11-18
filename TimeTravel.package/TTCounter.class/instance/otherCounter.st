@@ -1,4 +1,4 @@
 accessing
 otherCounter
-	<child>
+	<action>
 	^ TTCounter new

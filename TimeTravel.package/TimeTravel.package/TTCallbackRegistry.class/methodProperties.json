@@ -1,8 +1,0 @@
-{
-	"class" : {
-		 },
-	"instance" : {
-		"callbackAt:ifAbsent:" : "NicolasPetton 9/17/2012 17:54",
-		"callbacks" : "NicolasPetton 9/18/2012 19:58",
-		"initialize" : "NicolasPetton 7/26/2012 17:46",
-		"registerCallback:" : "NicolasPetton 9/19/2012 14:29" } }

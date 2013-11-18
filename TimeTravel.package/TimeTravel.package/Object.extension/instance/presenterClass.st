@@ -1,3 +1,0 @@
-*TimeTravel-Handlers
-presenterClass
-	^ TTModelPresenter

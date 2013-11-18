@@ -4,6 +4,7 @@ handleCallbackForRequest: aRequest
 	Oh, and no parameter yet."
 
 	| key |
+	
 	key := aRequest uri 
 		queryAt: TTDispatcher callbackField 
 		ifAbsent: [ ^ self ].

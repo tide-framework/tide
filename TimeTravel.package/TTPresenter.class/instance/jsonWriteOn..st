@@ -1,7 +1,6 @@
 json
 jsonWriteOn: aStream
-	Dictionary new
+	^ Dictionary new
 		at: 'actions' put: self actions;
-		at: 'state' put: self state;
-		at: 'children' put: self children;
+		at: 'state' put: (self state collect: [ :each | each asPresenter ]);
 		jsonWriteOn: aStream

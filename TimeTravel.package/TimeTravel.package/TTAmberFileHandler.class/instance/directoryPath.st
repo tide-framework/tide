@@ -1,3 +1,0 @@
-accessing
-directoryPath
-	^ directoryPath ifNil: [ '' ]
