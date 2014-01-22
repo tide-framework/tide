@@ -2,7 +2,7 @@ define("timetravel/TimeTravel-Amber-Examples", ["amber_vm/smalltalk", "amber_vm/
 smalltalk.addPackage('TimeTravel-Amber-Examples');
 smalltalk.packages["TimeTravel-Amber-Examples"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
-smalltalk.addClass('T2CounterWidget', smalltalk.Widget, ['counter', 'header'], 'TimeTravel-Amber-Examples');
+smalltalk.addClass('TTCounterWidget', smalltalk.Widget, ['counter', 'header'], 'TimeTravel-Amber-Examples');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addNewCounter",
@@ -14,13 +14,13 @@ _st(_st(self._counter())._otherCounter())._then_((function(proxy){
 return smalltalk.withContext(function($ctx2) {
 return _st(_st(self._class())._on_(proxy))._render();
 }, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"addNewCounter",{},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"addNewCounter",{},smalltalk.TTCounterWidget)})},
 args: [],
 source: "addNewCounter\x0a\x09self counter otherCounter then: [ :proxy | \x0a\x09\x09(self class on: proxy) render ]",
 messageSends: ["then:", "otherCounter", "counter", "render", "on:", "class"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -28,24 +28,24 @@ selector: "counter",
 category: 'accessing',
 fn: function (){
 var self=this;
-function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
+function $TTProxy(){return smalltalk.TTProxy||(typeof TTProxy=="undefined"?nil:TTProxy)}
 return smalltalk.withContext(function($ctx1) { 
 var $2,$1;
 $2=self["@counter"];
 if(($receiver = $2) == nil || $receiver == null){
-self["@counter"]=_st($T2Proxy())._on_("/counter");
+self["@counter"]=_st($TTProxy())._on_("/counter");
 $1=self["@counter"];
 } else {
 $1=$2;
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"counter",{},smalltalk.T2CounterWidget)})},
+}, function($ctx1) {$ctx1.fill(self,"counter",{},smalltalk.TTCounterWidget)})},
 args: [],
-source: "counter\x0a\x09^ counter ifNil: [ counter := T2Proxy on: '/counter' ]",
+source: "counter\x0a\x09^ counter ifNil: [ counter := TTProxy on: '/counter' ]",
 messageSends: ["ifNil:", "on:"],
-referencedClasses: ["T2Proxy"]
+referencedClasses: ["TTProxy"]
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -55,13 +55,13 @@ fn: function (aCounter){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@counter"]=aCounter;
-return self}, function($ctx1) {$ctx1.fill(self,"counter:",{aCounter:aCounter},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"counter:",{aCounter:aCounter},smalltalk.TTCounterWidget)})},
 args: ["aCounter"],
 source: "counter: aCounter\x0a\x09counter := aCounter",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -75,13 +75,13 @@ _st(self._counter())._then_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._update();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"decrease",{},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"decrease",{},smalltalk.TTCounterWidget)})},
 args: [],
 source: "decrease\x0a\x09self counter decrease.\x0a\x09self counter then: [ self update ]",
 messageSends: ["decrease", "counter", "then:", "update"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -95,13 +95,13 @@ _st(self._counter())._then_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._update();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"increase",{},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"increase",{},smalltalk.TTCounterWidget)})},
 args: [],
 source: "increase\x0a\x09self counter increase.\x0a\x09self counter then: [ self update ]",
 messageSends: ["increase", "counter", "then:", "update"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -115,13 +115,13 @@ _st(self._counter())._then_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._appendToJQuery_("body"._asJQuery());
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"render",{},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"render",{},smalltalk.TTCounterWidget)})},
 args: [],
 source: "render\x0a\x09self counter connect.\x0a\x09self counter then: [ \x0a\x09\x09self appendToJQuery: 'body' asJQuery ]",
 messageSends: ["connect", "counter", "then:", "appendToJQuery:", "asJQuery"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -151,13 +151,13 @@ $6=_st($5)._onClick_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._addNewCounter();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.TTCounterWidget)})},
 args: ["html"],
 source: "renderOn: html\x0a\x09header := html h1 with: self counter count asString.\x0a\x09html button \x0a\x09\x09with: '++';\x0a\x09\x09onClick: [ self increase ].\x0a\x09html button \x0a\x09\x09with: '--';\x0a\x09\x09onClick: [ self decrease ].\x0a\x09html br.\x0a\x09html a\x0a\x09\x09with: 'add a new counter';\x0a\x09\x09onClick: [ self addNewCounter ]",
 messageSends: ["with:", "h1", "asString", "count", "counter", "button", "onClick:", "increase", "decrease", "br", "a", "addNewCounter"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -170,13 +170,13 @@ _st(self["@header"])._contents_((function(html){
 return smalltalk.withContext(function($ctx2) {
 return _st(html)._with_(_st(_st(self._counter())._count())._asString());
 }, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"update",{},smalltalk.T2CounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"update",{},smalltalk.TTCounterWidget)})},
 args: [],
 source: "update\x0a\x09header contents: [ :html |\x0a\x09\x09html with: self counter count asString ]",
 messageSends: ["contents:", "with:", "asString", "count", "counter"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget);
+smalltalk.TTCounterWidget);
 
 
 smalltalk.addMethod(
@@ -187,13 +187,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(self._new())._render();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.T2CounterWidget.klass)})},
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TTCounterWidget.klass)})},
 args: [],
 source: "initialize\x0a\x09self new render",
 messageSends: ["render", "new"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget.klass);
+smalltalk.TTCounterWidget.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -208,12 +208,12 @@ _st($2)._counter_(aProxy);
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aProxy:aProxy},smalltalk.T2CounterWidget.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"on:",{aProxy:aProxy},smalltalk.TTCounterWidget.klass)})},
 args: ["aProxy"],
 source: "on: aProxy\x0a\x09^ self new\x0a\x09\x09counter: aProxy;\x0a\x09\x09yourself",
 messageSends: ["counter:", "new", "yourself"],
 referencedClasses: []
 }),
-smalltalk.T2CounterWidget.klass);
+smalltalk.TTCounterWidget.klass);
 
 });

@@ -1,9 +1,9 @@
 Smalltalk createPackage: 'TimeTravel-Amber-Core'!
-Object subclass: #T2Action
+Object subclass: #TTAction
 	instanceVariableNames: 'promise resolved'
 	package: 'TimeTravel-Amber-Core'!
 
-!T2Action methodsFor: 'accessing'!
+!TTAction methodsFor: 'accessing'!
 
 client
 	^ self promise client
@@ -17,7 +17,7 @@ promise: aPromise
 	promise := aPromise
 ! !
 
-!T2Action methodsFor: 'resolving'!
+!TTAction methodsFor: 'resolving'!
 
 beResolved
 	resolved := true.
@@ -28,13 +28,13 @@ resolve
 	self beResolved
 ! !
 
-!T2Action methodsFor: 'testing'!
+!TTAction methodsFor: 'testing'!
 
 isResolved
 	^ resolved ifNil: [ false ]
 ! !
 
-!T2Action class methodsFor: 'instance creation'!
+!TTAction class methodsFor: 'instance creation'!
 
 on: aPromise
 	^ self new 
@@ -42,11 +42,11 @@ on: aPromise
 		yourself
 ! !
 
-T2Action subclass: #T2CallbackAction
+TTAction subclass: #TTCallbackAction
 	instanceVariableNames: 'callback'
 	package: 'TimeTravel-Amber-Core'!
 
-!T2CallbackAction methodsFor: 'accessing'!
+!TTCallbackAction methodsFor: 'accessing'!
 
 callback
 	^ callback
@@ -56,18 +56,18 @@ callback: aBlock
 	callback := aBlock
 ! !
 
-!T2CallbackAction methodsFor: 'resolving'!
+!TTCallbackAction methodsFor: 'resolving'!
 
 resolve
 	self client promisedValue: (self callback value: self client promisedValue).
 	super resolve
 ! !
 
-T2Action subclass: #T2RequestAction
+TTAction subclass: #TTRequestAction
 	instanceVariableNames: 'requestUrl data'
 	package: 'TimeTravel-Amber-Core'!
 
-!T2RequestAction methodsFor: 'accessing'!
+!TTRequestAction methodsFor: 'accessing'!
 
 data
 	^ data
@@ -85,19 +85,19 @@ requestUrl: aString
 	requestUrl := aString
 ! !
 
-!T2RequestAction methodsFor: 'error handling'!
+!TTRequestAction methodsFor: 'error handling'!
 
 requestError: anObject
-	T2RequestError new
+	TTRequestError new
 		xhr: anObject;
 		signal
 !
 
 sessionNotFound
-	T2SessionNotFound signal
+	TTSessionNotFound signal
 ! !
 
-!T2RequestAction methodsFor: 'private'!
+!TTRequestAction methodsFor: 'private'!
 
 newClientFromJson: json
 	self client promisedValue: json asTimeTravelObject
@@ -107,7 +107,7 @@ updateClientFromJson: json
 	self client updateFromJson: json
 ! !
 
-!T2RequestAction methodsFor: 'resolving'!
+!TTRequestAction methodsFor: 'resolving'!
 
 handleResponse: json status: aNumber
 	^ aNumber == 200 
@@ -136,11 +136,11 @@ resolve
 	self request: self requestUrl
 ! !
 
-Object subclass: #T2Client
+Object subclass: #TTClient
 	instanceVariableNames: 'state actions firstPromise promisedValue path connected'
 	package: 'TimeTravel-Amber-Core'!
 
-!T2Client methodsFor: 'accessing'!
+!TTClient methodsFor: 'accessing'!
 
 actions
 	^ actions
@@ -153,7 +153,7 @@ flushPromises
 future
 	| promise |
 
-	promise := T2Promise on: self.
+	promise := TTPromise on: self.
 
 	firstPromise 
 		ifNil: [ firstPromise := promise ]
@@ -182,7 +182,7 @@ state
 	^ state
 ! !
 
-!T2Client methodsFor: 'forwarding'!
+!TTClient methodsFor: 'forwarding'!
 
 handleFutureMessage: aMessage
 	| selector |
@@ -201,7 +201,7 @@ then: aBlock
 	self future then: aBlock
 ! !
 
-!T2Client methodsFor: 'initialization'!
+!TTClient methodsFor: 'initialization'!
 
 connect
 	self isConnected ifFalse: [ self update ]
@@ -215,24 +215,24 @@ initialize
 	children := self newJavaScriptObject
 ! !
 
-!T2Client methodsFor: 'private'!
+!TTClient methodsFor: 'private'!
 
 newJavaScriptObject
 	<return {}>
 ! !
 
-!T2Client methodsFor: 'testing'!
+!TTClient methodsFor: 'testing'!
 
 isConnected
 	^ connected ifNil: [ false ]
 ! !
 
-!T2Client methodsFor: 'updating'!
+!TTClient methodsFor: 'updating'!
 
 update
 	| promise |
 	promise := self future.
-	promise setAction: ((T2RequestAction on: promise)
+	promise setAction: ((TTRequestAction on: promise)
 		requestUrl: self path;
 		yourself).
 	self future then: [ connected := true ]
@@ -259,7 +259,7 @@ updateState: aDictionary
 			state at: key put: value ]
 ! !
 
-!T2Client class methodsFor: 'instance creation'!
+!TTClient class methodsFor: 'instance creation'!
 
 fromJson: json
 	^ self new
@@ -273,11 +273,11 @@ on: aString
 		yourself
 ! !
 
-Object subclass: #T2Promise
+Object subclass: #TTPromise
 	instanceVariableNames: 'previous next client action'
 	package: 'TimeTravel-Amber-Core'!
 
-!T2Promise methodsFor: 'accessing'!
+!TTPromise methodsFor: 'accessing'!
 
 action
 	^ action
@@ -321,7 +321,7 @@ setAction: anAction
 	self travel
 ! !
 
-!T2Promise methodsFor: 'actions'!
+!TTPromise methodsFor: 'actions'!
 
 setRequestActionFromMessage: aMessage
 	| url data |
@@ -330,7 +330,7 @@ setRequestActionFromMessage: aMessage
 	url 
 		ifNil: [ self setChildActionFromMessage: aMessage ]
 		ifNotNil: [ 
-			self setAction: ((T2RequestAction on: self)
+			self setAction: ((TTRequestAction on: self)
 				requestUrl: url;
 				data: data;
 				yourself) ]
@@ -339,10 +339,10 @@ setRequestActionFromMessage: aMessage
 then: aBlock
 	self isAssigned
 		ifTrue: [ self client future then: aBlock ]
-		ifFalse: [ self setAction: ((T2CallbackAction on: self) callback: aBlock) ]
+		ifFalse: [ self setAction: ((TTCallbackAction on: self) callback: aBlock) ]
 ! !
 
-!T2Promise methodsFor: 'testing'!
+!TTPromise methodsFor: 'testing'!
 
 isAssigned
 	^ self action notNil
@@ -352,7 +352,7 @@ isResolved
 	^ self isAssigned and: [ self action isResolved ]
 ! !
 
-!T2Promise methodsFor: 'traveling'!
+!TTPromise methodsFor: 'traveling'!
 
 nextTravel
 	self next 
@@ -371,7 +371,7 @@ travel
 		ifTrue: [ self stepTravel ]
 ! !
 
-!T2Promise class methodsFor: 'instance creation'!
+!TTPromise class methodsFor: 'instance creation'!
 
 on: aClient
 	^ self new
@@ -379,11 +379,11 @@ on: aClient
 		yourself
 ! !
 
-ProtoObject subclass: #T2Proxy
+ProtoObject subclass: #TTProxy
 	instanceVariableNames: 'client'
 	package: 'TimeTravel-Amber-Core'!
 
-!T2Proxy methodsFor: 'accessing'!
+!TTProxy methodsFor: 'accessing'!
 
 xxxClient
 	^ client
@@ -393,7 +393,7 @@ xxxClient: aClient
 	client := aClient
 ! !
 
-!T2Proxy methodsFor: 'error handling'!
+!TTProxy methodsFor: 'error handling'!
 
 doesNotUnderstand: aMessage
 	^ (self xxxClient respondsTo: aMessage selector)
@@ -401,7 +401,7 @@ doesNotUnderstand: aMessage
 		ifFalse: [ self xxxClient handleFutureMessage: aMessage ]
 ! !
 
-!T2Proxy methodsFor: 'initialization'!
+!TTProxy methodsFor: 'initialization'!
 
 initialize
 	super initialize.
@@ -409,18 +409,18 @@ initialize
 		self removeSelector: each asSelector ]"
 ! !
 
-!T2Proxy methodsFor: 'private'!
+!TTProxy methodsFor: 'private'!
 
 inheritedSelectors
 	^ self class allSelectors
-		reject: [ :each | T2Proxy methodDictionary keys includes: each ]
+		reject: [ :each | TTProxy methodDictionary keys includes: each ]
 !
 
 removeSelector: aString
 	<delete self[aString];>
 ! !
 
-!T2Proxy class methodsFor: 'instance creation'!
+!TTProxy class methodsFor: 'instance creation'!
 
 client: aClient
 	"Do not add yourself here.
@@ -436,7 +436,7 @@ on: aPath
 	It is not understood by the proxy after sending #initialize, therefore it returns aPath"
 
 	^ self basicNew
-		xxxClient: (T2Client on: aPath);
+		xxxClient: (TTClient on: aPath);
 		initialize
 ! !
 
@@ -460,7 +460,7 @@ asTimeTravelObject
 !JSObjectProxy methodsFor: '*TimeTravel-Amber-Core'!
 
 asTimeTravelObject
-	^ T2Proxy client: (T2Client fromJson: self)
+	^ TTProxy client: (TTClient fromJson: self)
 ! !
 
 !Object methodsFor: '*TimeTravel-Amber-Core'!

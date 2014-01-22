@@ -2,7 +2,7 @@ define("timetravel/TimeTravel-Amber-Exceptions", ["amber_vm/smalltalk", "amber_v
 smalltalk.addPackage('TimeTravel-Amber-Exceptions');
 smalltalk.packages["TimeTravel-Amber-Exceptions"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
-smalltalk.addClass('T2RequestError', smalltalk.Error, ['xhr'], 'TimeTravel-Amber-Exceptions');
+smalltalk.addClass('TTRequestError', smalltalk.Error, ['xhr'], 'TimeTravel-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "xhr",
@@ -13,13 +13,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@xhr"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"xhr",{},smalltalk.T2RequestError)})},
+}, function($ctx1) {$ctx1.fill(self,"xhr",{},smalltalk.TTRequestError)})},
 args: [],
 source: "xhr\x0a\x09^ xhr",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2RequestError);
+smalltalk.TTRequestError);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -29,17 +29,17 @@ fn: function (anObject){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@xhr"]=anObject;
-return self}, function($ctx1) {$ctx1.fill(self,"xhr:",{anObject:anObject},smalltalk.T2RequestError)})},
+return self}, function($ctx1) {$ctx1.fill(self,"xhr:",{anObject:anObject},smalltalk.TTRequestError)})},
 args: ["anObject"],
 source: "xhr: anObject\x0a\x09xhr := anObject",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2RequestError);
+smalltalk.TTRequestError);
 
 
 
-smalltalk.addClass('T2SessionNotFound', smalltalk.Error, [], 'TimeTravel-Amber-Exceptions');
+smalltalk.addClass('TTSessionNotFound', smalltalk.Error, [], 'TimeTravel-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageText",
@@ -48,13 +48,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 return "TimeTravel session not found";
-}, function($ctx1) {$ctx1.fill(self,"messageText",{},smalltalk.T2SessionNotFound)})},
+}, function($ctx1) {$ctx1.fill(self,"messageText",{},smalltalk.TTSessionNotFound)})},
 args: [],
 source: "messageText\x0a\x09^ 'TimeTravel session not found'",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2SessionNotFound);
+smalltalk.TTSessionNotFound);
 
 
 });

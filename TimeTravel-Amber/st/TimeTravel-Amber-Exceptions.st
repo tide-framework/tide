@@ -1,9 +1,9 @@
 Smalltalk current createPackage: 'TimeTravel-Amber-Exceptions'!
-Error subclass: #T2RequestError
+Error subclass: #TTRequestError
 	instanceVariableNames: 'xhr'
 	package: 'TimeTravel-Amber-Exceptions'!
 
-!T2RequestError methodsFor: 'accessing'!
+!TTRequestError methodsFor: 'accessing'!
 
 xhr
 	^ xhr
@@ -13,11 +13,11 @@ xhr: anObject
 	xhr := anObject
 ! !
 
-Error subclass: #T2SessionNotFound
+Error subclass: #TTSessionNotFound
 	instanceVariableNames: ''
 	package: 'TimeTravel-Amber-Exceptions'!
 
-!T2SessionNotFound methodsFor: 'accessing'!
+!TTSessionNotFound methodsFor: 'accessing'!
 
 messageText
 	^ 'TimeTravel session not found'

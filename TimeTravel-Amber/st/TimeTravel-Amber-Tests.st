@@ -1,12 +1,12 @@
 Smalltalk current createPackage: 'TimeTravel-Amber-Tests'!
-TestCase subclass: #T2ClientTest
+TestCase subclass: #TTClientTest
 	instanceVariableNames: 'client'
 	package: 'TimeTravel-Amber-Tests'!
 
-!T2ClientTest methodsFor: 'initialization'!
+!TTClientTest methodsFor: 'initialization'!
 
 setUp
-	client := T2Client new
+	client := TTClient new
 !
 
 tearDown
@@ -15,11 +15,11 @@ tearDown
 	client := nil"
 ! !
 
-!T2ClientTest methodsFor: 'tests'!
+!TTClientTest methodsFor: 'tests'!
 
 testForwarding
 	"| client |"
-	client := T2Proxy client: (T2Client new).
+	client := TTProxy client: (TTClient new).
 
 	self should: [ client count ] raise: MessageNotUnderstood.	
 
@@ -47,38 +47,38 @@ testFuture
 	self assert: p3 next equals: nil
 ! !
 
-T2Proxy subclass: #T2MockProxy
+TTProxy subclass: #TTMockProxy
 	instanceVariableNames: 'catchedSelectors'
 	package: 'TimeTravel-Amber-Tests'!
 
-!T2MockProxy methodsFor: 'accessing'!
+!TTMockProxy methodsFor: 'accessing'!
 
 catchedSelectors
 	^ catchedSelectors
 ! !
 
-!T2MockProxy methodsFor: 'error handling'!
+!TTMockProxy methodsFor: 'error handling'!
 
 doesNotUnderstand: aMessage
 	catchedSelectors add: aMessage selector
 ! !
 
-!T2MockProxy methodsFor: 'initialization'!
+!TTMockProxy methodsFor: 'initialization'!
 
 initialize
 	super initialize.
 	catchedSelectors := #()
 ! !
 
-TestCase subclass: #T2ProxyTest
+TestCase subclass: #TTProxyTest
 	instanceVariableNames: ''
 	package: 'TimeTravel-Amber-Tests'!
 
-!T2ProxyTest methodsFor: 'tests'!
+!TTProxyTest methodsFor: 'tests'!
 
 testDNU
 	| proxy |
-	proxy := T2MockProxy new.
+	proxy := TTMockProxy new.
 
 	proxy yourself.
 	self assert: (proxy catchedSelectors includes: 'yourself').
@@ -90,7 +90,7 @@ testDNU
 testInheritedSelectors
 	| proxy |
 
-	proxy := T2Proxy basicNew.
+	proxy := TTProxy basicNew.
 
 	self assert: (proxy inheritedSelectors includes: 'isNil').
 	self deny: (proxy inheritedSelectors includes: 'xxxClient')
@@ -99,8 +99,8 @@ testInheritedSelectors
 testxxxClient
 	| proxy client |
 	
-	client := T2Client new.
-	proxy := T2Proxy client: client.
+	client := TTClient new.
+	proxy := TTProxy client: client.
 
 	self assert: proxy xxxClient == client.
 	self assert: proxy yourself == client.

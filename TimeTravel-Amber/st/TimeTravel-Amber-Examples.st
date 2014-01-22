@@ -1,19 +1,19 @@
 Smalltalk current createPackage: 'TimeTravel-Amber-Examples'!
-Widget subclass: #T2CounterWidget
+Widget subclass: #TTCounterWidget
 	instanceVariableNames: 'counter header'
 	package: 'TimeTravel-Amber-Examples'!
 
-!T2CounterWidget methodsFor: 'accessing'!
+!TTCounterWidget methodsFor: 'accessing'!
 
 counter
-	^ counter ifNil: [ counter := T2Proxy on: '/counter' ]
+	^ counter ifNil: [ counter := TTProxy on: '/counter' ]
 !
 
 counter: aCounter
 	counter := aCounter
 ! !
 
-!T2CounterWidget methodsFor: 'actions'!
+!TTCounterWidget methodsFor: 'actions'!
 
 addNewCounter
 	self counter otherCounter then: [ :proxy | 
@@ -30,7 +30,7 @@ increase
 	self counter then: [ self update ]
 ! !
 
-!T2CounterWidget methodsFor: 'rendering'!
+!TTCounterWidget methodsFor: 'rendering'!
 
 render
 	self counter connect.
@@ -52,14 +52,14 @@ renderOn: html
 		onClick: [ self addNewCounter ]
 ! !
 
-!T2CounterWidget methodsFor: 'updating'!
+!TTCounterWidget methodsFor: 'updating'!
 
 update
 	header contents: [ :html |
 		html with: self counter count asString ]
 ! !
 
-!T2CounterWidget class methodsFor: 'not yet classified'!
+!TTCounterWidget class methodsFor: 'not yet classified'!
 
 initialize
 	self new render
