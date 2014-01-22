@@ -25,12 +25,9 @@
   		"timetravel/TimeTravel-Amber-Examples",
   		"timetravel/TimeTravel-Amber-Tests"
   	],
-        function (smalltalk, helpers) {
-            smalltalk.defaultAmdNamespace = "timetravel";
-            smalltalk.initialize();
-
-            helpers.popupHelios();
-            
+        function (smalltalk) {
+            smalltalk.initialize({defaultAmdNamespace: 'timetravel'});
+            smalltalk.popupHelios();
         }
   );
 </script>
