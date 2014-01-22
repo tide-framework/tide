@@ -1284,27 +1284,6 @@ referencedClasses: []
 }),
 smalltalk.T2Proxy);
 
-smalltalk.addMethod(
-smalltalk.method({
-selector: "xxxDoIt",
-category: 'xxxDoIt',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st((function(){
-return smalltalk.withContext(function($ctx2) {
-return self._size();
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}))._value();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"xxxDoIt",{},smalltalk.T2Proxy)})},
-args: [],
-source: "xxxDoIt ^[self size] value",
-messageSends: ["value", "size"],
-referencedClasses: []
-}),
-smalltalk.T2Proxy);
-
 
 smalltalk.addMethod(
 smalltalk.method({

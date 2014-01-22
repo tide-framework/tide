@@ -420,11 +420,6 @@ removeSelector: aString
 	<delete self[aString];>
 ! !
 
-!T2Proxy methodsFor: 'xxxDoIt'!
-
-xxxDoIt ^[self size] value
-! !
-
 !T2Proxy class methodsFor: 'instance creation'!
 
 client: aClient
