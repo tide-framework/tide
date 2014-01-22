@@ -7,7 +7,7 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"directoryPath" ],
-	"name" : "TTAmberFileHandler",
+	"name" : "TTFileHandler",
 	"pools" : [
 		 ],
 	"super" : "TTHandler",
