@@ -211,8 +211,7 @@ initialize
 	super initialize.
 	"Primitive JS object. I need it because I'm keeping JSON data"
 	state := self newJavaScriptObject. 
-	actions := self newJavaScriptObject.
-	children := self newJavaScriptObject
+	actions := self newJavaScriptObject
 ! !
 
 !TTClient methodsFor: 'private'!

@@ -520,13 +520,13 @@ protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-smalltalk.TTClient.superclass.fn.prototype._initialize.apply(_st(self), []);
+globals.TTClient.superclass.fn.prototype._initialize.apply(_st(self), []);
 self["@state"]=self._newJavaScriptObject();
+$ctx1.sendIdx["newJavaScriptObject"]=1;
 self["@actions"]=self._newJavaScriptObject();
-self["@children"]=self._newJavaScriptObject();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TTClient)})},
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09\x22Primitive JS object. I need it because I'm keeping JSON data\x22\x0a\x09state := self newJavaScriptObject. \x0a\x09actions := self newJavaScriptObject.\x0a\x09children := self newJavaScriptObject",
+source: "initialize\x0a\x09super initialize.\x0a\x09\x22Primitive JS object. I need it because I'm keeping JSON data\x22\x0a\x09state := self newJavaScriptObject. \x0a\x09actions := self newJavaScriptObject",
 messageSends: ["initialize", "newJavaScriptObject"],
 referencedClasses: []
 }),
