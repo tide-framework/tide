@@ -4,8 +4,8 @@
 <head>
     <title>TimeTravel</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <script type='text/javascript' src='./TimeTravel-Amber/bower_components/amber/support/amber.js'></script>
-    <script type='text/javascript' src='./TimeTravel-Amber/bower_components/amber/support/requirejs/require.min.js'></script>
+    <script type='text/javascript' src='./bower_components/amber/support/amber.js'></script>
+    <script type='text/javascript' src='./bower_components/amber/support/requirejs/require.min.js'></script>
 </head>
 
 <body>
@@ -19,16 +19,18 @@
   require(
         [
   		"amber/devel", 
+  		"amber/helpers",
   		"timetravel/TimeTravel-Amber-Core",
   		"timetravel/TimeTravel-Amber-Exceptions",
   		"timetravel/TimeTravel-Amber-Examples",
   		"timetravel/TimeTravel-Amber-Tests"
   	],
-        function (smalltalk) {
+        function (smalltalk, helpers) {
             smalltalk.defaultAmdNamespace = "timetravel";
             smalltalk.initialize();
 
-            smalltalk.Browser._open()
+            helpers.popupHelios();
+            
         }
   );
 </script>
