@@ -1,12 +1,12 @@
-define("timetravel/TimeTravel-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/Kernel-Objects", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st){
+define("timetravel/TimeTravel-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Objects", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st, globals){
 smalltalk.addPackage('TimeTravel-Amber-Core');
 smalltalk.packages["TimeTravel-Amber-Core"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
-smalltalk.addClass('T2Action', smalltalk.Object, ['promise', 'resolved'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2Action', globals.Object, ['promise', 'resolved'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "beResolved",
-category: 'resolving',
+protocol: 'resolving',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -18,12 +18,12 @@ source: "beResolved\x0a\x09resolved := true.\x0a\x09self promise nextTravel",
 messageSends: ["nextTravel", "promise"],
 referencedClasses: []
 }),
-smalltalk.T2Action);
+globals.T2Action);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "client",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -36,12 +36,12 @@ source: "client\x0a\x09^ self promise client",
 messageSends: ["client", "promise"],
 referencedClasses: []
 }),
-smalltalk.T2Action);
+globals.T2Action);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "isResolved",
-category: 'testing',
+protocol: 'testing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -59,12 +59,12 @@ source: "isResolved\x0a\x09^ resolved ifNil: [ false ]",
 messageSends: ["ifNil:"],
 referencedClasses: []
 }),
-smalltalk.T2Action);
+globals.T2Action);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "promise",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -77,12 +77,12 @@ source: "promise\x0a\x09^ promise",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Action);
+globals.T2Action);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "promise:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aPromise){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -93,12 +93,12 @@ source: "promise: aPromise\x0a\x09promise := aPromise",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Action);
+globals.T2Action);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "resolve",
-category: 'resolving',
+protocol: 'resolving',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -109,13 +109,13 @@ source: "resolve\x0a\x09self beResolved",
 messageSends: ["beResolved"],
 referencedClasses: []
 }),
-smalltalk.T2Action);
+globals.T2Action);
 
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "on:",
-category: 'instance creation',
+protocol: 'instance creation',
 fn: function (aPromise){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -131,14 +131,14 @@ source: "on: aPromise\x0a\x09^ self new \x0a\x09\x09promise: aPromise; \x0a\x09\
 messageSends: ["promise:", "new", "yourself"],
 referencedClasses: []
 }),
-smalltalk.T2Action.klass);
+globals.T2Action.klass);
 
 
-smalltalk.addClass('T2CallbackAction', smalltalk.T2Action, ['callback'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2CallbackAction', globals.T2Action, ['callback'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "callback",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -151,12 +151,12 @@ source: "callback\x0a\x09^ callback",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2CallbackAction);
+globals.T2CallbackAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "callback:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aBlock){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -167,12 +167,12 @@ source: "callback: aBlock\x0a\x09callback := aBlock",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2CallbackAction);
+globals.T2CallbackAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "resolve",
-category: 'resolving',
+protocol: 'resolving',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -184,15 +184,15 @@ source: "resolve\x0a\x09self client promisedValue: (self callback value: self cl
 messageSends: ["promisedValue:", "client", "value:", "callback", "promisedValue", "resolve"],
 referencedClasses: []
 }),
-smalltalk.T2CallbackAction);
+globals.T2CallbackAction);
 
 
 
-smalltalk.addClass('T2RequestAction', smalltalk.T2Action, ['requestUrl', 'data'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2RequestAction', globals.T2Action, ['requestUrl', 'data'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "data",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -205,12 +205,12 @@ source: "data\x0a\x09^ data",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "data:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -221,12 +221,12 @@ source: "data: json\x0a\x09data := json",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "handleResponse:status:",
-category: 'resolving',
+protocol: 'resolving',
 fn: function (json,aNumber){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -244,12 +244,12 @@ source: "handleResponse: json status: aNumber\x0a\x09^ aNumber == 200 \x0a\x09\x
 messageSends: ["ifTrue:ifFalse:", "==", "updateClientFromJson:", "newClientFromJson:"],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "newClientFromJson:",
-category: 'private',
+protocol: 'private',
 fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -260,12 +260,12 @@ source: "newClientFromJson: json\x0a\x09self client promisedValue: json asTimeTr
 messageSends: ["promisedValue:", "client", "asTimeTravelObject"],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "request:",
-category: 'resolving',
+protocol: 'resolving',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -289,12 +289,12 @@ source: "request: aString\x0a\x09jQuery \x0a\x09\x09ajax: self requestUrl\x0a\x0
 messageSends: ["ajax:options:", "requestUrl", "->", "data", "handleResponse:status:", "status", "beResolved", "ifTrue:ifFalse:", "=", "sessionNotFound", "requestError:"],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "requestError:",
-category: 'error handling',
+protocol: 'error handling',
 fn: function (anObject){
 var self=this;
 function $T2RequestError(){return smalltalk.T2RequestError||(typeof T2RequestError=="undefined"?nil:T2RequestError)}
@@ -309,12 +309,12 @@ source: "requestError: anObject\x0a\x09T2RequestError new\x0a\x09\x09xhr: anObje
 messageSends: ["xhr:", "new", "signal"],
 referencedClasses: ["T2RequestError"]
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "requestUrl",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -327,12 +327,12 @@ source: "requestUrl\x0a\x09^ requestUrl",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "requestUrl:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -343,12 +343,12 @@ source: "requestUrl: aString\x0a\x09requestUrl := aString",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "resolve",
-category: 'resolving',
+protocol: 'resolving',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -359,12 +359,12 @@ source: "resolve\x0a\x09self request: self requestUrl",
 messageSends: ["request:", "requestUrl"],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "sessionNotFound",
-category: 'error handling',
+protocol: 'error handling',
 fn: function (){
 var self=this;
 function $T2SessionNotFound(){return smalltalk.T2SessionNotFound||(typeof T2SessionNotFound=="undefined"?nil:T2SessionNotFound)}
@@ -376,12 +376,12 @@ source: "sessionNotFound\x0a\x09T2SessionNotFound signal",
 messageSends: ["signal"],
 referencedClasses: ["T2SessionNotFound"]
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "updateClientFromJson:",
-category: 'private',
+protocol: 'private',
 fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -392,15 +392,15 @@ source: "updateClientFromJson: json\x0a\x09self client updateFromJson: json",
 messageSends: ["updateFromJson:", "client"],
 referencedClasses: []
 }),
-smalltalk.T2RequestAction);
+globals.T2RequestAction);
 
 
 
-smalltalk.addClass('T2Client', smalltalk.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'connected'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2Client', globals.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'connected'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "actions",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -413,12 +413,12 @@ source: "actions\x0a\x09^ actions",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "connect",
-category: 'initialization',
+protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -433,12 +433,12 @@ source: "connect\x0a\x09self isConnected ifFalse: [ self update ]",
 messageSends: ["ifFalse:", "isConnected", "update"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "flushPromises",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -449,12 +449,12 @@ source: "flushPromises\x0a\x09firstPromise := nil",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "future",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 var promise;
@@ -477,12 +477,12 @@ source: "future\x0a\x09| promise |\x0a\x0a\x09promise := T2Promise on: self.\x0a
 messageSends: ["on:", "ifNil:ifNotNil:", "next:"],
 referencedClasses: ["T2Promise"]
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "handleFutureMessage:",
-category: 'forwarding',
+protocol: 'forwarding',
 fn: function (aMessage){
 var self=this;
 var selector;
@@ -511,12 +511,12 @@ source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aM
 messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "doesNotUnderstand:"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "initialize",
-category: 'initialization',
+protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -530,12 +530,12 @@ source: "initialize\x0a\x09super initialize.\x0a\x09\x22Primitive JS object. I n
 messageSends: ["initialize", "newJavaScriptObject"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "isConnected",
-category: 'testing',
+protocol: 'testing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -553,12 +553,12 @@ source: "isConnected\x0a\x09^ connected ifNil: [ false ]",
 messageSends: ["ifNil:"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "newJavaScriptObject",
-category: 'private',
+protocol: 'private',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -569,12 +569,12 @@ source: "newJavaScriptObject\x0a\x09<return {}>",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "path",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -587,12 +587,12 @@ source: "path\x0a\x09^ path",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "path:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -603,12 +603,12 @@ source: "path: aString\x0a\x09path := aString",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "promisedValue",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -621,12 +621,12 @@ source: "promisedValue\x0a\x09^ promisedValue",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "promisedValue:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (anObject){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -637,12 +637,12 @@ source: "promisedValue: anObject\x0a\x09promisedValue := anObject",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "state",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -655,12 +655,12 @@ source: "state\x0a\x09^ state",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "then:",
-category: 'forwarding',
+protocol: 'forwarding',
 fn: function (aBlock){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -671,12 +671,12 @@ source: "then: aBlock\x0a\x09self future then: aBlock",
 messageSends: ["then:", "future"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "update",
-category: 'updating',
+protocol: 'updating',
 fn: function (){
 var self=this;
 var promise;
@@ -699,12 +699,12 @@ source: "update\x0a\x09| promise |\x0a\x09promise := self future.\x0a\x09promise
 messageSends: ["future", "setAction:", "requestUrl:", "on:", "path", "yourself", "then:"],
 referencedClasses: ["T2RequestAction"]
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "updateActions:",
-category: 'updating',
+protocol: 'updating',
 fn: function (aDictionary){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -718,12 +718,12 @@ source: "updateActions: aDictionary\x0a\x09aDictionary keysAndValuesDo: [ :key :
 messageSends: ["keysAndValuesDo:", "at:put:"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "updateFromJson:",
-category: 'updating',
+protocol: 'updating',
 fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -753,12 +753,12 @@ source: "updateFromJson: json\x0a\x09connected := true.\x0a\x09\x0a\x09(json at:
 messageSends: ["ifNotNil:", "at:", "keysAndValuesDo:", "state", "at:put:", "asTimeTravelObject", "actions"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "updateState:",
-category: 'updating',
+protocol: 'updating',
 fn: function (aDictionary){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -772,13 +772,13 @@ source: "updateState: aDictionary\x0a\x09aDictionary keysAndValuesDo: [ :key :va
 messageSends: ["keysAndValuesDo:", "at:put:"],
 referencedClasses: []
 }),
-smalltalk.T2Client);
+globals.T2Client);
 
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "fromJson:",
-category: 'instance creation',
+protocol: 'instance creation',
 fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -794,12 +794,12 @@ source: "fromJson: json\x0a\x09^ self new\x0a\x09\x09updateFromJson: json;\x0a\x
 messageSends: ["updateFromJson:", "new", "yourself"],
 referencedClasses: []
 }),
-smalltalk.T2Client.klass);
+globals.T2Client.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "on:",
-category: 'instance creation',
+protocol: 'instance creation',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -815,14 +815,14 @@ source: "on: aString\x0a\x09^ self new\x0a\x09\x09path: aString;\x0a\x09\x09your
 messageSends: ["path:", "new", "yourself"],
 referencedClasses: []
 }),
-smalltalk.T2Client.klass);
+globals.T2Client.klass);
 
 
-smalltalk.addClass('T2Promise', smalltalk.Object, ['previous', 'next', 'client', 'action'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2Promise', globals.Object, ['previous', 'next', 'client', 'action'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "action",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -835,12 +835,12 @@ source: "action\x0a\x09^ action",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "client",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -853,12 +853,12 @@ source: "client\x0a\x09^ client",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "client:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aClient){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -869,12 +869,12 @@ source: "client: aClient\x0a\x09client := aClient",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "future",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -887,12 +887,12 @@ source: "future\x0a\x09^ self client future",
 messageSends: ["future", "client"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "isAssigned",
-category: 'testing',
+protocol: 'testing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -905,12 +905,12 @@ source: "isAssigned\x0a\x09^ self action notNil",
 messageSends: ["notNil", "action"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "isResolved",
-category: 'testing',
+protocol: 'testing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -926,12 +926,12 @@ source: "isResolved\x0a\x09^ self isAssigned and: [ self action isResolved ]",
 messageSends: ["and:", "isAssigned", "isResolved", "action"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "next",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -944,12 +944,12 @@ source: "next\x0a\x09^ next",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "next:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aPromise){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -968,12 +968,12 @@ source: "next: aPromise\x0a\x09next \x0a\x09\x09ifNil: [ \x0a\x09\x09\x09next :=
 messageSends: ["ifNil:ifNotNil:", "previous:", "next:"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "nextTravel",
-category: 'traveling',
+protocol: 'traveling',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -990,12 +990,12 @@ source: "nextTravel\x0a\x09self next \x0a\x09\x09ifNil: [ self client flushPromi
 messageSends: ["ifNil:ifNotNil:", "next", "flushPromises", "client", "stepTravel"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "previous",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1008,12 +1008,12 @@ source: "previous\x0a\x09^ previous",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "previous:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aPromise){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1024,12 +1024,12 @@ source: "previous: aPromise\x0a\x09previous := aPromise",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "setAction:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (anAction){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1041,12 +1041,12 @@ source: "setAction: anAction\x0a\x09action := anAction.\x0a\x09self travel",
 messageSends: ["travel"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "setRequestActionFromMessage:",
-category: 'actions',
+protocol: 'actions',
 fn: function (aMessage){
 var self=this;
 var url,data;
@@ -1079,12 +1079,12 @@ source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url :=
 messageSends: ["at:", "actions", "client", "selector", "stringify:", "ifNil:", "arguments", "ifNil:ifNotNil:", "setChildActionFromMessage:", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
 referencedClasses: ["JSON", "T2RequestAction"]
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "stepTravel",
-category: 'traveling',
+protocol: 'traveling',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1101,12 +1101,12 @@ source: "stepTravel\x0a\x09self action \x0a\x09\x09ifNil: [ self nextTravel ]\x0
 messageSends: ["ifNil:ifNotNil:", "action", "nextTravel", "resolve"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "then:",
-category: 'actions',
+protocol: 'actions',
 fn: function (aBlock){
 var self=this;
 function $T2CallbackAction(){return smalltalk.T2CallbackAction||(typeof T2CallbackAction=="undefined"?nil:T2CallbackAction)}
@@ -1124,12 +1124,12 @@ source: "then: aBlock\x0a\x09self isAssigned\x0a\x09\x09ifTrue: [ self client fu
 messageSends: ["ifTrue:ifFalse:", "isAssigned", "then:", "future", "client", "setAction:", "callback:", "on:"],
 referencedClasses: ["T2CallbackAction"]
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "travel",
-category: 'traveling',
+protocol: 'traveling',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1147,13 +1147,13 @@ source: "travel\x0a\x09(self previous isNil or: [ self previous isResolved ]) \x
 messageSends: ["ifTrue:", "or:", "isNil", "previous", "isResolved", "stepTravel"],
 referencedClasses: []
 }),
-smalltalk.T2Promise);
+globals.T2Promise);
 
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "on:",
-category: 'instance creation',
+protocol: 'instance creation',
 fn: function (aClient){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1169,40 +1169,44 @@ source: "on: aClient\x0a\x09^ self new\x0a\x09\x09client: aClient;\x0a\x09\x09yo
 messageSends: ["client:", "new", "yourself"],
 referencedClasses: []
 }),
-smalltalk.T2Promise.klass);
+globals.T2Promise.klass);
 
 
-smalltalk.addClass('T2Proxy', smalltalk.Object, ['client'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('T2Proxy', globals.ProtoObject, ['client'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "doesNotUnderstand:",
-category: 'error handling',
+protocol: 'error handling',
 fn: function (aMessage){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $2,$1;
-$2=_st(self._xxxClient())._respondsTo_(_st(aMessage)._selector());
+var $3,$2,$4,$1;
+$3=self._xxxClient();
+$ctx1.sendIdx["xxxClient"]=1;
+$2=_st($3)._respondsTo_(_st(aMessage)._selector());
 if(smalltalk.assert($2)){
-$1=_st(aMessage)._sendTo_(self._xxxClient());
+$4=self._xxxClient();
+$ctx1.sendIdx["xxxClient"]=2;
+$1=_st(aMessage)._sendTo_($4);
 } else {
 $1=_st(self._xxxClient())._handleFutureMessage_(aMessage);
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},smalltalk.T2Proxy)})},
+}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},globals.T2Proxy)})},
 args: ["aMessage"],
 source: "doesNotUnderstand: aMessage\x0a\x09^ (self xxxClient respondsTo: aMessage selector)\x0a\x09\x09ifTrue: [ aMessage sendTo: self xxxClient ]\x0a\x09\x09ifFalse: [ self xxxClient handleFutureMessage: aMessage ]",
 messageSends: ["ifTrue:ifFalse:", "respondsTo:", "xxxClient", "selector", "sendTo:", "handleFutureMessage:"],
 referencedClasses: []
 }),
-smalltalk.T2Proxy);
+globals.T2Proxy);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "inheritedSelectors",
-category: 'private',
+protocol: 'private',
 fn: function (){
 var self=this;
-function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
+function $T2Proxy(){return globals.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
 $1=_st(_st(self._class())._allSelectors())._reject_((function(each){
@@ -1210,85 +1214,83 @@ return smalltalk.withContext(function($ctx2) {
 return _st(_st(_st($T2Proxy())._methodDictionary())._keys())._includes_(each);
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{},smalltalk.T2Proxy)})},
+}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{},globals.T2Proxy)})},
 args: [],
 source: "inheritedSelectors\x0a\x09^ self class allSelectors\x0a\x09\x09reject: [ :each | T2Proxy methodDictionary keys includes: each ]",
 messageSends: ["reject:", "allSelectors", "class", "includes:", "keys", "methodDictionary"],
 referencedClasses: ["T2Proxy"]
 }),
-smalltalk.T2Proxy);
+globals.T2Proxy);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "initialize",
-category: 'initialization',
+protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-smalltalk.T2Proxy.superclass.fn.prototype._initialize.apply(_st(self), []);
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.T2Proxy)})},
+globals.T2Proxy.superclass.fn.prototype._initialize.apply(_st(self), []);
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.T2Proxy)})},
 args: [],
 source: "initialize\x0a\x09super initialize.\x0a\x09\x22self inheritedSelectors do: [ :each |\x0a\x09\x09self removeSelector: each asSelector ]\x22",
 messageSends: ["initialize"],
 referencedClasses: []
 }),
-smalltalk.T2Proxy);
+globals.T2Proxy);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeSelector:",
-category: 'private',
+protocol: 'private',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 delete self[aString];;
-return self}, function($ctx1) {$ctx1.fill(self,"removeSelector:",{aString:aString},smalltalk.T2Proxy)})},
+return self}, function($ctx1) {$ctx1.fill(self,"removeSelector:",{aString:aString},globals.T2Proxy)})},
 args: ["aString"],
 source: "removeSelector: aString\x0a\x09<delete self[aString];>",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Proxy);
+globals.T2Proxy);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "xxxClient",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
 var $1;
 $1=self["@client"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"xxxClient",{},smalltalk.T2Proxy)})},
+},
 args: [],
 source: "xxxClient\x0a\x09^ client",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Proxy);
+globals.T2Proxy);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "xxxClient:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aClient){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
 self["@client"]=aClient;
-return self}, function($ctx1) {$ctx1.fill(self,"xxxClient:",{aClient:aClient},smalltalk.T2Proxy)})},
+return self},
 args: ["aClient"],
 source: "xxxClient: aClient\x0a\x09client := aClient",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.T2Proxy);
+globals.T2Proxy);
 
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "client:",
-category: 'instance creation',
+protocol: 'instance creation',
 fn: function (aClient){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1298,21 +1300,21 @@ _st($2)._xxxClient_(aClient);
 $3=_st($2)._initialize();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},smalltalk.T2Proxy.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},globals.T2Proxy.klass)})},
 args: ["aClient"],
 source: "client: aClient\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aClient\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: aClient;\x0a\x09\x09initialize",
 messageSends: ["xxxClient:", "basicNew", "initialize"],
 referencedClasses: []
 }),
-smalltalk.T2Proxy.klass);
+globals.T2Proxy.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "on:",
-category: 'instance creation',
+protocol: 'instance creation',
 fn: function (aPath){
 var self=this;
-function $T2Client(){return smalltalk.T2Client||(typeof T2Client=="undefined"?nil:T2Client)}
+function $T2Client(){return globals.T2Client||(typeof T2Client=="undefined"?nil:T2Client)}
 return smalltalk.withContext(function($ctx1) { 
 var $2,$3,$1;
 $2=self._basicNew();
@@ -1320,36 +1322,18 @@ _st($2)._xxxClient_(_st($T2Client())._on_(aPath));
 $3=_st($2)._initialize();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},smalltalk.T2Proxy.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},globals.T2Proxy.klass)})},
 args: ["aPath"],
 source: "on: aPath\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aPath\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: (T2Client on: aPath);\x0a\x09\x09initialize",
 messageSends: ["xxxClient:", "basicNew", "on:", "initialize"],
 referencedClasses: ["T2Client"]
 }),
-smalltalk.T2Proxy.klass);
+globals.T2Proxy.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "asTimeTravelObject",
-category: '*TimeTravel-Amber-Core',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=self;
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"asTimeTravelObject",{},smalltalk.Object)})},
-args: [],
-source: "asTimeTravelObject\x0a\x09^ self",
-messageSends: [],
-referencedClasses: []
-}),
-smalltalk.Object);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "asTimeTravelObject",
-category: '*TimeTravel-Amber-Core',
+protocol: '*TimeTravel-Amber-Core',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -1365,12 +1349,12 @@ source: "asTimeTravelObject\x0a\x09^ self collect: [ :each | each asTimeTravelOb
 messageSends: ["collect:", "asTimeTravelObject"],
 referencedClasses: []
 }),
-smalltalk.Array);
+globals.Array);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "asTimeTravelObject",
-category: '*TimeTravel-Amber-Core',
+protocol: '*TimeTravel-Amber-Core',
 fn: function (){
 var self=this;
 var dictionary;
@@ -1389,12 +1373,12 @@ source: "asTimeTravelObject\x0a\x09| dictionary |\x0a\x09dictionary := self clas
 messageSends: ["new", "class", "keysAndValuesDo:", "at:put:", "asTimeTravelObject"],
 referencedClasses: []
 }),
-smalltalk.HashedCollection);
+globals.HashedCollection);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "asTimeTravelObject",
-category: '*TimeTravel-Amber-Core',
+protocol: '*TimeTravel-Amber-Core',
 fn: function (){
 var self=this;
 function $T2Proxy(){return smalltalk.T2Proxy||(typeof T2Proxy=="undefined"?nil:T2Proxy)}
@@ -1409,6 +1393,24 @@ source: "asTimeTravelObject\x0a\x09^ T2Proxy client: (T2Client fromJson: self)",
 messageSends: ["client:", "fromJson:"],
 referencedClasses: ["T2Proxy", "T2Client"]
 }),
-smalltalk.JSObjectProxy);
+globals.JSObjectProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelObject",
+protocol: '*TimeTravel-Amber-Core',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelObject",{},smalltalk.Object)})},
+args: [],
+source: "asTimeTravelObject\x0a\x09^ self",
+messageSends: [],
+referencedClasses: []
+}),
+globals.Object);
 
 });

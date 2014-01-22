@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Core'!
+Smalltalk createPackage: 'TimeTravel-Amber-Core'!
 Object subclass: #T2Action
 	instanceVariableNames: 'promise resolved'
 	package: 'TimeTravel-Amber-Core'!
@@ -379,7 +379,7 @@ on: aClient
 		yourself
 ! !
 
-Object subclass: #T2Proxy
+ProtoObject subclass: #T2Proxy
 	instanceVariableNames: 'client'
 	package: 'TimeTravel-Amber-Core'!
 
@@ -440,12 +440,6 @@ on: aPath
 		initialize
 ! !
 
-!Object methodsFor: '*TimeTravel-Amber-Core'!
-
-asTimeTravelObject
-	^ self
-! !
-
 !Array methodsFor: '*TimeTravel-Amber-Core'!
 
 asTimeTravelObject
@@ -467,5 +461,11 @@ asTimeTravelObject
 
 asTimeTravelObject
 	^ T2Proxy client: (T2Client fromJson: self)
+! !
+
+!Object methodsFor: '*TimeTravel-Amber-Core'!
+
+asTimeTravelObject
+	^ self
 ! !
 
