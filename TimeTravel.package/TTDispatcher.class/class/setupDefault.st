@@ -2,7 +2,7 @@ private
 setupDefault
 	default := self new.
 	default 
-		registerHandler: ((TTFileHandler path: 'timetravel')
+		registerHandler: ((TTAmberFileHandler path: 'timetravel')
 			directoryPath: 'TimeTravel-Amber';
 			yourself);
 		registerHandler: ((TTPresenterHandler path: 'counter')

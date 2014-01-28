@@ -1,15 +1,14 @@
 {
-	"category" : "TimeTravel-Examples",
+	"category" : "TimeTravel-Handlers",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"label",
-		"done" ],
-	"name" : "TTTodoItem",
+		"directoryPath" ],
+	"name" : "TTAmberFileHandler",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "TTHandler",
 	"type" : "normal" }

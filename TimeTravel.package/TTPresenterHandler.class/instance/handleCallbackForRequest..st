@@ -1,7 +1,6 @@
 request handling
 handleCallbackForRequest: aRequest
-	"One callback only per request. 
-	Oh, and no parameter yet."
+	"One callback only per request."
 
 	| key |
 	
