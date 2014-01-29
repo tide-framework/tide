@@ -1,0 +1,3 @@
+converting
+asObject
+	^ self model

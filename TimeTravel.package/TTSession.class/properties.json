@@ -9,6 +9,7 @@
 		"id",
 		"callbacks",
 		"presenters",
+		"rootPresenters",
 		"createdOn",
 		"modifiedOn",
 		"expirySeconds" ],

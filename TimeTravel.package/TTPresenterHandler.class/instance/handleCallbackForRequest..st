@@ -12,4 +12,4 @@ handleCallbackForRequest: aRequest
 			callbackAt: key 
 			ifAbsent: [  ^ self ])
 		data: (aRequest entity ifNotNil: [ :entity | 
-			Json readFrom: (entity fields at: 'arguments') readStream ])
+			self readData: (Json readFrom: (entity fields at: 'arguments') readStream) ])

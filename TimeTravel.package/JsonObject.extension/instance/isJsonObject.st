@@ -1,0 +1,3 @@
+*TimeTravel-Handlers
+isJsonObject
+	^ true

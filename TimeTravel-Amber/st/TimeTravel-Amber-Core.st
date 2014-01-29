@@ -189,7 +189,7 @@ state
 !TTClient methodsFor: 'as yet unclassified'!
 
 asTimeTravelArgument
-	^ JSON stringify: #{ '__id__' -> self id }
+	^ #{ '__id__' -> self id }
 ! !
 
 !TTClient methodsFor: 'forwarding'!
