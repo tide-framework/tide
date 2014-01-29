@@ -186,6 +186,12 @@ state
 	^ state
 ! !
 
+!TTClient methodsFor: 'as yet unclassified'!
+
+asTimeTravelArgument
+	^ JSON stringify: #{ '__id__' -> self id }
+! !
+
 !TTClient methodsFor: 'forwarding'!
 
 handleFutureMessage: aMessage
@@ -394,6 +400,12 @@ xxxClient
 
 xxxClient: aClient
 	client := aClient
+! !
+
+!TTProxy methodsFor: 'converting'!
+
+asTimeTravelArgument
+	^ self client asTimeTravelArgument
 ! !
 
 !TTProxy methodsFor: 'error handling'!

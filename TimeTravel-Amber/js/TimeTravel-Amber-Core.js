@@ -417,6 +417,25 @@ globals.TTClient);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "asTimeTravelArgument",
+protocol: 'as yet unclassified',
+fn: function (){
+var self=this;
+function $JSON(){return globals.JSON||(typeof JSON=="undefined"?nil:JSON)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st($JSON())._stringify_(globals.HashedCollection._newFromPairs_(["__id__",self._id()]));
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelArgument",{},globals.TTClient)})},
+args: [],
+source: "asTimeTravelArgument\x0a\x09^ JSON stringify: #{ '__id__' -> self id }",
+messageSends: ["stringify:", "id"],
+referencedClasses: ["JSON"]
+}),
+globals.TTClient);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "connect",
 protocol: 'initialization',
 fn: function (){
@@ -1193,6 +1212,24 @@ globals.TTPromise.klass);
 
 
 smalltalk.addClass('TTProxy', globals.ProtoObject, ['client'], 'TimeTravel-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelArgument",
+protocol: 'converting',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(self._client())._asTimeTravelArgument();
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTimeTravelArgument",{},globals.TTProxy)})},
+args: [],
+source: "asTimeTravelArgument\x0a\x09^ self client asTimeTravelArgument",
+messageSends: ["asTimeTravelArgument", "client"],
+referencedClasses: []
+}),
+globals.TTProxy);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "doesNotUnderstand:",
