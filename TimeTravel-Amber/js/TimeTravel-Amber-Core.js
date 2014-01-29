@@ -1220,12 +1220,12 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=_st(self._client())._asTimeTravelArgument();
+$1=_st(self._xxxClient())._asTimeTravelArgument();
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"asTimeTravelArgument",{},globals.TTProxy)})},
 args: [],
-source: "asTimeTravelArgument\x0a\x09^ self client asTimeTravelArgument",
-messageSends: ["asTimeTravelArgument", "client"],
+source: "asTimeTravelArgument\x0a\x09^ self xxxClient asTimeTravelArgument",
+messageSends: ["asTimeTravelArgument", "xxxClient"],
 referencedClasses: []
 }),
 globals.TTProxy);

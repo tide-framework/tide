@@ -405,7 +405,7 @@ xxxClient: aClient
 !TTProxy methodsFor: 'converting'!
 
 asTimeTravelArgument
-	^ self client asTimeTravelArgument
+	^ self xxxClient asTimeTravelArgument
 ! !
 
 !TTProxy methodsFor: 'error handling'!
