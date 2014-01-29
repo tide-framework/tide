@@ -1,3 +1,3 @@
 accessing
 rootPresenter
-	^ self session rootPresenterFor: self
+	^ self session presenterFor: self
