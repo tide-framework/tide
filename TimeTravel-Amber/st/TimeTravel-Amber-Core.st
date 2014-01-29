@@ -332,13 +332,10 @@ setRequestActionFromMessage: aMessage
 	| url data |
 	url := self client actions at: aMessage selector.
 	data := JSON stringify: (aMessage arguments ifNil: [ #() ]).
-	url 
-		ifNil: [ self setChildActionFromMessage: aMessage ]
-		ifNotNil: [ 
-			self setAction: ((TTRequestAction on: self)
-				requestUrl: url;
-				data: data;
-				yourself) ]
+	self setAction: ((TTRequestAction on: self)
+		requestUrl: url;
+		data: data;
+		yourself)
 !
 
 then: aBlock

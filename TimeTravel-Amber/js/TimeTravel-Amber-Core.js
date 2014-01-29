@@ -1072,33 +1072,27 @@ protocol: 'actions',
 fn: function (aMessage){
 var self=this;
 var url,data;
-function $JSON(){return smalltalk.JSON||(typeof JSON=="undefined"?nil:JSON)}
-function $TTRequestAction(){return smalltalk.TTRequestAction||(typeof TTRequestAction=="undefined"?nil:TTRequestAction)}
+function $JSON(){return globals.JSON||(typeof JSON=="undefined"?nil:JSON)}
+function $TTRequestAction(){return globals.TTRequestAction||(typeof TTRequestAction=="undefined"?nil:TTRequestAction)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$2,$4,$5,$6;
+var $2,$1,$3,$4;
 url=_st(_st(self._client())._actions())._at_(_st(aMessage)._selector());
-$1=$JSON();
-$3=_st(aMessage)._arguments();
-if(($receiver = $3) == nil || $receiver == null){
-$2=[];
+$2=_st(aMessage)._arguments();
+if(($receiver = $2) == nil || $receiver == null){
+$1=[];
 } else {
-$2=$3;
+$1=$2;
 };
-data=_st($1)._stringify_($2);
-$4=url;
-if(($receiver = $4) == nil || $receiver == null){
-self._setChildActionFromMessage_(aMessage);
-} else {
-$5=_st($TTRequestAction())._on_(self);
-_st($5)._requestUrl_(url);
-_st($5)._data_(data);
-$6=_st($5)._yourself();
-self._setAction_($6);
-};
-return self}, function($ctx1) {$ctx1.fill(self,"setRequestActionFromMessage:",{aMessage:aMessage,url:url,data:data},smalltalk.TTPromise)})},
+data=_st($JSON())._stringify_($1);
+$3=_st($TTRequestAction())._on_(self);
+_st($3)._requestUrl_(url);
+_st($3)._data_(data);
+$4=_st($3)._yourself();
+self._setAction_($4);
+return self}, function($ctx1) {$ctx1.fill(self,"setRequestActionFromMessage:",{aMessage:aMessage,url:url,data:data},globals.TTPromise)})},
 args: ["aMessage"],
-source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client actions at: aMessage selector.\x0a\x09data := JSON stringify: (aMessage arguments ifNil: [ #() ]).\x0a\x09url \x0a\x09\x09ifNil: [ self setChildActionFromMessage: aMessage ]\x0a\x09\x09ifNotNil: [ \x0a\x09\x09\x09self setAction: ((TTRequestAction on: self)\x0a\x09\x09\x09\x09requestUrl: url;\x0a\x09\x09\x09\x09data: data;\x0a\x09\x09\x09\x09yourself) ]",
-messageSends: ["at:", "actions", "client", "selector", "stringify:", "ifNil:", "arguments", "ifNil:ifNotNil:", "setChildActionFromMessage:", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
+source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client actions at: aMessage selector.\x0a\x09data := JSON stringify: (aMessage arguments ifNil: [ #() ]).\x0a\x09self setAction: ((TTRequestAction on: self)\x0a\x09\x09requestUrl: url;\x0a\x09\x09data: data;\x0a\x09\x09yourself)",
+messageSends: ["at:", "actions", "client", "selector", "stringify:", "ifNil:", "arguments", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
 referencedClasses: ["JSON", "TTRequestAction"]
 }),
 globals.TTPromise);
