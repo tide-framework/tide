@@ -5,7 +5,7 @@ handleCallback: aCallback data: data
 	answer := aCallback value: data.
 	
 	entity := (ZnStringEntity type: ZnMimeType applicationJson)
-		string: answer asPresenter asJsonString;
+		string: answer timeTravelPresenter asJsonString;
 		yourself.
 	
 	"TODO: encapsulate properly"
