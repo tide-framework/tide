@@ -396,7 +396,7 @@ globals.TTRequestAction);
 
 
 
-smalltalk.addClass('TTClient', globals.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'connected'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('TTClient', globals.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'id', 'connected'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "actions",
@@ -509,6 +509,23 @@ return $5;
 args: ["aMessage"],
 source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self doesNotUnderstand: aMessage",
 messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "doesNotUnderstand:"],
+referencedClasses: []
+}),
+globals.TTClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "id",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@id"];
+return $1;
+},
+args: [],
+source: "id\x0a\x09^ id",
+messageSends: [],
 referencedClasses: []
 }),
 globals.TTClient);
@@ -729,14 +746,19 @@ var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 self["@connected"]=true;
+self["@id"]=_st(json)._at_("__id__");
+$ctx1.sendIdx["at:"]=1;
 $1=_st(json)._at_("state");
+$ctx1.sendIdx["at:"]=2;
 if(($receiver = $1) == nil || $receiver == null){
 $1;
 } else {
 _st(_st(json)._state())._keysAndValuesDo_((function(key,value){
 return smalltalk.withContext(function($ctx2) {
 return _st(self["@state"])._at_put_(key,_st(value)._asTimeTravelObject());
+$ctx2.sendIdx["at:put:"]=1;
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,2)})}));
+$ctx1.sendIdx["keysAndValuesDo:"]=1;
 };
 $2=_st(json)._at_("actions");
 if(($receiver = $2) == nil || $receiver == null){
@@ -747,10 +769,10 @@ return smalltalk.withContext(function($ctx2) {
 return _st(self["@actions"])._at_put_(key,value);
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,4)})}));
 };
-return self}, function($ctx1) {$ctx1.fill(self,"updateFromJson:",{json:json},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"updateFromJson:",{json:json},globals.TTClient)})},
 args: ["json"],
-source: "updateFromJson: json\x0a\x09connected := true.\x0a\x09\x0a\x09(json at: 'state') ifNotNil: [\x0a\x09\x09json state keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value asTimeTravelObject ] ].\x0a\x09(json at: 'actions') ifNotNil: [\x0a\x09\x09json actions keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ] ]",
-messageSends: ["ifNotNil:", "at:", "keysAndValuesDo:", "state", "at:put:", "asTimeTravelObject", "actions"],
+source: "updateFromJson: json\x0a\x09connected := true.\x0a\x09\x0a\x09id := json at: '__id__'.\x0a\x09\x0a\x09(json at: 'state') ifNotNil: [\x0a\x09\x09json state keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value asTimeTravelObject ] ].\x0a\x09(json at: 'actions') ifNotNil: [\x0a\x09\x09json actions keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ] ]",
+messageSends: ["at:", "ifNotNil:", "keysAndValuesDo:", "state", "at:put:", "asTimeTravelObject", "actions"],
 referencedClasses: []
 }),
 globals.TTClient);

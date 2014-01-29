@@ -137,7 +137,7 @@ resolve
 ! !
 
 Object subclass: #TTClient
-	instanceVariableNames: 'state actions firstPromise promisedValue path connected'
+	instanceVariableNames: 'state actions firstPromise promisedValue path id connected'
 	package: 'TimeTravel-Amber-Core'!
 
 !TTClient methodsFor: 'accessing'!
@@ -160,6 +160,10 @@ future
 		ifNotNil: [ firstPromise next: promise ].
 
 	^ promise
+!
+
+id
+	^ id
 !
 
 path
@@ -244,6 +248,8 @@ updateActions: aDictionary
 
 updateFromJson: json
 	connected := true.
+	
+	id := json at: '__id__'.
 	
 	(json at: 'state') ifNotNil: [
 		json state keysAndValuesDo: [ :key :value |
