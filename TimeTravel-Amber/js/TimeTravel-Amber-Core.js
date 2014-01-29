@@ -1075,24 +1075,28 @@ var url,data;
 function $JSON(){return globals.JSON||(typeof JSON=="undefined"?nil:JSON)}
 function $TTRequestAction(){return globals.TTRequestAction||(typeof TTRequestAction=="undefined"?nil:TTRequestAction)}
 return smalltalk.withContext(function($ctx1) { 
-var $2,$1,$3,$4;
+var $3,$2,$1,$4,$5;
 url=_st(_st(self._client())._actions())._at_(_st(aMessage)._selector());
-$2=_st(aMessage)._arguments();
-if(($receiver = $2) == nil || $receiver == null){
-$1=[];
+$3=_st(aMessage)._arguments();
+if(($receiver = $3) == nil || $receiver == null){
+$2=[];
 } else {
-$1=$2;
+$2=$3;
 };
+$1=_st($2)._collect_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(each)._asTimeTravelArgument();
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,2)})}));
 data=_st($JSON())._stringify_($1);
-$3=_st($TTRequestAction())._on_(self);
-_st($3)._requestUrl_(url);
-_st($3)._data_(data);
-$4=_st($3)._yourself();
-self._setAction_($4);
+$4=_st($TTRequestAction())._on_(self);
+_st($4)._requestUrl_(url);
+_st($4)._data_(data);
+$5=_st($4)._yourself();
+self._setAction_($5);
 return self}, function($ctx1) {$ctx1.fill(self,"setRequestActionFromMessage:",{aMessage:aMessage,url:url,data:data},globals.TTPromise)})},
 args: ["aMessage"],
-source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client actions at: aMessage selector.\x0a\x09data := JSON stringify: (aMessage arguments ifNil: [ #() ]).\x0a\x09self setAction: ((TTRequestAction on: self)\x0a\x09\x09requestUrl: url;\x0a\x09\x09data: data;\x0a\x09\x09yourself)",
-messageSends: ["at:", "actions", "client", "selector", "stringify:", "ifNil:", "arguments", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
+source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client actions at: aMessage selector.\x0a\x09data := JSON stringify: ((aMessage arguments ifNil: [ #() ]) \x0a\x09\x09collect: [ :each | each asTimeTravelArgument ]).\x0a\x09self setAction: ((TTRequestAction on: self)\x0a\x09\x09requestUrl: url;\x0a\x09\x09data: data;\x0a\x09\x09yourself)",
+messageSends: ["at:", "actions", "client", "selector", "stringify:", "collect:", "ifNil:", "arguments", "asTimeTravelArgument", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
 referencedClasses: ["JSON", "TTRequestAction"]
 }),
 globals.TTPromise);
@@ -1410,6 +1414,21 @@ messageSends: ["client:", "fromJson:"],
 referencedClasses: ["TTProxy", "TTClient"]
 }),
 globals.JSObjectProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTimeTravelArgument",
+protocol: '*TimeTravel-Amber-Core',
+fn: function (){
+var self=this;
+return self;
+},
+args: [],
+source: "asTimeTravelArgument\x0a\x09^ self",
+messageSends: [],
+referencedClasses: []
+}),
+globals.Object);
 
 smalltalk.addMethod(
 smalltalk.method({

@@ -331,7 +331,8 @@ setAction: anAction
 setRequestActionFromMessage: aMessage
 	| url data |
 	url := self client actions at: aMessage selector.
-	data := JSON stringify: (aMessage arguments ifNil: [ #() ]).
+	data := JSON stringify: ((aMessage arguments ifNil: [ #() ]) 
+		collect: [ :each | each asTimeTravelArgument ]).
 	self setAction: ((TTRequestAction on: self)
 		requestUrl: url;
 		data: data;
@@ -466,6 +467,10 @@ asTimeTravelObject
 ! !
 
 !Object methodsFor: '*TimeTravel-Amber-Core'!
+
+asTimeTravelArgument
+	^ self
+!
 
 asTimeTravelObject
 	^ self
