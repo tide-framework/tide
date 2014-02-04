@@ -1,5 +1,5 @@
 registration
 registerAt: aString
-	(TTPresenterHandler on: self)
-		path: aString;
+	(TTPresenterHandler path: aString)
+		rootPresenterClass: self;
 		register
