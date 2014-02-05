@@ -103,6 +103,16 @@ newClientFromJson: json
 	self client promisedValue: json asTimeTravelObject
 !
 
+serverErrorFromJson: json
+	| serverError |
+	
+	serverError := json asTimeTravelObject.	
+	TTServerError new 
+		code: serverError code;
+		messageText: serverError messageText;
+		signal.
+!
+
 updateClientFromJson: json
 	self client updateFromJson: json
 ! !
@@ -110,9 +120,11 @@ updateClientFromJson: json
 !TTRequestAction methodsFor: 'resolving'!
 
 handleResponse: json status: aNumber
-	^ aNumber == 200 
-		ifTrue: [ self updateClientFromJson: json ]
-		ifFalse: [ self newClientFromJson: json ]
+	aNumber == 200 ifTrue: [ ^ self updateClientFromJson: json ].
+	aNumber == 201 ifTrue: [ ^ self newClientFromJson: json ].
+	aNumber == 202 ifTrue: [ ^ self serverErrorFromJson: json ].
+	
+	self error: 'Invalid server answer code'.
 !
 
 request: aString
@@ -410,6 +422,16 @@ xxxClient: aClient
 	client := aClient
 ! !
 
+!TTProxy methodsFor: 'as yet unclassified'!
+
+inspectOn: anInspector
+	anInspector
+		setLabel: self printString;
+		setVariables: #{
+			'client' -> client
+		}
+! !
+
 !TTProxy methodsFor: 'converting'!
 
 asTimeTravelArgument
@@ -452,6 +474,15 @@ client: aClient
 	^ self basicNew
 		xxxClient: aClient;
 		initialize
+!
+
+connectOn: aPath
+	"Creates a proxy on aPath and connect it. 
+	 This is a convenience method."
+	 
+	^ (self on: aPath) 
+		connect; 
+		yourself.
 !
 
 on: aPath

@@ -230,18 +230,29 @@ protocol: 'resolving',
 fn: function (json,aNumber){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $2,$1;
-$2=_st(aNumber).__eq_eq((200));
-if(smalltalk.assert($2)){
-$1=self._updateClientFromJson_(json);
-} else {
-$1=self._newClientFromJson_(json);
+var $1,$2,$3,$4,$5,$6;
+$1=_st(aNumber).__eq_eq((200));
+$ctx1.sendIdx["=="]=1;
+if(smalltalk.assert($1)){
+$2=self._updateClientFromJson_(json);
+return $2;
 };
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"handleResponse:status:",{json:json,aNumber:aNumber},smalltalk.TTRequestAction)})},
+$3=_st(aNumber).__eq_eq((201));
+$ctx1.sendIdx["=="]=2;
+if(smalltalk.assert($3)){
+$4=self._newClientFromJson_(json);
+return $4;
+};
+$5=_st(aNumber).__eq_eq((202));
+if(smalltalk.assert($5)){
+$6=self._serverErrorFromJson_(json);
+return $6;
+};
+self._error_("Invalid server answer code");
+return self}, function($ctx1) {$ctx1.fill(self,"handleResponse:status:",{json:json,aNumber:aNumber},globals.TTRequestAction)})},
 args: ["json", "aNumber"],
-source: "handleResponse: json status: aNumber\x0a\x09^ aNumber == 200 \x0a\x09\x09ifTrue: [ self updateClientFromJson: json ]\x0a\x09\x09ifFalse: [ self newClientFromJson: json ]",
-messageSends: ["ifTrue:ifFalse:", "==", "updateClientFromJson:", "newClientFromJson:"],
+source: "handleResponse: json status: aNumber\x0a\x09aNumber == 200 ifTrue: [ ^ self updateClientFromJson: json ].\x0a\x09aNumber == 201 ifTrue: [ ^ self newClientFromJson: json ].\x0a\x09aNumber == 202 ifTrue: [ ^ self serverErrorFromJson: json ].\x0a\x09\x0a\x09self error: 'Invalid server answer code'.",
+messageSends: ["ifTrue:", "==", "updateClientFromJson:", "newClientFromJson:", "serverErrorFromJson:", "error:"],
 referencedClasses: []
 }),
 globals.TTRequestAction);
@@ -358,6 +369,29 @@ args: [],
 source: "resolve\x0a\x09self request: self requestUrl",
 messageSends: ["request:", "requestUrl"],
 referencedClasses: []
+}),
+globals.TTRequestAction);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "serverErrorFromJson:",
+protocol: 'private',
+fn: function (json){
+var self=this;
+var serverError;
+function $TTServerError(){return globals.TTServerError||(typeof TTServerError=="undefined"?nil:TTServerError)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+serverError=_st(json)._asTimeTravelObject();
+$1=_st($TTServerError())._new();
+_st($1)._code_(_st(serverError)._code());
+_st($1)._messageText_(_st(serverError)._messageText());
+$2=_st($1)._signal();
+return self}, function($ctx1) {$ctx1.fill(self,"serverErrorFromJson:",{json:json,serverError:serverError},globals.TTRequestAction)})},
+args: ["json"],
+source: "serverErrorFromJson: json\x0a\x09| serverError |\x0a\x09\x0a\x09serverError := json asTimeTravelObject.\x09\x0a\x09TTServerError new \x0a\x09\x09code: serverError code;\x0a\x09\x09messageText: serverError messageText;\x0a\x09\x09signal.",
+messageSends: ["asTimeTravelObject", "code:", "new", "code", "messageText:", "messageText", "signal"],
+referencedClasses: ["TTServerError"]
 }),
 globals.TTRequestAction);
 
@@ -1320,6 +1354,24 @@ globals.TTProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "inspectOn:",
+protocol: 'as yet unclassified',
+fn: function (anInspector){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+_st(anInspector)._setLabel_(self._printString());
+$1=_st(anInspector)._setVariables_(globals.HashedCollection._newFromPairs_(["client",self["@client"]]));
+return self}, function($ctx1) {$ctx1.fill(self,"inspectOn:",{anInspector:anInspector},globals.TTProxy)})},
+args: ["anInspector"],
+source: "inspectOn: anInspector\x0a\x09anInspector\x0a\x09\x09setLabel: self printString;\x0a\x09\x09setVariables: #{\x0a\x09\x09\x09'client' -> client\x0a\x09\x09}",
+messageSends: ["setLabel:", "printString", "setVariables:"],
+referencedClasses: []
+}),
+globals.TTProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "removeSelector:",
 protocol: 'private',
 fn: function (aString){
@@ -1384,6 +1436,27 @@ return $1;
 args: ["aClient"],
 source: "client: aClient\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aClient\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: aClient;\x0a\x09\x09initialize",
 messageSends: ["xxxClient:", "basicNew", "initialize"],
+referencedClasses: []
+}),
+globals.TTProxy.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "connectOn:",
+protocol: 'instance creation',
+fn: function (aPath){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._on_(aPath);
+_st($2)._connect();
+$3=_st($2)._yourself();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"connectOn:",{aPath:aPath},globals.TTProxy.klass)})},
+args: ["aPath"],
+source: "connectOn: aPath\x0a\x09\x22Creates a proxy on aPath and connect it. \x0a\x09 This is a convenience method.\x22\x0a\x09 \x0a\x09^ (self on: aPath) \x0a\x09\x09connect; \x0a\x09\x09yourself.",
+messageSends: ["connect", "on:", "yourself"],
 referencedClasses: []
 }),
 globals.TTProxy.klass);

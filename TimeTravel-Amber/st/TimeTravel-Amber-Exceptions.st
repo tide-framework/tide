@@ -31,6 +31,20 @@ xhr: anObject
 	xhr := anObject
 ! !
 
+Error subclass: #TTServerError
+	instanceVariableNames: 'code'
+	package: 'TimeTravel-Amber-Exceptions'!
+
+!TTServerError methodsFor: 'accessing'!
+
+code
+	^ code
+!
+
+code: aString 
+	code := aString.
+! !
+
 Error subclass: #TTSessionNotFound
 	instanceVariableNames: ''
 	package: 'TimeTravel-Amber-Exceptions'!

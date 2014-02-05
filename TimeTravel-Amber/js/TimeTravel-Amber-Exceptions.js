@@ -92,6 +92,41 @@ globals.TTRequestError);
 
 
 
+smalltalk.addClass('TTServerError', globals.Error, ['code'], 'TimeTravel-Amber-Exceptions');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "code",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@code"];
+return $1;
+},
+args: [],
+source: "code\x0a\x09^ code",
+messageSends: [],
+referencedClasses: []
+}),
+globals.TTServerError);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "code:",
+protocol: 'accessing',
+fn: function (aString){
+var self=this;
+self["@code"]=aString;
+return self},
+args: ["aString"],
+source: "code: aString \x0a\x09code := aString.",
+messageSends: [],
+referencedClasses: []
+}),
+globals.TTServerError);
+
+
+
 smalltalk.addClass('TTSessionNotFound', globals.Error, [], 'TimeTravel-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
