@@ -1,0 +1,4 @@
+accessing
+code
+	<state>
+	^ code

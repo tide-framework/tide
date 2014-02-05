@@ -1,0 +1,1 @@
+I'm a presenter used by TTPresenterExceptionHandler to transmit exceptions to amber.

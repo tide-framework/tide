@@ -1,0 +1,4 @@
+accessing
+messageText
+	<state>
+	^ messageText

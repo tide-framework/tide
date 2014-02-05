@@ -1,0 +1,14 @@
+{
+	"category" : "TimeTravel-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "TTPresenterExceptionHandler",
+	"pools" : [
+		 ],
+	"super" : "TTPresenterHandler",
+	"type" : "normal" }

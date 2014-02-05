@@ -1,0 +1,1 @@
+I'm a handler that traps exceptions and dispatch them to amber with a format that amber can understand. 
