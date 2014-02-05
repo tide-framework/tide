@@ -1,4 +1,22 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Exceptions'!
+Smalltalk createPackage: 'TimeTravel-Amber-Exceptions'!
+Error subclass: #TTPromiseNotFound
+	instanceVariableNames: 'selector'
+	package: 'TimeTravel-Amber-Exceptions'!
+
+!TTPromiseNotFound methodsFor: 'accessing'!
+
+messageText
+	^ 'No promise was found for selector ', self selector
+!
+
+selector
+	^ selector
+!
+
+selector: aString
+	selector := aString
+! !
+
 Error subclass: #TTRequestError
 	instanceVariableNames: 'xhr'
 	package: 'TimeTravel-Amber-Exceptions'!

@@ -418,7 +418,7 @@ globals.TTClient);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "asTimeTravelArgument",
-protocol: 'as yet unclassified',
+protocol: 'converting',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -505,28 +505,32 @@ fn: function (aMessage){
 var self=this;
 var selector;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5;
-selector=_st(_st(aMessage)._selector())._asString();
-$1=_st(self["@state"])._at_(selector);
-if(($receiver = $1) == nil || $receiver == null){
-$1;
-} else {
+var $1,$2,$3,$4,$5,$6;
+$1=_st(aMessage)._selector();
+$ctx1.sendIdx["selector"]=1;
+selector=_st($1)._asString();
 $2=_st(self["@state"])._at_(selector);
-return $2;
-};
-$3=_st(self["@actions"])._at_(selector);
-if(($receiver = $3) == nil || $receiver == null){
-$3;
+$ctx1.sendIdx["at:"]=1;
+if(($receiver = $2) == nil || $receiver == null){
+$2;
 } else {
-$4=_st(self._future())._setRequestActionFromMessage_(aMessage);
-return $4;
+$3=_st(self["@state"])._at_(selector);
+$ctx1.sendIdx["at:"]=2;
+return $3;
 };
-$5=self._doesNotUnderstand_(aMessage);
+$4=_st(self["@actions"])._at_(selector);
+if(($receiver = $4) == nil || $receiver == null){
+$4;
+} else {
+$5=_st(self._future())._setRequestActionFromMessage_(aMessage);
 return $5;
-}, function($ctx1) {$ctx1.fill(self,"handleFutureMessage:",{aMessage:aMessage,selector:selector},smalltalk.TTClient)})},
+};
+$6=self._promiseNotFound_(_st(aMessage)._selector());
+return $6;
+}, function($ctx1) {$ctx1.fill(self,"handleFutureMessage:",{aMessage:aMessage,selector:selector},globals.TTClient)})},
 args: ["aMessage"],
-source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self doesNotUnderstand: aMessage",
-messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "doesNotUnderstand:"],
+source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self promiseNotFound: aMessage selector",
+messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "promiseNotFound:"],
 referencedClasses: []
 }),
 globals.TTClient);
@@ -637,6 +641,26 @@ args: ["aString"],
 source: "path: aString\x0a\x09path := aString",
 messageSends: [],
 referencedClasses: []
+}),
+globals.TTClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "promiseNotFound:",
+protocol: 'error handling',
+fn: function (aSelector){
+var self=this;
+function $TTPromiseNotFound(){return globals.TTPromiseNotFound||(typeof TTPromiseNotFound=="undefined"?nil:TTPromiseNotFound)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+$1=_st($TTPromiseNotFound())._new();
+_st($1)._selector_(aSelector);
+$2=_st($1)._signal();
+return self}, function($ctx1) {$ctx1.fill(self,"promiseNotFound:",{aSelector:aSelector},globals.TTClient)})},
+args: ["aSelector"],
+source: "promiseNotFound: aSelector\x0a\x09TTPromiseNotFound new\x0a\x09\x09selector: aSelector;\x0a\x09\x09signal",
+messageSends: ["selector:", "new", "signal"],
+referencedClasses: ["TTPromiseNotFound"]
 }),
 globals.TTClient);
 

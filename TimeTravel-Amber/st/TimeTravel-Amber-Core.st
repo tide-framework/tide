@@ -186,10 +186,18 @@ state
 	^ state
 ! !
 
-!TTClient methodsFor: 'as yet unclassified'!
+!TTClient methodsFor: 'converting'!
 
 asTimeTravelArgument
 	^ #{ '__id__' -> self id }
+! !
+
+!TTClient methodsFor: 'error handling'!
+
+promiseNotFound: aSelector
+	TTPromiseNotFound new
+		selector: aSelector;
+		signal
 ! !
 
 !TTClient methodsFor: 'forwarding'!
@@ -204,7 +212,7 @@ handleFutureMessage: aMessage
 	(actions at: selector) 
 		ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].
 
-	^ self doesNotUnderstand: aMessage
+	^ self promiseNotFound: aMessage selector
 !
 
 then: aBlock
