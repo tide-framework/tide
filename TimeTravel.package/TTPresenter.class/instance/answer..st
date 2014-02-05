@@ -1,6 +1,6 @@
 request handling
 answer: anObject
 	self respond: (ZnResponse ok: ((ZnStringEntity 
-		type: (ZnMimeType predefinedInstanceAt: #applicationJson))
+		type: ZnMimeType applicationJson)
 		string: anObject asJsonString;
 		yourself))
