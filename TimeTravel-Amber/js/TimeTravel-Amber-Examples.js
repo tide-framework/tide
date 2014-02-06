@@ -1,12 +1,12 @@
-define("timetravel/TimeTravel-Amber-Examples", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/Canvas"], function(smalltalk,nil,_st){
+define("timetravel/TimeTravel-Amber-Examples", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Canvas"], function(smalltalk,nil,_st, globals){
 smalltalk.addPackage('TimeTravel-Amber-Examples');
 smalltalk.packages["TimeTravel-Amber-Examples"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
-smalltalk.addClass('TTCounterWidget', smalltalk.Widget, ['counter', 'header'], 'TimeTravel-Amber-Examples');
+smalltalk.addClass('TTCounterWidget', globals.Widget, ['counter', 'header'], 'TimeTravel-Amber-Examples');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addNewCounter",
-category: 'actions',
+protocol: 'actions',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -20,12 +20,12 @@ source: "addNewCounter\x0a\x09self counter otherCounter then: [ :proxy | \x0a\x0
 messageSends: ["then:", "otherCounter", "counter", "render", "on:", "class"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "counter",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 function $TTProxy(){return smalltalk.TTProxy||(typeof TTProxy=="undefined"?nil:TTProxy)}
@@ -45,12 +45,12 @@ source: "counter\x0a\x09^ counter ifNil: [ counter := TTProxy on: '/counter' ]",
 messageSends: ["ifNil:", "on:"],
 referencedClasses: ["TTProxy"]
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "counter:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (aCounter){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -61,12 +61,12 @@ source: "counter: aCounter\x0a\x09counter := aCounter",
 messageSends: [],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "decrease",
-category: 'actions',
+protocol: 'actions',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -81,12 +81,12 @@ source: "decrease\x0a\x09self counter decrease.\x0a\x09self counter then: [ self
 messageSends: ["decrease", "counter", "then:", "update"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "increase",
-category: 'actions',
+protocol: 'actions',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -101,12 +101,12 @@ source: "increase\x0a\x09self counter increase.\x0a\x09self counter then: [ self
 messageSends: ["increase", "counter", "then:", "update"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "render",
-category: 'rendering',
+protocol: 'rendering',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -121,12 +121,12 @@ source: "render\x0a\x09self counter connect.\x0a\x09self counter then: [ \x0a\x0
 messageSends: ["connect", "counter", "then:", "appendToJQuery:", "asJQuery"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-category: 'rendering',
+protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -157,12 +157,12 @@ source: "renderOn: html\x0a\x09header := html h1 with: self counter count asStri
 messageSends: ["with:", "h1", "asString", "count", "counter", "button", "onClick:", "increase", "decrease", "br", "a", "addNewCounter"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "update",
-category: 'updating',
+protocol: 'updating',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -176,29 +176,27 @@ source: "update\x0a\x09header contents: [ :html |\x0a\x09\x09html with: self cou
 messageSends: ["contents:", "with:", "asString", "count", "counter"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget);
+globals.TTCounterWidget);
 
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "initialize",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(self._new())._render();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TTCounterWidget.klass)})},
+return self},
 args: [],
-source: "initialize\x0a\x09self new render",
-messageSends: ["render", "new"],
+source: "initialize\x0a\x09\x22self new render\x22",
+messageSends: [],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget.klass);
+globals.TTCounterWidget.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "on:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (aProxy){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -214,6 +212,6 @@ source: "on: aProxy\x0a\x09^ self new\x0a\x09\x09counter: aProxy;\x0a\x09\x09you
 messageSends: ["counter:", "new", "yourself"],
 referencedClasses: []
 }),
-smalltalk.TTCounterWidget.klass);
+globals.TTCounterWidget.klass);
 
 });

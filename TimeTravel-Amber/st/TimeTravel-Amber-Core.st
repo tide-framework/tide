@@ -104,13 +104,17 @@ newClientFromJson: json
 !
 
 serverErrorFromJson: json
-	| serverError |
-	
+	| serverError error |
+
 	serverError := json asTimeTravelObject.	
-	TTServerError new 
+	error := TTServerError new 
 		code: serverError code;
 		messageText: serverError messageText;
-		signal.
+		yourself.
+		
+	self promise errorHandler 
+		ifNotNil: [ :handler | handler failure: error ]
+		ifNil: [ error signal ].
 !
 
 updateClientFromJson: json
@@ -146,6 +150,41 @@ request: aString
 
 resolve
 	self request: self requestUrl
+! !
+
+Object subclass: #TTAsyncPromiseFailureHandler
+	instanceVariableNames: 'failureAction action'
+	package: 'TimeTravel-Amber-Core'!
+
+!TTAsyncPromiseFailureHandler methodsFor: 'accessing'!
+
+action 
+	^ action
+! !
+
+!TTAsyncPromiseFailureHandler methodsFor: 'initialization'!
+
+initializeAction: aBlock  
+	self initialize.
+	action := aBlock.
+! !
+
+!TTAsyncPromiseFailureHandler methodsFor: 'signaling'!
+
+failure: anError
+	self action value: anError
+! !
+
+!TTAsyncPromiseFailureHandler class methodsFor: 'instance creation'!
+
+action: aBlock 
+	^ self basicNew 
+		initializeAction: aBlock;
+		yourself
+!
+
+new 
+	^ self error: 'Use #action:'
 ! !
 
 Object subclass: #TTClient
@@ -305,7 +344,7 @@ on: aString
 ! !
 
 Object subclass: #TTPromise
-	instanceVariableNames: 'previous next client action'
+	instanceVariableNames: 'previous next client action errorHandler'
 	package: 'TimeTravel-Amber-Core'!
 
 !TTPromise methodsFor: 'accessing'!
@@ -320,6 +359,10 @@ client
 
 client: aClient
 	client := aClient
+!
+
+errorHandler
+	^ errorHandler
 !
 
 future
@@ -371,6 +414,13 @@ then: aBlock
 		ifFalse: [ self setAction: ((TTCallbackAction on: self) callback: aBlock) ]
 ! !
 
+!TTPromise methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+	errorHandler := self class errorHandler.
+! !
+
 !TTPromise methodsFor: 'testing'!
 
 isAssigned
@@ -398,6 +448,26 @@ stepTravel
 travel
 	(self previous isNil or: [ self previous isResolved ]) 
 		ifTrue: [ self stepTravel ]
+! !
+
+TTPromise class instanceVariableNames: 'errorHandler'!
+
+!TTPromise class methodsFor: 'accessing'!
+
+errorHandler 
+	^ errorHandler
+!
+
+errorHandler: anErrorHandler 
+	errorHandler := anErrorHandler
+!
+
+use: anErrorHandler during: aBlock
+	| oldErrorHandler |
+	
+	oldErrorHandler := self errorHandler.
+	self errorHandler: anErrorHandler.
+	aBlock ensure: [ self errorHandler: oldErrorHandler ]
 ! !
 
 !TTPromise class methodsFor: 'instance creation'!
@@ -498,6 +568,14 @@ on: aPath
 
 asTimeTravelObject
 	^ self collect: [ :each | each asTimeTravelObject ]
+! !
+
+!BlockClosure methodsFor: '*TimeTravel-Amber-Core'!
+
+onPromiseFailureDo: failureBlock
+	^ TTPromise
+		use: (TTAsyncPromiseFailureHandler action: failureBlock)
+		during: self
 ! !
 
 !HashedCollection methodsFor: '*TimeTravel-Amber-Core'!

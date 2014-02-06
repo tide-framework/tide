@@ -1,4 +1,4 @@
-define("timetravel/TimeTravel-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Objects", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st, globals){
+define("timetravel/TimeTravel-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Objects", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st, globals){
 smalltalk.addPackage('TimeTravel-Amber-Core');
 smalltalk.packages["TimeTravel-Amber-Core"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
@@ -378,19 +378,28 @@ selector: "serverErrorFromJson:",
 protocol: 'private',
 fn: function (json){
 var self=this;
-var serverError;
+var serverError,error;
 function $TTServerError(){return globals.TTServerError||(typeof TTServerError=="undefined"?nil:TTServerError)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
+var $1,$2,$3;
 serverError=_st(json)._asTimeTravelObject();
 $1=_st($TTServerError())._new();
 _st($1)._code_(_st(serverError)._code());
 _st($1)._messageText_(_st(serverError)._messageText());
-$2=_st($1)._signal();
-return self}, function($ctx1) {$ctx1.fill(self,"serverErrorFromJson:",{json:json,serverError:serverError},globals.TTRequestAction)})},
+$2=_st($1)._yourself();
+error=$2;
+$3=_st(self._promise())._errorHandler();
+if(($receiver = $3) == nil || $receiver == null){
+_st(error)._signal();
+} else {
+var handler;
+handler=$receiver;
+_st(handler)._failure_(error);
+};
+return self}, function($ctx1) {$ctx1.fill(self,"serverErrorFromJson:",{json:json,serverError:serverError,error:error},globals.TTRequestAction)})},
 args: ["json"],
-source: "serverErrorFromJson: json\x0a\x09| serverError |\x0a\x09\x0a\x09serverError := json asTimeTravelObject.\x09\x0a\x09TTServerError new \x0a\x09\x09code: serverError code;\x0a\x09\x09messageText: serverError messageText;\x0a\x09\x09signal.",
-messageSends: ["asTimeTravelObject", "code:", "new", "code", "messageText:", "messageText", "signal"],
+source: "serverErrorFromJson: json\x0a\x09| serverError error |\x0a\x0a\x09serverError := json asTimeTravelObject.\x09\x0a\x09error := TTServerError new \x0a\x09\x09code: serverError code;\x0a\x09\x09messageText: serverError messageText;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09self promise errorHandler \x0a\x09\x09ifNotNil: [ :handler | handler failure: error ]\x0a\x09\x09ifNil: [ error signal ].",
+messageSends: ["asTimeTravelObject", "code:", "new", "code", "messageText:", "messageText", "yourself", "ifNotNil:ifNil:", "errorHandler", "promise", "failure:", "signal"],
 referencedClasses: ["TTServerError"]
 }),
 globals.TTRequestAction);
@@ -428,6 +437,98 @@ referencedClasses: []
 }),
 globals.TTRequestAction);
 
+
+
+smalltalk.addClass('TTAsyncPromiseFailureHandler', globals.Object, ['failureAction', 'action'], 'TimeTravel-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "action",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@action"];
+return $1;
+},
+args: [],
+source: "action \x0a\x09^ action",
+messageSends: [],
+referencedClasses: []
+}),
+globals.TTAsyncPromiseFailureHandler);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "failure:",
+protocol: 'signaling',
+fn: function (anError){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(self._action())._value_(anError);
+return self}, function($ctx1) {$ctx1.fill(self,"failure:",{anError:anError},globals.TTAsyncPromiseFailureHandler)})},
+args: ["anError"],
+source: "failure: anError\x0a\x09self action value: anError",
+messageSends: ["value:", "action"],
+referencedClasses: []
+}),
+globals.TTAsyncPromiseFailureHandler);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "initializeAction:",
+protocol: 'initialization',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self._initialize();
+self["@action"]=aBlock;
+return self}, function($ctx1) {$ctx1.fill(self,"initializeAction:",{aBlock:aBlock},globals.TTAsyncPromiseFailureHandler)})},
+args: ["aBlock"],
+source: "initializeAction: aBlock  \x0a\x09self initialize.\x0a\x09action := aBlock.",
+messageSends: ["initialize"],
+referencedClasses: []
+}),
+globals.TTAsyncPromiseFailureHandler);
+
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "action:",
+protocol: 'instance creation',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._basicNew();
+_st($2)._initializeAction_(aBlock);
+$3=_st($2)._yourself();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"action:",{aBlock:aBlock},globals.TTAsyncPromiseFailureHandler.klass)})},
+args: ["aBlock"],
+source: "action: aBlock \x0a\x09^ self basicNew \x0a\x09\x09initializeAction: aBlock;\x0a\x09\x09yourself",
+messageSends: ["initializeAction:", "basicNew", "yourself"],
+referencedClasses: []
+}),
+globals.TTAsyncPromiseFailureHandler.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "new",
+protocol: 'instance creation',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._error_("Use #action:");
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"new",{},globals.TTAsyncPromiseFailureHandler.klass)})},
+args: [],
+source: "new \x0a\x09^ self error: 'Use #action:'",
+messageSends: ["error:"],
+referencedClasses: []
+}),
+globals.TTAsyncPromiseFailureHandler.klass);
 
 
 smalltalk.addClass('TTClient', globals.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'id', 'connected'], 'TimeTravel-Amber-Core');
@@ -916,7 +1017,7 @@ referencedClasses: []
 globals.TTClient.klass);
 
 
-smalltalk.addClass('TTPromise', globals.Object, ['previous', 'next', 'client', 'action'], 'TimeTravel-Amber-Core');
+smalltalk.addClass('TTPromise', globals.Object, ['previous', 'next', 'client', 'action', 'errorHandler'], 'TimeTravel-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "action",
@@ -971,6 +1072,23 @@ globals.TTPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "errorHandler",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@errorHandler"];
+return $1;
+},
+args: [],
+source: "errorHandler\x0a\x09^ errorHandler",
+messageSends: [],
+referencedClasses: []
+}),
+globals.TTPromise);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "future",
 protocol: 'accessing',
 fn: function (){
@@ -983,6 +1101,23 @@ return $1;
 args: [],
 source: "future\x0a\x09^ self client future",
 messageSends: ["future", "client"],
+referencedClasses: []
+}),
+globals.TTPromise);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "initialize",
+protocol: 'initialization',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+globals.TTPromise.superclass.fn.prototype._initialize.apply(_st(self), []);
+self["@errorHandler"]=_st(self._class())._errorHandler();
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TTPromise)})},
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x09errorHandler := self class errorHandler.",
+messageSends: ["initialize", "errorHandler", "class"],
 referencedClasses: []
 }),
 globals.TTPromise);
@@ -1246,6 +1381,39 @@ referencedClasses: []
 globals.TTPromise);
 
 
+globals.TTPromise.klass.iVarNames = ['errorHandler'];
+smalltalk.addMethod(
+smalltalk.method({
+selector: "errorHandler",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@errorHandler"];
+return $1;
+},
+args: [],
+source: "errorHandler \x0a\x09^ errorHandler",
+messageSends: [],
+referencedClasses: []
+}),
+globals.TTPromise.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "errorHandler:",
+protocol: 'accessing',
+fn: function (anErrorHandler){
+var self=this;
+self["@errorHandler"]=anErrorHandler;
+return self},
+args: ["anErrorHandler"],
+source: "errorHandler: anErrorHandler \x0a\x09errorHandler := anErrorHandler",
+messageSends: [],
+referencedClasses: []
+}),
+globals.TTPromise.klass);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "on:",
@@ -1263,6 +1431,29 @@ return $1;
 args: ["aClient"],
 source: "on: aClient\x0a\x09^ self new\x0a\x09\x09client: aClient;\x0a\x09\x09yourself",
 messageSends: ["client:", "new", "yourself"],
+referencedClasses: []
+}),
+globals.TTPromise.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "use:during:",
+protocol: 'accessing',
+fn: function (anErrorHandler,aBlock){
+var self=this;
+var oldErrorHandler;
+return smalltalk.withContext(function($ctx1) { 
+oldErrorHandler=self._errorHandler();
+self._errorHandler_(anErrorHandler);
+$ctx1.sendIdx["errorHandler:"]=1;
+_st(aBlock)._ensure_((function(){
+return smalltalk.withContext(function($ctx2) {
+return self._errorHandler_(oldErrorHandler);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"use:during:",{anErrorHandler:anErrorHandler,aBlock:aBlock,oldErrorHandler:oldErrorHandler},globals.TTPromise.klass)})},
+args: ["anErrorHandler", "aBlock"],
+source: "use: anErrorHandler during: aBlock\x0a\x09| oldErrorHandler |\x0a\x09\x0a\x09oldErrorHandler := self errorHandler.\x0a\x09self errorHandler: anErrorHandler.\x0a\x09aBlock ensure: [ self errorHandler: oldErrorHandler ]\x09",
+messageSends: ["errorHandler", "errorHandler:", "ensure:"],
 referencedClasses: []
 }),
 globals.TTPromise.klass);
@@ -1503,6 +1694,26 @@ messageSends: ["collect:", "asTimeTravelObject"],
 referencedClasses: []
 }),
 globals.Array);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "onPromiseFailureDo:",
+protocol: '*TimeTravel-Amber-Core',
+fn: function (failureBlock){
+var self=this;
+function $TTPromise(){return globals.TTPromise||(typeof TTPromise=="undefined"?nil:TTPromise)}
+function $TTAsyncPromiseFailureHandler(){return globals.TTAsyncPromiseFailureHandler||(typeof TTAsyncPromiseFailureHandler=="undefined"?nil:TTAsyncPromiseFailureHandler)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st($TTPromise())._use_during_(_st($TTAsyncPromiseFailureHandler())._action_(failureBlock),self);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"onPromiseFailureDo:",{failureBlock:failureBlock},globals.BlockClosure)})},
+args: ["failureBlock"],
+source: "onPromiseFailureDo: failureBlock\x0a\x09^ TTPromise\x0a\x09\x09use: (TTAsyncPromiseFailureHandler action: failureBlock)\x0a\x09\x09during: self ",
+messageSends: ["use:during:", "action:"],
+referencedClasses: ["TTPromise", "TTAsyncPromiseFailureHandler"]
+}),
+globals.BlockClosure);
 
 smalltalk.addMethod(
 smalltalk.method({

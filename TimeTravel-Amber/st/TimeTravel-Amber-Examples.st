@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'TimeTravel-Amber-Examples'!
+Smalltalk createPackage: 'TimeTravel-Amber-Examples'!
 Widget subclass: #TTCounterWidget
 	instanceVariableNames: 'counter header'
 	package: 'TimeTravel-Amber-Examples'!
@@ -62,7 +62,7 @@ update
 !TTCounterWidget class methodsFor: 'not yet classified'!
 
 initialize
-	self new render
+	"self new render"
 !
 
 on: aProxy
