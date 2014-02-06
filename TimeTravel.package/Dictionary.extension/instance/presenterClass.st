@@ -1,0 +1,3 @@
+*TimeTravel-Handlers
+presenterClass
+	^ TTDictionaryPresenter
