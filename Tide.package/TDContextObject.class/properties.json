@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "TDContextObject",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

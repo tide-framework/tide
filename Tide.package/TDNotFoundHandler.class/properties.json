@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "TDNotFoundHandler",
+	"pools" : [
+		 ],
+	"super" : "TDHandler",
+	"type" : "normal" }

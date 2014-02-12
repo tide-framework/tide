@@ -1,0 +1,3 @@
+*Tide-Presenters
+presenterClass
+	^ TDLiteralPresenter

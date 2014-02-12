@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Examples",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"count" ],
+	"name" : "TDCounter",
+	"pools" : [
+		 ],
+	"super" : "TDPresenter",
+	"type" : "normal" }

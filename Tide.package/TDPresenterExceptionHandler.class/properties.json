@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		 ],
+	"name" : "TDPresenterExceptionHandler",
+	"pools" : [
+		 ],
+	"super" : "TDPresenterHandler",
+	"type" : "normal" }

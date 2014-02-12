@@ -1,0 +1,14 @@
+{
+	"category" : "BaselineOfTide",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "EstebanLorenzano 1/6/2014 16:55",
+	"instvars" : [
+		 ],
+	"name" : "BaselineOfTide",
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }

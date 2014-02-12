@@ -1,0 +1,15 @@
+{
+	"category" : "Tide-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"messageSend",
+		"id" ],
+	"name" : "TDCallback",
+	"pools" : [
+		 ],
+	"super" : "TDContextObject",
+	"type" : "normal" }

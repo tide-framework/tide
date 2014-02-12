@@ -1,0 +1,15 @@
+{
+	"category" : "Tide-Presenters",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "EstebanLorenzano 2/5/2014 15:57",
+	"instvars" : [
+		"code",
+		"messageText" ],
+	"name" : "TDExceptionPresenter",
+	"pools" : [
+		 ],
+	"super" : "TDPresenter",
+	"type" : "normal" }

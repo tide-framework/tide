@@ -1,0 +1,16 @@
+{
+	"category" : "Tide-Server",
+	"classinstvars" : [
+		"default" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"sessionManager",
+		"handlers",
+		"preferences" ],
+	"name" : "TDDispatcher",
+	"pools" : [
+		 ],
+	"super" : "TDContextObject",
+	"type" : "normal" }

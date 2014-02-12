@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Presenters",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"model" ],
+	"name" : "TDModelPresenter",
+	"pools" : [
+		 ],
+	"super" : "TDPresenter",
+	"type" : "normal" }

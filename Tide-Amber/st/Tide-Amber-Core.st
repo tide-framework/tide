@@ -1,0 +1,607 @@
+Smalltalk createPackage: 'Tide-Amber-Core'!
+Object subclass: #TTAction
+	instanceVariableNames: 'promise resolved'
+	package: 'Tide-Amber-Core'!
+
+!TTAction methodsFor: 'accessing'!
+
+client
+	^ self promise client
+!
+
+promise
+	^ promise
+!
+
+promise: aPromise
+	promise := aPromise
+! !
+
+!TTAction methodsFor: 'resolving'!
+
+beResolved
+	resolved := true.
+	self promise nextTravel
+!
+
+resolve
+	self beResolved
+! !
+
+!TTAction methodsFor: 'testing'!
+
+isResolved
+	^ resolved ifNil: [ false ]
+! !
+
+!TTAction class methodsFor: 'instance creation'!
+
+on: aPromise
+	^ self new 
+		promise: aPromise; 
+		yourself
+! !
+
+TTAction subclass: #TTCallbackAction
+	instanceVariableNames: 'callback'
+	package: 'Tide-Amber-Core'!
+
+!TTCallbackAction methodsFor: 'accessing'!
+
+callback
+	^ callback
+!
+
+callback: aBlock
+	callback := aBlock
+! !
+
+!TTCallbackAction methodsFor: 'resolving'!
+
+resolve
+	self client promisedValue: (self callback value: self client promisedValue).
+	super resolve
+! !
+
+TTAction subclass: #TTRequestAction
+	instanceVariableNames: 'requestUrl data'
+	package: 'Tide-Amber-Core'!
+
+!TTRequestAction methodsFor: 'accessing'!
+
+data
+	^ data
+!
+
+data: json
+	data := json
+!
+
+requestUrl
+	^ requestUrl
+!
+
+requestUrl: aString
+	requestUrl := aString
+! !
+
+!TTRequestAction methodsFor: 'error handling'!
+
+requestError: anObject
+	TTRequestError new
+		xhr: anObject;
+		signal
+!
+
+sessionNotFound
+	TTSessionNotFound signal
+! !
+
+!TTRequestAction methodsFor: 'private'!
+
+newClientFromJson: json
+	self client promisedValue: json asTideObject
+!
+
+serverErrorFromJson: json
+	| serverError error |
+
+	serverError := json asTideObject.	
+	error := TTServerError new 
+		code: serverError code;
+		messageText: serverError messageText;
+		yourself.
+		
+	self promise errorHandler 
+		ifNotNil: [ :handler | handler failure: error ]
+		ifNil: [ error signal ].
+!
+
+updateClientFromJson: json
+	self client updateFromJson: json
+! !
+
+!TTRequestAction methodsFor: 'resolving'!
+
+handleResponse: json status: aNumber
+	aNumber == 200 ifTrue: [ ^ self updateClientFromJson: json ].
+	aNumber == 201 ifTrue: [ ^ self newClientFromJson: json ].
+	aNumber == 202 ifTrue: [ ^ self serverErrorFromJson: json ].
+	
+	self error: 'Invalid server answer code'.
+!
+
+request: aString
+	jQuery 
+		ajax: self requestUrl
+		options: #{
+			'type' -> 'POST'.
+			'dataType' -> 'json'.
+			'data' -> #{ 'arguments' -> self data }.
+			'success' -> [ :json :textStatus :xhr |
+				self handleResponse: json status: xhr status.
+				self beResolved ].
+			'error' -> [ :ex |
+				ex status = 408 
+					ifTrue: [ self sessionNotFound ]
+					ifFalse: [ self requestError: ex ] ]
+		}
+!
+
+resolve
+	self request: self requestUrl
+! !
+
+Object subclass: #TTAsyncPromiseFailureHandler
+	instanceVariableNames: 'failureAction action'
+	package: 'Tide-Amber-Core'!
+
+!TTAsyncPromiseFailureHandler methodsFor: 'accessing'!
+
+action 
+	^ action
+! !
+
+!TTAsyncPromiseFailureHandler methodsFor: 'initialization'!
+
+initializeAction: aBlock  
+	self initialize.
+	action := aBlock.
+! !
+
+!TTAsyncPromiseFailureHandler methodsFor: 'signaling'!
+
+failure: anError
+	self action value: anError
+! !
+
+!TTAsyncPromiseFailureHandler class methodsFor: 'instance creation'!
+
+action: aBlock 
+	^ self basicNew 
+		initializeAction: aBlock;
+		yourself
+!
+
+new 
+	^ self error: 'Use #action:'
+! !
+
+Object subclass: #TTClient
+	instanceVariableNames: 'state actions firstPromise promisedValue path id connected'
+	package: 'Tide-Amber-Core'!
+
+!TTClient methodsFor: 'accessing'!
+
+actions
+	^ actions
+!
+
+flushPromises
+	firstPromise := nil
+!
+
+future
+	| promise |
+
+	promise := TTPromise on: self.
+
+	firstPromise 
+		ifNil: [ firstPromise := promise ]
+		ifNotNil: [ firstPromise next: promise ].
+
+	^ promise
+!
+
+id
+	^ id
+!
+
+path
+	^ path
+!
+
+path: aString
+	path := aString
+!
+
+promisedValue
+	^ promisedValue
+!
+
+promisedValue: anObject
+	promisedValue := anObject
+!
+
+state
+	^ state
+! !
+
+!TTClient methodsFor: 'converting'!
+
+asTideArgument
+	^ #{ '__id__' -> self id }
+! !
+
+!TTClient methodsFor: 'error handling'!
+
+promiseNotFound: aSelector
+	TTPromiseNotFound new
+		selector: aSelector;
+		signal
+! !
+
+!TTClient methodsFor: 'forwarding'!
+
+handleFutureMessage: aMessage
+	| selector |
+	selector := aMessage selector asString.
+	
+	(state at: selector) 
+		ifNotNil: [ ^ state at: selector ].
+
+	(actions at: selector) 
+		ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].
+
+	^ self promiseNotFound: aMessage selector
+!
+
+then: aBlock
+	self future then: aBlock
+! !
+
+!TTClient methodsFor: 'initialization'!
+
+connect
+	self isConnected ifFalse: [ self update ]
+!
+
+initialize
+	super initialize.
+	"Primitive JS object. I need it because I'm keeping JSON data"
+	state := self newJavaScriptObject. 
+	actions := self newJavaScriptObject
+! !
+
+!TTClient methodsFor: 'private'!
+
+newJavaScriptObject
+	<return {}>
+! !
+
+!TTClient methodsFor: 'testing'!
+
+isConnected
+	^ connected ifNil: [ false ]
+! !
+
+!TTClient methodsFor: 'updating'!
+
+update
+	| promise |
+	promise := self future.
+	promise setAction: ((TTRequestAction on: promise)
+		requestUrl: self path;
+		yourself).
+	self future then: [ connected := true ]
+!
+
+updateActions: aDictionary
+	aDictionary keysAndValuesDo: [ :key :value |
+			actions at: key put: value ]
+!
+
+updateFromJson: json
+	connected := true.
+	
+	id := json at: '__id__'.
+	
+	(json at: 'state') ifNotNil: [
+		json state keysAndValuesDo: [ :key :value |
+			state at: key put: value asTideObject ] ].
+	(json at: 'actions') ifNotNil: [
+		json actions keysAndValuesDo: [ :key :value |
+			actions at: key put: value ] ]
+!
+
+updateState: aDictionary
+	aDictionary keysAndValuesDo: [ :key :value |
+			state at: key put: value ]
+! !
+
+!TTClient class methodsFor: 'instance creation'!
+
+fromJson: json
+	^ self new
+		updateFromJson: json;
+		yourself
+!
+
+on: aString
+	^ self new
+		path: aString;
+		yourself
+! !
+
+Object subclass: #TTPromise
+	instanceVariableNames: 'previous next client action errorHandler'
+	package: 'Tide-Amber-Core'!
+
+!TTPromise methodsFor: 'accessing'!
+
+action
+	^ action
+!
+
+client
+	^ client
+!
+
+client: aClient
+	client := aClient
+!
+
+errorHandler
+	^ errorHandler
+!
+
+future
+	^ self client future
+!
+
+next
+	^ next
+!
+
+next: aPromise
+	next 
+		ifNil: [ 
+			next := aPromise. 
+			aPromise previous: self ]
+		ifNotNil: [ 
+			next next: aPromise ]
+!
+
+previous
+	^ previous
+!
+
+previous: aPromise
+	previous := aPromise
+!
+
+setAction: anAction
+	action := anAction.
+	self travel
+! !
+
+!TTPromise methodsFor: 'actions'!
+
+setRequestActionFromMessage: aMessage
+	| url data |
+	url := self client actions at: aMessage selector.
+	data := JSON stringify: ((aMessage arguments ifNil: [ #() ]) 
+		collect: [ :each | each asTideArgument ]).
+	self setAction: ((TTRequestAction on: self)
+		requestUrl: url;
+		data: data;
+		yourself)
+!
+
+then: aBlock
+	self isAssigned
+		ifTrue: [ self client future then: aBlock ]
+		ifFalse: [ self setAction: ((TTCallbackAction on: self) callback: aBlock) ]
+! !
+
+!TTPromise methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+	errorHandler := self class errorHandler.
+! !
+
+!TTPromise methodsFor: 'testing'!
+
+isAssigned
+	^ self action notNil
+!
+
+isResolved
+	^ self isAssigned and: [ self action isResolved ]
+! !
+
+!TTPromise methodsFor: 'traveling'!
+
+nextTravel
+	self next 
+		ifNil: [ self client flushPromises ]
+		ifNotNil: [ self next stepTravel ]
+!
+
+stepTravel
+	self action 
+		ifNil: [ self nextTravel ]
+		ifNotNil: [ self action resolve ]
+!
+
+travel
+	(self previous isNil or: [ self previous isResolved ]) 
+		ifTrue: [ self stepTravel ]
+! !
+
+TTPromise class instanceVariableNames: 'errorHandler'!
+
+!TTPromise class methodsFor: 'accessing'!
+
+errorHandler 
+	^ errorHandler
+!
+
+errorHandler: anErrorHandler 
+	errorHandler := anErrorHandler
+!
+
+use: anErrorHandler during: aBlock
+	| oldErrorHandler |
+	
+	oldErrorHandler := self errorHandler.
+	self errorHandler: anErrorHandler.
+	aBlock ensure: [ self errorHandler: oldErrorHandler ]
+! !
+
+!TTPromise class methodsFor: 'instance creation'!
+
+on: aClient
+	^ self new
+		client: aClient;
+		yourself
+! !
+
+ProtoObject subclass: #TTProxy
+	instanceVariableNames: 'client'
+	package: 'Tide-Amber-Core'!
+
+!TTProxy methodsFor: 'accessing'!
+
+xxxClient
+	^ client
+!
+
+xxxClient: aClient
+	client := aClient
+! !
+
+!TTProxy methodsFor: 'as yet unclassified'!
+
+inspectOn: anInspector
+	anInspector
+		setLabel: self printString;
+		setVariables: #{
+			'client' -> client
+		}
+! !
+
+!TTProxy methodsFor: 'converting'!
+
+asTideArgument
+	^ self xxxClient asTideArgument
+! !
+
+!TTProxy methodsFor: 'error handling'!
+
+doesNotUnderstand: aMessage
+	^ (self xxxClient respondsTo: aMessage selector)
+		ifTrue: [ aMessage sendTo: self xxxClient ]
+		ifFalse: [ self xxxClient handleFutureMessage: aMessage ]
+! !
+
+!TTProxy methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+	"self inheritedSelectors do: [ :each |
+		self removeSelector: each asSelector ]"
+! !
+
+!TTProxy methodsFor: 'private'!
+
+inheritedSelectors
+	^ self class allSelectors
+		reject: [ :each | TTProxy methodDictionary keys includes: each ]
+!
+
+removeSelector: aString
+	<delete self[aString];>
+! !
+
+!TTProxy class methodsFor: 'instance creation'!
+
+client: aClient
+	"Do not add yourself here.
+	It is not understood by the proxy after sending #initialize, therefore it returns aClient"
+
+	^ self basicNew
+		xxxClient: aClient;
+		initialize
+!
+
+connectOn: aPath
+	"Creates a proxy on aPath and connect it. 
+	 This is a convenience method."
+	 
+	^ (self on: aPath) 
+		connect; 
+		yourself.
+!
+
+on: aPath
+	"Do not add yourself here.
+	It is not understood by the proxy after sending #initialize, therefore it returns aPath"
+
+	^ self basicNew
+		xxxClient: (TTClient on: aPath);
+		initialize
+! !
+
+!Array methodsFor: '*Tide-Amber-Core'!
+
+asTideObject
+	^ self collect: [ :each | each asTideObject ]
+! !
+
+!BlockClosure methodsFor: '*Tide-Amber-Core'!
+
+onPromiseFailureDo: failureBlock
+	^ TTPromise
+		use: (TTAsyncPromiseFailureHandler action: failureBlock)
+		during: self
+! !
+
+!HashedCollection methodsFor: '*Tide-Amber-Core'!
+
+asTideObject
+	| dictionary |
+	dictionary := self class new.
+	self keysAndValuesDo: [ :key :value | 
+		dictionary at: key put: value asTideObject ].
+		
+	^ dictionary
+! !
+
+!JSObjectProxy methodsFor: '*Tide-Amber-Core'!
+
+asTideObject
+	^ TTProxy client: (TTClient fromJson: self)
+! !
+
+!Object methodsFor: '*Tide-Amber-Core'!
+
+asTideArgument
+	^ self
+!
+
+asTideObject
+	^ self
+! !
+

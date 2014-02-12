@@ -1,0 +1,3 @@
+*Tide-Handlers
+isJsonObject
+	^ false

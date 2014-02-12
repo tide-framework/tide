@@ -1,0 +1,15 @@
+{
+	"category" : "Tide-Server",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"sessions",
+		"sessionExpirationProcess" ],
+	"name" : "TDSessionManager",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

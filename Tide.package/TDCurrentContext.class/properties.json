@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "TDCurrentContext",
+	"pools" : [
+		 ],
+	"super" : "TDDynamicVariable",
+	"type" : "normal" }

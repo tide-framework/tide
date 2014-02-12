@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"response" ],
+	"name" : "TDResponseNotification",
+	"pools" : [
+		 ],
+	"super" : "Notification",
+	"type" : "normal" }

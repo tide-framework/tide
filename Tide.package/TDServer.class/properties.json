@@ -1,0 +1,16 @@
+{
+	"category" : "Tide-Server",
+	"classinstvars" : [
+		"server",
+		"current",
+		"serverStarted" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"dispatcher" ],
+	"name" : "TDServer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"rootPresenterClass" ],
+	"name" : "TDPresenterHandler",
+	"pools" : [
+		 ],
+	"super" : "TDHandler",
+	"type" : "normal" }

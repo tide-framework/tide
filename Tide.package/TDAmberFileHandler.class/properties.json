@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Handlers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"directoryPath" ],
+	"name" : "TDAmberFileHandler",
+	"pools" : [
+		 ],
+	"super" : "TDHandler",
+	"type" : "normal" }

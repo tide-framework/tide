@@ -1,3 +1,0 @@
-*TimeTravel-Handlers
-isJsonObject
-	^ false
