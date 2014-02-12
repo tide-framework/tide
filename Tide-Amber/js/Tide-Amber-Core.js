@@ -2,7 +2,7 @@ define("timetravel/Tide-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amb
 smalltalk.addPackage('Tide-Amber-Core');
 smalltalk.packages["Tide-Amber-Core"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
-smalltalk.addClass('TTAction', globals.Object, ['promise', 'resolved'], 'Tide-Amber-Core');
+smalltalk.addClass('TDAction', globals.Object, ['promise', 'resolved'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "beResolved",
@@ -12,13 +12,13 @@ var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@resolved"]=true;
 _st(self._promise())._nextTravel();
-return self}, function($ctx1) {$ctx1.fill(self,"beResolved",{},smalltalk.TTAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"beResolved",{},globals.TDAction)})},
 args: [],
 source: "beResolved\x0a\x09resolved := true.\x0a\x09self promise nextTravel",
 messageSends: ["nextTravel", "promise"],
 referencedClasses: []
 }),
-globals.TTAction);
+globals.TDAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -30,13 +30,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=_st(self._promise())._client();
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"client",{},smalltalk.TTAction)})},
+}, function($ctx1) {$ctx1.fill(self,"client",{},globals.TDAction)})},
 args: [],
 source: "client\x0a\x09^ self promise client",
 messageSends: ["client", "promise"],
 referencedClasses: []
 }),
-globals.TTAction);
+globals.TDAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -53,13 +53,13 @@ $1=false;
 $1=$2;
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"isResolved",{},smalltalk.TTAction)})},
+}, function($ctx1) {$ctx1.fill(self,"isResolved",{},globals.TDAction)})},
 args: [],
 source: "isResolved\x0a\x09^ resolved ifNil: [ false ]",
 messageSends: ["ifNil:"],
 referencedClasses: []
 }),
-globals.TTAction);
+globals.TDAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -67,17 +67,16 @@ selector: "promise",
 protocol: 'accessing',
 fn: function (){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
 var $1;
 $1=self["@promise"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"promise",{},smalltalk.TTAction)})},
+},
 args: [],
 source: "promise\x0a\x09^ promise",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTAction);
+globals.TDAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -85,15 +84,14 @@ selector: "promise:",
 protocol: 'accessing',
 fn: function (aPromise){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
 self["@promise"]=aPromise;
-return self}, function($ctx1) {$ctx1.fill(self,"promise:",{aPromise:aPromise},smalltalk.TTAction)})},
+return self},
 args: ["aPromise"],
 source: "promise: aPromise\x0a\x09promise := aPromise",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTAction);
+globals.TDAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -103,13 +101,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self._beResolved();
-return self}, function($ctx1) {$ctx1.fill(self,"resolve",{},smalltalk.TTAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"resolve",{},globals.TDAction)})},
 args: [],
 source: "resolve\x0a\x09self beResolved",
 messageSends: ["beResolved"],
 referencedClasses: []
 }),
-globals.TTAction);
+globals.TDAction);
 
 
 smalltalk.addMethod(
@@ -125,33 +123,32 @@ _st($2)._promise_(aPromise);
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aPromise:aPromise},smalltalk.TTAction.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"on:",{aPromise:aPromise},globals.TDAction.klass)})},
 args: ["aPromise"],
 source: "on: aPromise\x0a\x09^ self new \x0a\x09\x09promise: aPromise; \x0a\x09\x09yourself",
 messageSends: ["promise:", "new", "yourself"],
 referencedClasses: []
 }),
-globals.TTAction.klass);
+globals.TDAction.klass);
 
 
-smalltalk.addClass('TTCallbackAction', globals.TTAction, ['callback'], 'Tide-Amber-Core');
+smalltalk.addClass('TDCallbackAction', globals.TDAction, ['callback'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "callback",
 protocol: 'accessing',
 fn: function (){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
 var $1;
 $1=self["@callback"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"callback",{},smalltalk.TTCallbackAction)})},
+},
 args: [],
 source: "callback\x0a\x09^ callback",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTCallbackAction);
+globals.TDCallbackAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -159,15 +156,14 @@ selector: "callback:",
 protocol: 'accessing',
 fn: function (aBlock){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
 self["@callback"]=aBlock;
-return self}, function($ctx1) {$ctx1.fill(self,"callback:",{aBlock:aBlock},smalltalk.TTCallbackAction)})},
+return self},
 args: ["aBlock"],
 source: "callback: aBlock\x0a\x09callback := aBlock",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTCallbackAction);
+globals.TDCallbackAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -176,19 +172,22 @@ protocol: 'resolving',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self._client())._promisedValue_(_st(self._callback())._value_(_st(self._client())._promisedValue()));
-smalltalk.TTCallbackAction.superclass.fn.prototype._resolve.apply(_st(self), []);
-return self}, function($ctx1) {$ctx1.fill(self,"resolve",{},smalltalk.TTCallbackAction)})},
+var $1;
+$1=self._client();
+$ctx1.sendIdx["client"]=1;
+_st($1)._promisedValue_(_st(self._callback())._value_(_st(self._client())._promisedValue()));
+globals.TDCallbackAction.superclass.fn.prototype._resolve.apply(_st(self), []);
+return self}, function($ctx1) {$ctx1.fill(self,"resolve",{},globals.TDCallbackAction)})},
 args: [],
 source: "resolve\x0a\x09self client promisedValue: (self callback value: self client promisedValue).\x0a\x09super resolve",
 messageSends: ["promisedValue:", "client", "value:", "callback", "promisedValue", "resolve"],
 referencedClasses: []
 }),
-globals.TTCallbackAction);
+globals.TDCallbackAction);
 
 
 
-smalltalk.addClass('TTRequestAction', globals.TTAction, ['requestUrl', 'data'], 'Tide-Amber-Core');
+smalltalk.addClass('TDRequestAction', globals.TDAction, ['requestUrl', 'data'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "data",
@@ -199,13 +198,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@data"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"data",{},smalltalk.TTRequestAction)})},
+}, function($ctx1) {$ctx1.fill(self,"data",{},smalltalk.TDRequestAction)})},
 args: [],
 source: "data\x0a\x09^ data",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -215,13 +214,13 @@ fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@data"]=json;
-return self}, function($ctx1) {$ctx1.fill(self,"data:",{json:json},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"data:",{json:json},smalltalk.TDRequestAction)})},
 args: ["json"],
 source: "data: json\x0a\x09data := json",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -249,13 +248,13 @@ $6=self._serverErrorFromJson_(json);
 return $6;
 };
 self._error_("Invalid server answer code");
-return self}, function($ctx1) {$ctx1.fill(self,"handleResponse:status:",{json:json,aNumber:aNumber},globals.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"handleResponse:status:",{json:json,aNumber:aNumber},globals.TDRequestAction)})},
 args: ["json", "aNumber"],
 source: "handleResponse: json status: aNumber\x0a\x09aNumber == 200 ifTrue: [ ^ self updateClientFromJson: json ].\x0a\x09aNumber == 201 ifTrue: [ ^ self newClientFromJson: json ].\x0a\x09aNumber == 202 ifTrue: [ ^ self serverErrorFromJson: json ].\x0a\x09\x0a\x09self error: 'Invalid server answer code'.",
 messageSends: ["ifTrue:", "==", "updateClientFromJson:", "newClientFromJson:", "serverErrorFromJson:", "error:"],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -265,13 +264,13 @@ fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(self._client())._promisedValue_(_st(json)._asTideObject());
-return self}, function($ctx1) {$ctx1.fill(self,"newClientFromJson:",{json:json},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"newClientFromJson:",{json:json},smalltalk.TDRequestAction)})},
 args: ["json"],
 source: "newClientFromJson: json\x0a\x09self client promisedValue: json asTideObject",
 messageSends: ["promisedValue:", "client", "asTideObject"],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -294,13 +293,13 @@ return self._sessionNotFound();
 return self._requestError_(ex);
 };
 }, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,2)})}))]));
-return self}, function($ctx1) {$ctx1.fill(self,"request:",{aString:aString},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"request:",{aString:aString},smalltalk.TDRequestAction)})},
 args: ["aString"],
 source: "request: aString\x0a\x09jQuery \x0a\x09\x09ajax: self requestUrl\x0a\x09\x09options: #{\x0a\x09\x09\x09'type' -> 'POST'.\x0a\x09\x09\x09'dataType' -> 'json'.\x0a\x09\x09\x09'data' -> #{ 'arguments' -> self data }.\x0a\x09\x09\x09'success' -> [ :json :textStatus :xhr |\x0a\x09\x09\x09\x09self handleResponse: json status: xhr status.\x0a\x09\x09\x09\x09self beResolved ].\x0a\x09\x09\x09'error' -> [ :ex |\x0a\x09\x09\x09\x09ex status = 408 \x0a\x09\x09\x09\x09\x09ifTrue: [ self sessionNotFound ]\x0a\x09\x09\x09\x09\x09ifFalse: [ self requestError: ex ] ]\x0a\x09\x09}",
 messageSends: ["ajax:options:", "requestUrl", "->", "data", "handleResponse:status:", "status", "beResolved", "ifTrue:ifFalse:", "=", "sessionNotFound", "requestError:"],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -308,19 +307,19 @@ selector: "requestError:",
 protocol: 'error handling',
 fn: function (anObject){
 var self=this;
-function $TTRequestError(){return smalltalk.TTRequestError||(typeof TTRequestError=="undefined"?nil:TTRequestError)}
+function $TDRequestError(){return smalltalk.TDRequestError||(typeof TDRequestError=="undefined"?nil:TDRequestError)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-$1=_st($TTRequestError())._new();
+$1=_st($TDRequestError())._new();
 _st($1)._xhr_(anObject);
 $2=_st($1)._signal();
-return self}, function($ctx1) {$ctx1.fill(self,"requestError:",{anObject:anObject},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"requestError:",{anObject:anObject},smalltalk.TDRequestAction)})},
 args: ["anObject"],
-source: "requestError: anObject\x0a\x09TTRequestError new\x0a\x09\x09xhr: anObject;\x0a\x09\x09signal",
+source: "requestError: anObject\x0a\x09TDRequestError new\x0a\x09\x09xhr: anObject;\x0a\x09\x09signal",
 messageSends: ["xhr:", "new", "signal"],
-referencedClasses: ["TTRequestError"]
+referencedClasses: ["TDRequestError"]
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -332,13 +331,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@requestUrl"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"requestUrl",{},smalltalk.TTRequestAction)})},
+}, function($ctx1) {$ctx1.fill(self,"requestUrl",{},smalltalk.TDRequestAction)})},
 args: [],
 source: "requestUrl\x0a\x09^ requestUrl",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -348,13 +347,13 @@ fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@requestUrl"]=aString;
-return self}, function($ctx1) {$ctx1.fill(self,"requestUrl:",{aString:aString},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"requestUrl:",{aString:aString},smalltalk.TDRequestAction)})},
 args: ["aString"],
 source: "requestUrl: aString\x0a\x09requestUrl := aString",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -364,13 +363,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self._request_(self._requestUrl());
-return self}, function($ctx1) {$ctx1.fill(self,"resolve",{},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"resolve",{},smalltalk.TDRequestAction)})},
 args: [],
 source: "resolve\x0a\x09self request: self requestUrl",
 messageSends: ["request:", "requestUrl"],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -379,11 +378,11 @@ protocol: 'private',
 fn: function (json){
 var self=this;
 var serverError,error;
-function $TTServerError(){return globals.TTServerError||(typeof TTServerError=="undefined"?nil:TTServerError)}
+function $TDServerError(){return globals.TDServerError||(typeof TDServerError=="undefined"?nil:TDServerError)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2,$3;
 serverError=_st(json)._asTideObject();
-$1=_st($TTServerError())._new();
+$1=_st($TDServerError())._new();
 _st($1)._code_(_st(serverError)._code());
 _st($1)._messageText_(_st(serverError)._messageText());
 $2=_st($1)._yourself();
@@ -396,13 +395,13 @@ var handler;
 handler=$receiver;
 _st(handler)._failure_(error);
 };
-return self}, function($ctx1) {$ctx1.fill(self,"serverErrorFromJson:",{json:json,serverError:serverError,error:error},globals.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"serverErrorFromJson:",{json:json,serverError:serverError,error:error},globals.TDRequestAction)})},
 args: ["json"],
-source: "serverErrorFromJson: json\x0a\x09| serverError error |\x0a\x0a\x09serverError := json asTideObject.\x09\x0a\x09error := TTServerError new \x0a\x09\x09code: serverError code;\x0a\x09\x09messageText: serverError messageText;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09self promise errorHandler \x0a\x09\x09ifNotNil: [ :handler | handler failure: error ]\x0a\x09\x09ifNil: [ error signal ].",
+source: "serverErrorFromJson: json\x0a\x09| serverError error |\x0a\x0a\x09serverError := json asTideObject.\x09\x0a\x09error := TDServerError new \x0a\x09\x09code: serverError code;\x0a\x09\x09messageText: serverError messageText;\x0a\x09\x09yourself.\x0a\x09\x09\x0a\x09self promise errorHandler \x0a\x09\x09ifNotNil: [ :handler | handler failure: error ]\x0a\x09\x09ifNil: [ error signal ].",
 messageSends: ["asTideObject", "code:", "new", "code", "messageText:", "messageText", "yourself", "ifNotNil:ifNil:", "errorHandler", "promise", "failure:", "signal"],
-referencedClasses: ["TTServerError"]
+referencedClasses: ["TDServerError"]
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -410,16 +409,16 @@ selector: "sessionNotFound",
 protocol: 'error handling',
 fn: function (){
 var self=this;
-function $TTSessionNotFound(){return smalltalk.TTSessionNotFound||(typeof TTSessionNotFound=="undefined"?nil:TTSessionNotFound)}
+function $TDSessionNotFound(){return smalltalk.TDSessionNotFound||(typeof TDSessionNotFound=="undefined"?nil:TDSessionNotFound)}
 return smalltalk.withContext(function($ctx1) { 
-_st($TTSessionNotFound())._signal();
-return self}, function($ctx1) {$ctx1.fill(self,"sessionNotFound",{},smalltalk.TTRequestAction)})},
+_st($TDSessionNotFound())._signal();
+return self}, function($ctx1) {$ctx1.fill(self,"sessionNotFound",{},smalltalk.TDRequestAction)})},
 args: [],
-source: "sessionNotFound\x0a\x09TTSessionNotFound signal",
+source: "sessionNotFound\x0a\x09TDSessionNotFound signal",
 messageSends: ["signal"],
-referencedClasses: ["TTSessionNotFound"]
+referencedClasses: ["TDSessionNotFound"]
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -429,17 +428,17 @@ fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(self._client())._updateFromJson_(json);
-return self}, function($ctx1) {$ctx1.fill(self,"updateClientFromJson:",{json:json},smalltalk.TTRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"updateClientFromJson:",{json:json},smalltalk.TDRequestAction)})},
 args: ["json"],
 source: "updateClientFromJson: json\x0a\x09self client updateFromJson: json",
 messageSends: ["updateFromJson:", "client"],
 referencedClasses: []
 }),
-globals.TTRequestAction);
+globals.TDRequestAction);
 
 
 
-smalltalk.addClass('TTAsyncPromiseFailureHandler', globals.Object, ['failureAction', 'action'], 'Tide-Amber-Core');
+smalltalk.addClass('TDAsyncPromiseFailureHandler', globals.Object, ['failureAction', 'action'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "action",
@@ -455,7 +454,7 @@ source: "action \x0a\x09^ action",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTAsyncPromiseFailureHandler);
+globals.TDAsyncPromiseFailureHandler);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -465,13 +464,13 @@ fn: function (anError){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(self._action())._value_(anError);
-return self}, function($ctx1) {$ctx1.fill(self,"failure:",{anError:anError},globals.TTAsyncPromiseFailureHandler)})},
+return self}, function($ctx1) {$ctx1.fill(self,"failure:",{anError:anError},globals.TDAsyncPromiseFailureHandler)})},
 args: ["anError"],
 source: "failure: anError\x0a\x09self action value: anError",
 messageSends: ["value:", "action"],
 referencedClasses: []
 }),
-globals.TTAsyncPromiseFailureHandler);
+globals.TDAsyncPromiseFailureHandler);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -482,13 +481,13 @@ var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self._initialize();
 self["@action"]=aBlock;
-return self}, function($ctx1) {$ctx1.fill(self,"initializeAction:",{aBlock:aBlock},globals.TTAsyncPromiseFailureHandler)})},
+return self}, function($ctx1) {$ctx1.fill(self,"initializeAction:",{aBlock:aBlock},globals.TDAsyncPromiseFailureHandler)})},
 args: ["aBlock"],
 source: "initializeAction: aBlock  \x0a\x09self initialize.\x0a\x09action := aBlock.",
 messageSends: ["initialize"],
 referencedClasses: []
 }),
-globals.TTAsyncPromiseFailureHandler);
+globals.TDAsyncPromiseFailureHandler);
 
 
 smalltalk.addMethod(
@@ -504,13 +503,13 @@ _st($2)._initializeAction_(aBlock);
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"action:",{aBlock:aBlock},globals.TTAsyncPromiseFailureHandler.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"action:",{aBlock:aBlock},globals.TDAsyncPromiseFailureHandler.klass)})},
 args: ["aBlock"],
 source: "action: aBlock \x0a\x09^ self basicNew \x0a\x09\x09initializeAction: aBlock;\x0a\x09\x09yourself",
 messageSends: ["initializeAction:", "basicNew", "yourself"],
 referencedClasses: []
 }),
-globals.TTAsyncPromiseFailureHandler.klass);
+globals.TDAsyncPromiseFailureHandler.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -522,16 +521,16 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self._error_("Use #action:");
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"new",{},globals.TTAsyncPromiseFailureHandler.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"new",{},globals.TDAsyncPromiseFailureHandler.klass)})},
 args: [],
 source: "new \x0a\x09^ self error: 'Use #action:'",
 messageSends: ["error:"],
 referencedClasses: []
 }),
-globals.TTAsyncPromiseFailureHandler.klass);
+globals.TDAsyncPromiseFailureHandler.klass);
 
 
-smalltalk.addClass('TTClient', globals.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'id', 'connected'], 'Tide-Amber-Core');
+smalltalk.addClass('TDClient', globals.Object, ['state', 'actions', 'firstPromise', 'promisedValue', 'path', 'id', 'connected'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "actions",
@@ -542,13 +541,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@actions"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"actions",{},smalltalk.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"actions",{},smalltalk.TDClient)})},
 args: [],
 source: "actions\x0a\x09^ actions",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -560,13 +559,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=globals.HashedCollection._newFromPairs_(["__id__",self._id()]);
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"asTideArgument",{},globals.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"asTideArgument",{},globals.TDClient)})},
 args: [],
 source: "asTideArgument\x0a\x09^ #{ '__id__' -> self id }",
 messageSends: ["id"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -580,13 +579,13 @@ $1=self._isConnected();
 if(! smalltalk.assert($1)){
 self._update();
 };
-return self}, function($ctx1) {$ctx1.fill(self,"connect",{},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"connect",{},smalltalk.TDClient)})},
 args: [],
 source: "connect\x0a\x09self isConnected ifFalse: [ self update ]",
 messageSends: ["ifFalse:", "isConnected", "update"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -596,13 +595,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@firstPromise"]=nil;
-return self}, function($ctx1) {$ctx1.fill(self,"flushPromises",{},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"flushPromises",{},smalltalk.TDClient)})},
 args: [],
 source: "flushPromises\x0a\x09firstPromise := nil",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -611,10 +610,10 @@ protocol: 'accessing',
 fn: function (){
 var self=this;
 var promise;
-function $TTPromise(){return smalltalk.TTPromise||(typeof TTPromise=="undefined"?nil:TTPromise)}
+function $TDPromise(){return smalltalk.TDPromise||(typeof TDPromise=="undefined"?nil:TDPromise)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-promise=_st($TTPromise())._on_(self);
+promise=_st($TDPromise())._on_(self);
 $1=self["@firstPromise"];
 if(($receiver = $1) == nil || $receiver == null){
 self["@firstPromise"]=promise;
@@ -624,13 +623,13 @@ _st(self["@firstPromise"])._next_(promise);
 };
 $2=promise;
 return $2;
-}, function($ctx1) {$ctx1.fill(self,"future",{promise:promise},smalltalk.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"future",{promise:promise},smalltalk.TDClient)})},
 args: [],
-source: "future\x0a\x09| promise |\x0a\x0a\x09promise := TTPromise on: self.\x0a\x0a\x09firstPromise \x0a\x09\x09ifNil: [ firstPromise := promise ]\x0a\x09\x09ifNotNil: [ firstPromise next: promise ].\x0a\x0a\x09^ promise",
+source: "future\x0a\x09| promise |\x0a\x0a\x09promise := TDPromise on: self.\x0a\x0a\x09firstPromise \x0a\x09\x09ifNil: [ firstPromise := promise ]\x0a\x09\x09ifNotNil: [ firstPromise next: promise ].\x0a\x0a\x09^ promise",
 messageSends: ["on:", "ifNil:ifNotNil:", "next:"],
-referencedClasses: ["TTPromise"]
+referencedClasses: ["TDPromise"]
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -662,13 +661,13 @@ return $5;
 };
 $6=self._promiseNotFound_(_st(aMessage)._selector());
 return $6;
-}, function($ctx1) {$ctx1.fill(self,"handleFutureMessage:",{aMessage:aMessage,selector:selector},globals.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"handleFutureMessage:",{aMessage:aMessage,selector:selector},globals.TDClient)})},
 args: ["aMessage"],
 source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self promiseNotFound: aMessage selector",
 messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "promiseNotFound:"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -685,7 +684,7 @@ source: "id\x0a\x09^ id",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -694,17 +693,17 @@ protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-globals.TTClient.superclass.fn.prototype._initialize.apply(_st(self), []);
+globals.TDClient.superclass.fn.prototype._initialize.apply(_st(self), []);
 self["@state"]=self._newJavaScriptObject();
 $ctx1.sendIdx["newJavaScriptObject"]=1;
 self["@actions"]=self._newJavaScriptObject();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TDClient)})},
 args: [],
 source: "initialize\x0a\x09super initialize.\x0a\x09\x22Primitive JS object. I need it because I'm keeping JSON data\x22\x0a\x09state := self newJavaScriptObject. \x0a\x09actions := self newJavaScriptObject",
 messageSends: ["initialize", "newJavaScriptObject"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -721,13 +720,13 @@ $1=false;
 $1=$2;
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"isConnected",{},smalltalk.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"isConnected",{},smalltalk.TDClient)})},
 args: [],
 source: "isConnected\x0a\x09^ connected ifNil: [ false ]",
 messageSends: ["ifNil:"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -737,13 +736,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 return {};
-return self}, function($ctx1) {$ctx1.fill(self,"newJavaScriptObject",{},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"newJavaScriptObject",{},smalltalk.TDClient)})},
 args: [],
 source: "newJavaScriptObject\x0a\x09<return {}>",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -755,13 +754,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@path"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"path",{},smalltalk.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"path",{},smalltalk.TDClient)})},
 args: [],
 source: "path\x0a\x09^ path",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -771,13 +770,13 @@ fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@path"]=aString;
-return self}, function($ctx1) {$ctx1.fill(self,"path:",{aString:aString},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"path:",{aString:aString},smalltalk.TDClient)})},
 args: ["aString"],
 source: "path: aString\x0a\x09path := aString",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -785,19 +784,19 @@ selector: "promiseNotFound:",
 protocol: 'error handling',
 fn: function (aSelector){
 var self=this;
-function $TTPromiseNotFound(){return globals.TTPromiseNotFound||(typeof TTPromiseNotFound=="undefined"?nil:TTPromiseNotFound)}
+function $TDPromiseNotFound(){return globals.TDPromiseNotFound||(typeof TDPromiseNotFound=="undefined"?nil:TDPromiseNotFound)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
-$1=_st($TTPromiseNotFound())._new();
+$1=_st($TDPromiseNotFound())._new();
 _st($1)._selector_(aSelector);
 $2=_st($1)._signal();
-return self}, function($ctx1) {$ctx1.fill(self,"promiseNotFound:",{aSelector:aSelector},globals.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"promiseNotFound:",{aSelector:aSelector},globals.TDClient)})},
 args: ["aSelector"],
-source: "promiseNotFound: aSelector\x0a\x09TTPromiseNotFound new\x0a\x09\x09selector: aSelector;\x0a\x09\x09signal",
+source: "promiseNotFound: aSelector\x0a\x09TDPromiseNotFound new\x0a\x09\x09selector: aSelector;\x0a\x09\x09signal",
 messageSends: ["selector:", "new", "signal"],
-referencedClasses: ["TTPromiseNotFound"]
+referencedClasses: ["TDPromiseNotFound"]
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -809,13 +808,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@promisedValue"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"promisedValue",{},smalltalk.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"promisedValue",{},smalltalk.TDClient)})},
 args: [],
 source: "promisedValue\x0a\x09^ promisedValue",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -825,13 +824,13 @@ fn: function (anObject){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@promisedValue"]=anObject;
-return self}, function($ctx1) {$ctx1.fill(self,"promisedValue:",{anObject:anObject},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"promisedValue:",{anObject:anObject},smalltalk.TDClient)})},
 args: ["anObject"],
 source: "promisedValue: anObject\x0a\x09promisedValue := anObject",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -843,13 +842,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@state"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"state",{},smalltalk.TTClient)})},
+}, function($ctx1) {$ctx1.fill(self,"state",{},smalltalk.TDClient)})},
 args: [],
 source: "state\x0a\x09^ state",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -859,13 +858,13 @@ fn: function (aBlock){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(self._future())._then_(aBlock);
-return self}, function($ctx1) {$ctx1.fill(self,"then:",{aBlock:aBlock},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"then:",{aBlock:aBlock},smalltalk.TDClient)})},
 args: ["aBlock"],
 source: "then: aBlock\x0a\x09self future then: aBlock",
 messageSends: ["then:", "future"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -874,26 +873,26 @@ protocol: 'updating',
 fn: function (){
 var self=this;
 var promise;
-function $TTRequestAction(){return smalltalk.TTRequestAction||(typeof TTRequestAction=="undefined"?nil:TTRequestAction)}
+function $TDRequestAction(){return globals.TDRequestAction||(typeof TDRequestAction=="undefined"?nil:TDRequestAction)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 promise=self._future();
-$1=_st($TTRequestAction())._on_(promise);
+$ctx1.sendIdx["future"]=1;
+$1=_st($TDRequestAction())._on_(promise);
 _st($1)._requestUrl_(self._path());
 $2=_st($1)._yourself();
 _st(promise)._setAction_($2);
 _st(self._future())._then_((function(){
-return smalltalk.withContext(function($ctx2) {
 self["@connected"]=true;
 return self["@connected"];
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"update",{promise:promise},smalltalk.TTClient)})},
+}));
+return self}, function($ctx1) {$ctx1.fill(self,"update",{promise:promise},globals.TDClient)})},
 args: [],
-source: "update\x0a\x09| promise |\x0a\x09promise := self future.\x0a\x09promise setAction: ((TTRequestAction on: promise)\x0a\x09\x09requestUrl: self path;\x0a\x09\x09yourself).\x0a\x09self future then: [ connected := true ]",
+source: "update\x0a\x09| promise |\x0a\x09promise := self future.\x0a\x09promise setAction: ((TDRequestAction on: promise)\x0a\x09\x09requestUrl: self path;\x0a\x09\x09yourself).\x0a\x09self future then: [ connected := true ]",
 messageSends: ["future", "setAction:", "requestUrl:", "on:", "path", "yourself", "then:"],
-referencedClasses: ["TTRequestAction"]
+referencedClasses: ["TDRequestAction"]
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -906,13 +905,13 @@ _st(aDictionary)._keysAndValuesDo_((function(key,value){
 return smalltalk.withContext(function($ctx2) {
 return _st(self["@actions"])._at_put_(key,value);
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"updateActions:",{aDictionary:aDictionary},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"updateActions:",{aDictionary:aDictionary},smalltalk.TDClient)})},
 args: ["aDictionary"],
 source: "updateActions: aDictionary\x0a\x09aDictionary keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ]",
 messageSends: ["keysAndValuesDo:", "at:put:"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -946,13 +945,13 @@ return smalltalk.withContext(function($ctx2) {
 return _st(self["@actions"])._at_put_(key,value);
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,4)})}));
 };
-return self}, function($ctx1) {$ctx1.fill(self,"updateFromJson:",{json:json},globals.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"updateFromJson:",{json:json},globals.TDClient)})},
 args: ["json"],
 source: "updateFromJson: json\x0a\x09connected := true.\x0a\x09\x0a\x09id := json at: '__id__'.\x0a\x09\x0a\x09(json at: 'state') ifNotNil: [\x0a\x09\x09json state keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value asTideObject ] ].\x0a\x09(json at: 'actions') ifNotNil: [\x0a\x09\x09json actions keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09actions at: key put: value ] ]",
 messageSends: ["at:", "ifNotNil:", "keysAndValuesDo:", "state", "at:put:", "asTideObject", "actions"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -965,13 +964,13 @@ _st(aDictionary)._keysAndValuesDo_((function(key,value){
 return smalltalk.withContext(function($ctx2) {
 return _st(self["@state"])._at_put_(key,value);
 }, function($ctx2) {$ctx2.fillBlock({key:key,value:value},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"updateState:",{aDictionary:aDictionary},smalltalk.TTClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"updateState:",{aDictionary:aDictionary},smalltalk.TDClient)})},
 args: ["aDictionary"],
 source: "updateState: aDictionary\x0a\x09aDictionary keysAndValuesDo: [ :key :value |\x0a\x09\x09\x09state at: key put: value ]",
 messageSends: ["keysAndValuesDo:", "at:put:"],
 referencedClasses: []
 }),
-globals.TTClient);
+globals.TDClient);
 
 
 smalltalk.addMethod(
@@ -987,13 +986,13 @@ _st($2)._updateFromJson_(json);
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"fromJson:",{json:json},smalltalk.TTClient.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"fromJson:",{json:json},smalltalk.TDClient.klass)})},
 args: ["json"],
 source: "fromJson: json\x0a\x09^ self new\x0a\x09\x09updateFromJson: json;\x0a\x09\x09yourself",
 messageSends: ["updateFromJson:", "new", "yourself"],
 referencedClasses: []
 }),
-globals.TTClient.klass);
+globals.TDClient.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1008,16 +1007,16 @@ _st($2)._path_(aString);
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aString:aString},smalltalk.TTClient.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"on:",{aString:aString},smalltalk.TDClient.klass)})},
 args: ["aString"],
 source: "on: aString\x0a\x09^ self new\x0a\x09\x09path: aString;\x0a\x09\x09yourself",
 messageSends: ["path:", "new", "yourself"],
 referencedClasses: []
 }),
-globals.TTClient.klass);
+globals.TDClient.klass);
 
 
-smalltalk.addClass('TTPromise', globals.Object, ['previous', 'next', 'client', 'action', 'errorHandler'], 'Tide-Amber-Core');
+smalltalk.addClass('TDPromise', globals.Object, ['previous', 'next', 'client', 'action', 'errorHandler'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "action",
@@ -1028,13 +1027,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@action"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"action",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"action",{},smalltalk.TDPromise)})},
 args: [],
 source: "action\x0a\x09^ action",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1046,13 +1045,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@client"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"client",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"client",{},smalltalk.TDPromise)})},
 args: [],
 source: "client\x0a\x09^ client",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1062,13 +1061,13 @@ fn: function (aClient){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@client"]=aClient;
-return self}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},smalltalk.TDPromise)})},
 args: ["aClient"],
 source: "client: aClient\x0a\x09client := aClient",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1085,7 +1084,7 @@ source: "errorHandler\x0a\x09^ errorHandler",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1097,13 +1096,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=_st(self._client())._future();
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"future",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"future",{},smalltalk.TDPromise)})},
 args: [],
 source: "future\x0a\x09^ self client future",
 messageSends: ["future", "client"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1112,15 +1111,15 @@ protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-globals.TTPromise.superclass.fn.prototype._initialize.apply(_st(self), []);
+globals.TDPromise.superclass.fn.prototype._initialize.apply(_st(self), []);
 self["@errorHandler"]=_st(self._class())._errorHandler();
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TDPromise)})},
 args: [],
 source: "initialize\x0a\x09super initialize.\x0a\x09errorHandler := self class errorHandler.",
 messageSends: ["initialize", "errorHandler", "class"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1132,13 +1131,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=_st(self._action())._notNil();
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"isAssigned",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"isAssigned",{},smalltalk.TDPromise)})},
 args: [],
 source: "isAssigned\x0a\x09^ self action notNil",
 messageSends: ["notNil", "action"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1153,13 +1152,13 @@ return smalltalk.withContext(function($ctx2) {
 return _st(self._action())._isResolved();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"isResolved",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"isResolved",{},smalltalk.TDPromise)})},
 args: [],
 source: "isResolved\x0a\x09^ self isAssigned and: [ self action isResolved ]",
 messageSends: ["and:", "isAssigned", "isResolved", "action"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1171,13 +1170,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@next"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"next",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"next",{},smalltalk.TDPromise)})},
 args: [],
 source: "next\x0a\x09^ next",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1195,13 +1194,13 @@ _st(aPromise)._previous_(self);
 } else {
 _st(self["@next"])._next_(aPromise);
 };
-return self}, function($ctx1) {$ctx1.fill(self,"next:",{aPromise:aPromise},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"next:",{aPromise:aPromise},smalltalk.TDPromise)})},
 args: ["aPromise"],
 source: "next: aPromise\x0a\x09next \x0a\x09\x09ifNil: [ \x0a\x09\x09\x09next := aPromise. \x0a\x09\x09\x09aPromise previous: self ]\x0a\x09\x09ifNotNil: [ \x0a\x09\x09\x09next next: aPromise ]",
 messageSends: ["ifNil:ifNotNil:", "previous:", "next:"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1217,13 +1216,13 @@ _st(self._client())._flushPromises();
 } else {
 _st(self._next())._stepTravel();
 };
-return self}, function($ctx1) {$ctx1.fill(self,"nextTravel",{},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"nextTravel",{},smalltalk.TDPromise)})},
 args: [],
 source: "nextTravel\x0a\x09self next \x0a\x09\x09ifNil: [ self client flushPromises ]\x0a\x09\x09ifNotNil: [ self next stepTravel ]",
 messageSends: ["ifNil:ifNotNil:", "next", "flushPromises", "client", "stepTravel"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1235,13 +1234,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@previous"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"previous",{},smalltalk.TTPromise)})},
+}, function($ctx1) {$ctx1.fill(self,"previous",{},smalltalk.TDPromise)})},
 args: [],
 source: "previous\x0a\x09^ previous",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1251,13 +1250,13 @@ fn: function (aPromise){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@previous"]=aPromise;
-return self}, function($ctx1) {$ctx1.fill(self,"previous:",{aPromise:aPromise},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"previous:",{aPromise:aPromise},smalltalk.TDPromise)})},
 args: ["aPromise"],
 source: "previous: aPromise\x0a\x09previous := aPromise",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1268,13 +1267,13 @@ var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@action"]=anAction;
 self._travel();
-return self}, function($ctx1) {$ctx1.fill(self,"setAction:",{anAction:anAction},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"setAction:",{anAction:anAction},smalltalk.TDPromise)})},
 args: ["anAction"],
 source: "setAction: anAction\x0a\x09action := anAction.\x0a\x09self travel",
 messageSends: ["travel"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1284,7 +1283,7 @@ fn: function (aMessage){
 var self=this;
 var url,data;
 function $JSON(){return globals.JSON||(typeof JSON=="undefined"?nil:JSON)}
-function $TTRequestAction(){return globals.TTRequestAction||(typeof TTRequestAction=="undefined"?nil:TTRequestAction)}
+function $TDRequestAction(){return globals.TDRequestAction||(typeof TDRequestAction=="undefined"?nil:TDRequestAction)}
 return smalltalk.withContext(function($ctx1) { 
 var $3,$2,$1,$4,$5;
 url=_st(_st(self._client())._actions())._at_(_st(aMessage)._selector());
@@ -1299,18 +1298,18 @@ return smalltalk.withContext(function($ctx2) {
 return _st(each)._asTideArgument();
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,2)})}));
 data=_st($JSON())._stringify_($1);
-$4=_st($TTRequestAction())._on_(self);
+$4=_st($TDRequestAction())._on_(self);
 _st($4)._requestUrl_(url);
 _st($4)._data_(data);
 $5=_st($4)._yourself();
 self._setAction_($5);
-return self}, function($ctx1) {$ctx1.fill(self,"setRequestActionFromMessage:",{aMessage:aMessage,url:url,data:data},globals.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"setRequestActionFromMessage:",{aMessage:aMessage,url:url,data:data},globals.TDPromise)})},
 args: ["aMessage"],
-source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client actions at: aMessage selector.\x0a\x09data := JSON stringify: ((aMessage arguments ifNil: [ #() ]) \x0a\x09\x09collect: [ :each | each asTideArgument ]).\x0a\x09self setAction: ((TTRequestAction on: self)\x0a\x09\x09requestUrl: url;\x0a\x09\x09data: data;\x0a\x09\x09yourself)",
+source: "setRequestActionFromMessage: aMessage\x0a\x09| url data |\x0a\x09url := self client actions at: aMessage selector.\x0a\x09data := JSON stringify: ((aMessage arguments ifNil: [ #() ]) \x0a\x09\x09collect: [ :each | each asTideArgument ]).\x0a\x09self setAction: ((TDRequestAction on: self)\x0a\x09\x09requestUrl: url;\x0a\x09\x09data: data;\x0a\x09\x09yourself)",
 messageSends: ["at:", "actions", "client", "selector", "stringify:", "collect:", "ifNil:", "arguments", "asTideArgument", "setAction:", "requestUrl:", "on:", "data:", "yourself"],
-referencedClasses: ["JSON", "TTRequestAction"]
+referencedClasses: ["JSON", "TDRequestAction"]
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1326,13 +1325,13 @@ self._nextTravel();
 } else {
 _st(self._action())._resolve();
 };
-return self}, function($ctx1) {$ctx1.fill(self,"stepTravel",{},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"stepTravel",{},smalltalk.TDPromise)})},
 args: [],
 source: "stepTravel\x0a\x09self action \x0a\x09\x09ifNil: [ self nextTravel ]\x0a\x09\x09ifNotNil: [ self action resolve ]",
 messageSends: ["ifNil:ifNotNil:", "action", "nextTravel", "resolve"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1340,22 +1339,22 @@ selector: "then:",
 protocol: 'actions',
 fn: function (aBlock){
 var self=this;
-function $TTCallbackAction(){return smalltalk.TTCallbackAction||(typeof TTCallbackAction=="undefined"?nil:TTCallbackAction)}
+function $TDCallbackAction(){return globals.TDCallbackAction||(typeof TDCallbackAction=="undefined"?nil:TDCallbackAction)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
 $1=self._isAssigned();
 if(smalltalk.assert($1)){
 _st(_st(self._client())._future())._then_(aBlock);
 } else {
-self._setAction_(_st(_st($TTCallbackAction())._on_(self))._callback_(aBlock));
+self._setAction_(_st(_st($TDCallbackAction())._on_(self))._callback_(aBlock));
 };
-return self}, function($ctx1) {$ctx1.fill(self,"then:",{aBlock:aBlock},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"then:",{aBlock:aBlock},globals.TDPromise)})},
 args: ["aBlock"],
-source: "then: aBlock\x0a\x09self isAssigned\x0a\x09\x09ifTrue: [ self client future then: aBlock ]\x0a\x09\x09ifFalse: [ self setAction: ((TTCallbackAction on: self) callback: aBlock) ]",
+source: "then: aBlock\x0a\x09self isAssigned\x0a\x09\x09ifTrue: [ self client future then: aBlock ]\x0a\x09\x09ifFalse: [ self setAction: ((TDCallbackAction on: self) callback: aBlock) ]",
 messageSends: ["ifTrue:ifFalse:", "isAssigned", "then:", "future", "client", "setAction:", "callback:", "on:"],
-referencedClasses: ["TTCallbackAction"]
+referencedClasses: ["TDCallbackAction"]
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1372,16 +1371,16 @@ return _st(self._previous())._isResolved();
 if(smalltalk.assert($1)){
 self._stepTravel();
 };
-return self}, function($ctx1) {$ctx1.fill(self,"travel",{},smalltalk.TTPromise)})},
+return self}, function($ctx1) {$ctx1.fill(self,"travel",{},smalltalk.TDPromise)})},
 args: [],
 source: "travel\x0a\x09(self previous isNil or: [ self previous isResolved ]) \x0a\x09\x09ifTrue: [ self stepTravel ]",
 messageSends: ["ifTrue:", "or:", "isNil", "previous", "isResolved", "stepTravel"],
 referencedClasses: []
 }),
-globals.TTPromise);
+globals.TDPromise);
 
 
-globals.TTPromise.klass.iVarNames = ['errorHandler'];
+globals.TDPromise.klass.iVarNames = ['errorHandler'];
 smalltalk.addMethod(
 smalltalk.method({
 selector: "errorHandler",
@@ -1397,7 +1396,7 @@ source: "errorHandler \x0a\x09^ errorHandler",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise.klass);
+globals.TDPromise.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1412,7 +1411,7 @@ source: "errorHandler: anErrorHandler \x0a\x09errorHandler := anErrorHandler",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromise.klass);
+globals.TDPromise.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1427,13 +1426,13 @@ _st($2)._client_(aClient);
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aClient:aClient},smalltalk.TTPromise.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"on:",{aClient:aClient},smalltalk.TDPromise.klass)})},
 args: ["aClient"],
 source: "on: aClient\x0a\x09^ self new\x0a\x09\x09client: aClient;\x0a\x09\x09yourself",
 messageSends: ["client:", "new", "yourself"],
 referencedClasses: []
 }),
-globals.TTPromise.klass);
+globals.TDPromise.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1450,16 +1449,16 @@ _st(aBlock)._ensure_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._errorHandler_(oldErrorHandler);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"use:during:",{anErrorHandler:anErrorHandler,aBlock:aBlock,oldErrorHandler:oldErrorHandler},globals.TTPromise.klass)})},
+return self}, function($ctx1) {$ctx1.fill(self,"use:during:",{anErrorHandler:anErrorHandler,aBlock:aBlock,oldErrorHandler:oldErrorHandler},globals.TDPromise.klass)})},
 args: ["anErrorHandler", "aBlock"],
 source: "use: anErrorHandler during: aBlock\x0a\x09| oldErrorHandler |\x0a\x09\x0a\x09oldErrorHandler := self errorHandler.\x0a\x09self errorHandler: anErrorHandler.\x0a\x09aBlock ensure: [ self errorHandler: oldErrorHandler ]\x09",
 messageSends: ["errorHandler", "errorHandler:", "ensure:"],
 referencedClasses: []
 }),
-globals.TTPromise.klass);
+globals.TDPromise.klass);
 
 
-smalltalk.addClass('TTProxy', globals.ProtoObject, ['client'], 'Tide-Amber-Core');
+smalltalk.addClass('TDProxy', globals.ProtoObject, ['client'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "asTideArgument",
@@ -1470,13 +1469,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=_st(self._xxxClient())._asTideArgument();
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"asTideArgument",{},globals.TTProxy)})},
+}, function($ctx1) {$ctx1.fill(self,"asTideArgument",{},globals.TDProxy)})},
 args: [],
 source: "asTideArgument\x0a\x09^ self xxxClient asTideArgument",
 messageSends: ["asTideArgument", "xxxClient"],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1497,13 +1496,13 @@ $1=_st(aMessage)._sendTo_($4);
 $1=_st(self._xxxClient())._handleFutureMessage_(aMessage);
 };
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},globals.TTProxy)})},
+}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},globals.TDProxy)})},
 args: ["aMessage"],
 source: "doesNotUnderstand: aMessage\x0a\x09^ (self xxxClient respondsTo: aMessage selector)\x0a\x09\x09ifTrue: [ aMessage sendTo: self xxxClient ]\x0a\x09\x09ifFalse: [ self xxxClient handleFutureMessage: aMessage ]",
 messageSends: ["ifTrue:ifFalse:", "respondsTo:", "xxxClient", "selector", "sendTo:", "handleFutureMessage:"],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1511,21 +1510,21 @@ selector: "inheritedSelectors",
 protocol: 'private',
 fn: function (){
 var self=this;
-function $TTProxy(){return globals.TTProxy||(typeof TTProxy=="undefined"?nil:TTProxy)}
+function $TDProxy(){return globals.TDProxy||(typeof TDProxy=="undefined"?nil:TDProxy)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
 $1=_st(_st(self._class())._allSelectors())._reject_((function(each){
 return smalltalk.withContext(function($ctx2) {
-return _st(_st(_st($TTProxy())._methodDictionary())._keys())._includes_(each);
+return _st(_st(_st($TDProxy())._methodDictionary())._keys())._includes_(each);
 }, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{},globals.TTProxy)})},
+}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{},globals.TDProxy)})},
 args: [],
-source: "inheritedSelectors\x0a\x09^ self class allSelectors\x0a\x09\x09reject: [ :each | TTProxy methodDictionary keys includes: each ]",
+source: "inheritedSelectors\x0a\x09^ self class allSelectors\x0a\x09\x09reject: [ :each | TDProxy methodDictionary keys includes: each ]",
 messageSends: ["reject:", "allSelectors", "class", "includes:", "keys", "methodDictionary"],
-referencedClasses: ["TTProxy"]
+referencedClasses: ["TDProxy"]
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1534,14 +1533,14 @@ protocol: 'initialization',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-globals.TTProxy.superclass.fn.prototype._initialize.apply(_st(self), []);
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TTProxy)})},
+globals.TDProxy.superclass.fn.prototype._initialize.apply(_st(self), []);
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TDProxy)})},
 args: [],
 source: "initialize\x0a\x09super initialize.\x0a\x09\x22self inheritedSelectors do: [ :each |\x0a\x09\x09self removeSelector: each asSelector ]\x22",
 messageSends: ["initialize"],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1553,13 +1552,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 _st(anInspector)._setLabel_(self._printString());
 $1=_st(anInspector)._setVariables_(globals.HashedCollection._newFromPairs_(["client",self["@client"]]));
-return self}, function($ctx1) {$ctx1.fill(self,"inspectOn:",{anInspector:anInspector},globals.TTProxy)})},
+return self}, function($ctx1) {$ctx1.fill(self,"inspectOn:",{anInspector:anInspector},globals.TDProxy)})},
 args: ["anInspector"],
 source: "inspectOn: anInspector\x0a\x09anInspector\x0a\x09\x09setLabel: self printString;\x0a\x09\x09setVariables: #{\x0a\x09\x09\x09'client' -> client\x0a\x09\x09}",
 messageSends: ["setLabel:", "printString", "setVariables:"],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1569,13 +1568,13 @@ fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 delete self[aString];;
-return self}, function($ctx1) {$ctx1.fill(self,"removeSelector:",{aString:aString},globals.TTProxy)})},
+return self}, function($ctx1) {$ctx1.fill(self,"removeSelector:",{aString:aString},globals.TDProxy)})},
 args: ["aString"],
 source: "removeSelector: aString\x0a\x09<delete self[aString];>",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1592,7 +1591,7 @@ source: "xxxClient\x0a\x09^ client",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1607,7 +1606,7 @@ source: "xxxClient: aClient\x0a\x09client := aClient",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTProxy);
+globals.TDProxy);
 
 
 smalltalk.addMethod(
@@ -1623,13 +1622,13 @@ _st($2)._xxxClient_(aClient);
 $3=_st($2)._initialize();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},globals.TTProxy.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},globals.TDProxy.klass)})},
 args: ["aClient"],
 source: "client: aClient\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aClient\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: aClient;\x0a\x09\x09initialize",
 messageSends: ["xxxClient:", "basicNew", "initialize"],
 referencedClasses: []
 }),
-globals.TTProxy.klass);
+globals.TDProxy.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1644,13 +1643,13 @@ _st($2)._connect();
 $3=_st($2)._yourself();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"connectOn:",{aPath:aPath},globals.TTProxy.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"connectOn:",{aPath:aPath},globals.TDProxy.klass)})},
 args: ["aPath"],
 source: "connectOn: aPath\x0a\x09\x22Creates a proxy on aPath and connect it. \x0a\x09 This is a convenience method.\x22\x0a\x09 \x0a\x09^ (self on: aPath) \x0a\x09\x09connect; \x0a\x09\x09yourself.",
 messageSends: ["connect", "on:", "yourself"],
 referencedClasses: []
 }),
-globals.TTProxy.klass);
+globals.TDProxy.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1658,21 +1657,21 @@ selector: "on:",
 protocol: 'instance creation',
 fn: function (aPath){
 var self=this;
-function $TTClient(){return globals.TTClient||(typeof TTClient=="undefined"?nil:TTClient)}
+function $TDClient(){return globals.TDClient||(typeof TDClient=="undefined"?nil:TDClient)}
 return smalltalk.withContext(function($ctx1) { 
 var $2,$3,$1;
 $2=self._basicNew();
-_st($2)._xxxClient_(_st($TTClient())._on_(aPath));
+_st($2)._xxxClient_(_st($TDClient())._on_(aPath));
 $3=_st($2)._initialize();
 $1=$3;
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},globals.TTProxy.klass)})},
+}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},globals.TDProxy.klass)})},
 args: ["aPath"],
-source: "on: aPath\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aPath\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: (TTClient on: aPath);\x0a\x09\x09initialize",
+source: "on: aPath\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aPath\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: (TDClient on: aPath);\x0a\x09\x09initialize",
 messageSends: ["xxxClient:", "basicNew", "on:", "initialize"],
-referencedClasses: ["TTClient"]
+referencedClasses: ["TDClient"]
 }),
-globals.TTProxy.klass);
+globals.TDProxy.klass);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -1701,17 +1700,17 @@ selector: "onPromiseFailureDo:",
 protocol: '*Tide-Amber-Core',
 fn: function (failureBlock){
 var self=this;
-function $TTPromise(){return globals.TTPromise||(typeof TTPromise=="undefined"?nil:TTPromise)}
-function $TTAsyncPromiseFailureHandler(){return globals.TTAsyncPromiseFailureHandler||(typeof TTAsyncPromiseFailureHandler=="undefined"?nil:TTAsyncPromiseFailureHandler)}
+function $TDPromise(){return globals.TDPromise||(typeof TDPromise=="undefined"?nil:TDPromise)}
+function $TDAsyncPromiseFailureHandler(){return globals.TDAsyncPromiseFailureHandler||(typeof TDAsyncPromiseFailureHandler=="undefined"?nil:TDAsyncPromiseFailureHandler)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=_st($TTPromise())._use_during_(_st($TTAsyncPromiseFailureHandler())._action_(failureBlock),self);
+$1=_st($TDPromise())._use_during_(_st($TDAsyncPromiseFailureHandler())._action_(failureBlock),self);
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"onPromiseFailureDo:",{failureBlock:failureBlock},globals.BlockClosure)})},
 args: ["failureBlock"],
-source: "onPromiseFailureDo: failureBlock\x0a\x09^ TTPromise\x0a\x09\x09use: (TTAsyncPromiseFailureHandler action: failureBlock)\x0a\x09\x09during: self ",
+source: "onPromiseFailureDo: failureBlock\x0a\x09^ TDPromise\x0a\x09\x09use: (TDAsyncPromiseFailureHandler action: failureBlock)\x0a\x09\x09during: self ",
 messageSends: ["use:during:", "action:"],
-referencedClasses: ["TTPromise", "TTAsyncPromiseFailureHandler"]
+referencedClasses: ["TDPromise", "TDAsyncPromiseFailureHandler"]
 }),
 globals.BlockClosure);
 
@@ -1745,17 +1744,17 @@ selector: "asTideObject",
 protocol: '*Tide-Amber-Core',
 fn: function (){
 var self=this;
-function $TTProxy(){return smalltalk.TTProxy||(typeof TTProxy=="undefined"?nil:TTProxy)}
-function $TTClient(){return smalltalk.TTClient||(typeof TTClient=="undefined"?nil:TTClient)}
+function $TDProxy(){return smalltalk.TDProxy||(typeof TDProxy=="undefined"?nil:TDProxy)}
+function $TDClient(){return smalltalk.TDClient||(typeof TDClient=="undefined"?nil:TDClient)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-$1=_st($TTProxy())._client_(_st($TTClient())._fromJson_(self));
+$1=_st($TDProxy())._client_(_st($TDClient())._fromJson_(self));
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"asTideObject",{},smalltalk.JSObjectProxy)})},
 args: [],
-source: "asTideObject\x0a\x09^ TTProxy client: (TTClient fromJson: self)",
+source: "asTideObject\x0a\x09^ TDProxy client: (TDClient fromJson: self)",
 messageSends: ["client:", "fromJson:"],
-referencedClasses: ["TTProxy", "TTClient"]
+referencedClasses: ["TDProxy", "TDClient"]
 }),
 globals.JSObjectProxy);
 

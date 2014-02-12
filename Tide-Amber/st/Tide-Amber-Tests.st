@@ -1,12 +1,12 @@
 Smalltalk current createPackage: 'Tide-Amber-Tests'!
-TestCase subclass: #TTClientTest
+TestCase subclass: #TDClientTest
 	instanceVariableNames: 'client'
 	package: 'Tide-Amber-Tests'!
 
-!TTClientTest methodsFor: 'initialization'!
+!TDClientTest methodsFor: 'initialization'!
 
 setUp
-	client := TTClient new
+	client := TDClient new
 !
 
 tearDown
@@ -15,11 +15,11 @@ tearDown
 	client := nil"
 ! !
 
-!TTClientTest methodsFor: 'tests'!
+!TDClientTest methodsFor: 'tests'!
 
 testForwarding
 	"| client |"
-	client := TTProxy client: (TTClient new).
+	client := TDProxy client: (TDClient new).
 
 	self should: [ client count ] raise: MessageNotUnderstood.	
 
@@ -47,38 +47,38 @@ testFuture
 	self assert: p3 next equals: nil
 ! !
 
-TTProxy subclass: #TTMockProxy
+TDProxy subclass: #TDMockProxy
 	instanceVariableNames: 'catchedSelectors'
 	package: 'Tide-Amber-Tests'!
 
-!TTMockProxy methodsFor: 'accessing'!
+!TDMockProxy methodsFor: 'accessing'!
 
 catchedSelectors
 	^ catchedSelectors
 ! !
 
-!TTMockProxy methodsFor: 'error handling'!
+!TDMockProxy methodsFor: 'error handling'!
 
 doesNotUnderstand: aMessage
 	catchedSelectors add: aMessage selector
 ! !
 
-!TTMockProxy methodsFor: 'initialization'!
+!TDMockProxy methodsFor: 'initialization'!
 
 initialize
 	super initialize.
 	catchedSelectors := #()
 ! !
 
-TestCase subclass: #TTProxyTest
+TestCase subclass: #TDProxyTest
 	instanceVariableNames: ''
 	package: 'Tide-Amber-Tests'!
 
-!TTProxyTest methodsFor: 'tests'!
+!TDProxyTest methodsFor: 'tests'!
 
 testDNU
 	| proxy |
-	proxy := TTMockProxy new.
+	proxy := TDMockProxy new.
 
 	proxy yourself.
 	self assert: (proxy catchedSelectors includes: 'yourself').
@@ -90,7 +90,7 @@ testDNU
 testInheritedSelectors
 	| proxy |
 
-	proxy := TTProxy basicNew.
+	proxy := TDProxy basicNew.
 
 	self assert: (proxy inheritedSelectors includes: 'isNil').
 	self deny: (proxy inheritedSelectors includes: 'xxxClient')
@@ -99,8 +99,8 @@ testInheritedSelectors
 testxxxClient
 	| proxy client |
 	
-	client := TTClient new.
-	proxy := TTProxy client: client.
+	client := TDClient new.
+	proxy := TDProxy client: client.
 
 	self assert: proxy xxxClient == client.
 	self assert: proxy yourself == client.

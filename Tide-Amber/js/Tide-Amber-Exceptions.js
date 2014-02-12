@@ -2,7 +2,7 @@ define("timetravel/Tide-Amber-Exceptions", ["amber_vm/smalltalk", "amber_vm/nil"
 smalltalk.addPackage('Tide-Amber-Exceptions');
 smalltalk.packages["Tide-Amber-Exceptions"].transport = {"type":"amd","amdNamespace":"timetravel"};
 
-smalltalk.addClass('TTPromiseNotFound', globals.Error, ['selector'], 'Tide-Amber-Exceptions');
+smalltalk.addClass('TDPromiseNotFound', globals.Error, ['selector'], 'Tide-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageText",
@@ -13,13 +13,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1="No promise was found for selector ".__comma(self._selector());
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"messageText",{},globals.TTPromiseNotFound)})},
+}, function($ctx1) {$ctx1.fill(self,"messageText",{},globals.TDPromiseNotFound)})},
 args: [],
 source: "messageText\x0a\x09^ 'No promise was found for selector ', self selector",
 messageSends: [",", "selector"],
 referencedClasses: []
 }),
-globals.TTPromiseNotFound);
+globals.TDPromiseNotFound);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -36,7 +36,7 @@ source: "selector\x0a\x09^ selector",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromiseNotFound);
+globals.TDPromiseNotFound);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -51,11 +51,11 @@ source: "selector: aString\x0a\x09selector := aString",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTPromiseNotFound);
+globals.TDPromiseNotFound);
 
 
 
-smalltalk.addClass('TTRequestError', globals.Error, ['xhr'], 'Tide-Amber-Exceptions');
+smalltalk.addClass('TDRequestError', globals.Error, ['xhr'], 'Tide-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "xhr",
@@ -66,13 +66,13 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self["@xhr"];
 return $1;
-}, function($ctx1) {$ctx1.fill(self,"xhr",{},smalltalk.TTRequestError)})},
+}, function($ctx1) {$ctx1.fill(self,"xhr",{},smalltalk.TDRequestError)})},
 args: [],
 source: "xhr\x0a\x09^ xhr",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTRequestError);
+globals.TDRequestError);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -82,17 +82,17 @@ fn: function (anObject){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 self["@xhr"]=anObject;
-return self}, function($ctx1) {$ctx1.fill(self,"xhr:",{anObject:anObject},smalltalk.TTRequestError)})},
+return self}, function($ctx1) {$ctx1.fill(self,"xhr:",{anObject:anObject},smalltalk.TDRequestError)})},
 args: ["anObject"],
 source: "xhr: anObject\x0a\x09xhr := anObject",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTRequestError);
+globals.TDRequestError);
 
 
 
-smalltalk.addClass('TTServerError', globals.Error, ['code'], 'Tide-Amber-Exceptions');
+smalltalk.addClass('TDServerError', globals.Error, ['code'], 'Tide-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "code",
@@ -108,7 +108,7 @@ source: "code\x0a\x09^ code",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTServerError);
+globals.TDServerError);
 
 smalltalk.addMethod(
 smalltalk.method({
@@ -123,11 +123,11 @@ source: "code: aString \x0a\x09code := aString.",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTServerError);
+globals.TDServerError);
 
 
 
-smalltalk.addClass('TTSessionNotFound', globals.Error, [], 'Tide-Amber-Exceptions');
+smalltalk.addClass('TDSessionNotFound', globals.Error, [], 'Tide-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageText",
@@ -136,13 +136,13 @@ fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 return "Tide session not found";
-}, function($ctx1) {$ctx1.fill(self,"messageText",{},smalltalk.TTSessionNotFound)})},
+}, function($ctx1) {$ctx1.fill(self,"messageText",{},smalltalk.TDSessionNotFound)})},
 args: [],
 source: "messageText\x0a\x09^ 'Tide session not found'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TTSessionNotFound);
+globals.TDSessionNotFound);
 
 
 });

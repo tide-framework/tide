@@ -1,9 +1,9 @@
 Smalltalk createPackage: 'Tide-Amber-Core'!
-Object subclass: #TTAction
+Object subclass: #TDAction
 	instanceVariableNames: 'promise resolved'
 	package: 'Tide-Amber-Core'!
 
-!TTAction methodsFor: 'accessing'!
+!TDAction methodsFor: 'accessing'!
 
 client
 	^ self promise client
@@ -17,7 +17,7 @@ promise: aPromise
 	promise := aPromise
 ! !
 
-!TTAction methodsFor: 'resolving'!
+!TDAction methodsFor: 'resolving'!
 
 beResolved
 	resolved := true.
@@ -28,13 +28,13 @@ resolve
 	self beResolved
 ! !
 
-!TTAction methodsFor: 'testing'!
+!TDAction methodsFor: 'testing'!
 
 isResolved
 	^ resolved ifNil: [ false ]
 ! !
 
-!TTAction class methodsFor: 'instance creation'!
+!TDAction class methodsFor: 'instance creation'!
 
 on: aPromise
 	^ self new 
@@ -42,11 +42,11 @@ on: aPromise
 		yourself
 ! !
 
-TTAction subclass: #TTCallbackAction
+TDAction subclass: #TDCallbackAction
 	instanceVariableNames: 'callback'
 	package: 'Tide-Amber-Core'!
 
-!TTCallbackAction methodsFor: 'accessing'!
+!TDCallbackAction methodsFor: 'accessing'!
 
 callback
 	^ callback
@@ -56,18 +56,18 @@ callback: aBlock
 	callback := aBlock
 ! !
 
-!TTCallbackAction methodsFor: 'resolving'!
+!TDCallbackAction methodsFor: 'resolving'!
 
 resolve
 	self client promisedValue: (self callback value: self client promisedValue).
 	super resolve
 ! !
 
-TTAction subclass: #TTRequestAction
+TDAction subclass: #TDRequestAction
 	instanceVariableNames: 'requestUrl data'
 	package: 'Tide-Amber-Core'!
 
-!TTRequestAction methodsFor: 'accessing'!
+!TDRequestAction methodsFor: 'accessing'!
 
 data
 	^ data
@@ -85,19 +85,19 @@ requestUrl: aString
 	requestUrl := aString
 ! !
 
-!TTRequestAction methodsFor: 'error handling'!
+!TDRequestAction methodsFor: 'error handling'!
 
 requestError: anObject
-	TTRequestError new
+	TDRequestError new
 		xhr: anObject;
 		signal
 !
 
 sessionNotFound
-	TTSessionNotFound signal
+	TDSessionNotFound signal
 ! !
 
-!TTRequestAction methodsFor: 'private'!
+!TDRequestAction methodsFor: 'private'!
 
 newClientFromJson: json
 	self client promisedValue: json asTideObject
@@ -107,7 +107,7 @@ serverErrorFromJson: json
 	| serverError error |
 
 	serverError := json asTideObject.	
-	error := TTServerError new 
+	error := TDServerError new 
 		code: serverError code;
 		messageText: serverError messageText;
 		yourself.
@@ -121,7 +121,7 @@ updateClientFromJson: json
 	self client updateFromJson: json
 ! !
 
-!TTRequestAction methodsFor: 'resolving'!
+!TDRequestAction methodsFor: 'resolving'!
 
 handleResponse: json status: aNumber
 	aNumber == 200 ifTrue: [ ^ self updateClientFromJson: json ].
@@ -152,30 +152,30 @@ resolve
 	self request: self requestUrl
 ! !
 
-Object subclass: #TTAsyncPromiseFailureHandler
+Object subclass: #TDAsyncPromiseFailureHandler
 	instanceVariableNames: 'failureAction action'
 	package: 'Tide-Amber-Core'!
 
-!TTAsyncPromiseFailureHandler methodsFor: 'accessing'!
+!TDAsyncPromiseFailureHandler methodsFor: 'accessing'!
 
 action 
 	^ action
 ! !
 
-!TTAsyncPromiseFailureHandler methodsFor: 'initialization'!
+!TDAsyncPromiseFailureHandler methodsFor: 'initialization'!
 
 initializeAction: aBlock  
 	self initialize.
 	action := aBlock.
 ! !
 
-!TTAsyncPromiseFailureHandler methodsFor: 'signaling'!
+!TDAsyncPromiseFailureHandler methodsFor: 'signaling'!
 
 failure: anError
 	self action value: anError
 ! !
 
-!TTAsyncPromiseFailureHandler class methodsFor: 'instance creation'!
+!TDAsyncPromiseFailureHandler class methodsFor: 'instance creation'!
 
 action: aBlock 
 	^ self basicNew 
@@ -187,11 +187,11 @@ new
 	^ self error: 'Use #action:'
 ! !
 
-Object subclass: #TTClient
+Object subclass: #TDClient
 	instanceVariableNames: 'state actions firstPromise promisedValue path id connected'
 	package: 'Tide-Amber-Core'!
 
-!TTClient methodsFor: 'accessing'!
+!TDClient methodsFor: 'accessing'!
 
 actions
 	^ actions
@@ -204,7 +204,7 @@ flushPromises
 future
 	| promise |
 
-	promise := TTPromise on: self.
+	promise := TDPromise on: self.
 
 	firstPromise 
 		ifNil: [ firstPromise := promise ]
@@ -237,21 +237,21 @@ state
 	^ state
 ! !
 
-!TTClient methodsFor: 'converting'!
+!TDClient methodsFor: 'converting'!
 
 asTideArgument
 	^ #{ '__id__' -> self id }
 ! !
 
-!TTClient methodsFor: 'error handling'!
+!TDClient methodsFor: 'error handling'!
 
 promiseNotFound: aSelector
-	TTPromiseNotFound new
+	TDPromiseNotFound new
 		selector: aSelector;
 		signal
 ! !
 
-!TTClient methodsFor: 'forwarding'!
+!TDClient methodsFor: 'forwarding'!
 
 handleFutureMessage: aMessage
 	| selector |
@@ -270,7 +270,7 @@ then: aBlock
 	self future then: aBlock
 ! !
 
-!TTClient methodsFor: 'initialization'!
+!TDClient methodsFor: 'initialization'!
 
 connect
 	self isConnected ifFalse: [ self update ]
@@ -283,24 +283,24 @@ initialize
 	actions := self newJavaScriptObject
 ! !
 
-!TTClient methodsFor: 'private'!
+!TDClient methodsFor: 'private'!
 
 newJavaScriptObject
 	<return {}>
 ! !
 
-!TTClient methodsFor: 'testing'!
+!TDClient methodsFor: 'testing'!
 
 isConnected
 	^ connected ifNil: [ false ]
 ! !
 
-!TTClient methodsFor: 'updating'!
+!TDClient methodsFor: 'updating'!
 
 update
 	| promise |
 	promise := self future.
-	promise setAction: ((TTRequestAction on: promise)
+	promise setAction: ((TDRequestAction on: promise)
 		requestUrl: self path;
 		yourself).
 	self future then: [ connected := true ]
@@ -329,7 +329,7 @@ updateState: aDictionary
 			state at: key put: value ]
 ! !
 
-!TTClient class methodsFor: 'instance creation'!
+!TDClient class methodsFor: 'instance creation'!
 
 fromJson: json
 	^ self new
@@ -343,11 +343,11 @@ on: aString
 		yourself
 ! !
 
-Object subclass: #TTPromise
+Object subclass: #TDPromise
 	instanceVariableNames: 'previous next client action errorHandler'
 	package: 'Tide-Amber-Core'!
 
-!TTPromise methodsFor: 'accessing'!
+!TDPromise methodsFor: 'accessing'!
 
 action
 	^ action
@@ -395,14 +395,14 @@ setAction: anAction
 	self travel
 ! !
 
-!TTPromise methodsFor: 'actions'!
+!TDPromise methodsFor: 'actions'!
 
 setRequestActionFromMessage: aMessage
 	| url data |
 	url := self client actions at: aMessage selector.
 	data := JSON stringify: ((aMessage arguments ifNil: [ #() ]) 
 		collect: [ :each | each asTideArgument ]).
-	self setAction: ((TTRequestAction on: self)
+	self setAction: ((TDRequestAction on: self)
 		requestUrl: url;
 		data: data;
 		yourself)
@@ -411,17 +411,17 @@ setRequestActionFromMessage: aMessage
 then: aBlock
 	self isAssigned
 		ifTrue: [ self client future then: aBlock ]
-		ifFalse: [ self setAction: ((TTCallbackAction on: self) callback: aBlock) ]
+		ifFalse: [ self setAction: ((TDCallbackAction on: self) callback: aBlock) ]
 ! !
 
-!TTPromise methodsFor: 'initialization'!
+!TDPromise methodsFor: 'initialization'!
 
 initialize
 	super initialize.
 	errorHandler := self class errorHandler.
 ! !
 
-!TTPromise methodsFor: 'testing'!
+!TDPromise methodsFor: 'testing'!
 
 isAssigned
 	^ self action notNil
@@ -431,7 +431,7 @@ isResolved
 	^ self isAssigned and: [ self action isResolved ]
 ! !
 
-!TTPromise methodsFor: 'traveling'!
+!TDPromise methodsFor: 'traveling'!
 
 nextTravel
 	self next 
@@ -450,9 +450,9 @@ travel
 		ifTrue: [ self stepTravel ]
 ! !
 
-TTPromise class instanceVariableNames: 'errorHandler'!
+TDPromise class instanceVariableNames: 'errorHandler'!
 
-!TTPromise class methodsFor: 'accessing'!
+!TDPromise class methodsFor: 'accessing'!
 
 errorHandler 
 	^ errorHandler
@@ -470,7 +470,7 @@ use: anErrorHandler during: aBlock
 	aBlock ensure: [ self errorHandler: oldErrorHandler ]
 ! !
 
-!TTPromise class methodsFor: 'instance creation'!
+!TDPromise class methodsFor: 'instance creation'!
 
 on: aClient
 	^ self new
@@ -478,11 +478,11 @@ on: aClient
 		yourself
 ! !
 
-ProtoObject subclass: #TTProxy
+ProtoObject subclass: #TDProxy
 	instanceVariableNames: 'client'
 	package: 'Tide-Amber-Core'!
 
-!TTProxy methodsFor: 'accessing'!
+!TDProxy methodsFor: 'accessing'!
 
 xxxClient
 	^ client
@@ -492,7 +492,7 @@ xxxClient: aClient
 	client := aClient
 ! !
 
-!TTProxy methodsFor: 'as yet unclassified'!
+!TDProxy methodsFor: 'as yet unclassified'!
 
 inspectOn: anInspector
 	anInspector
@@ -502,13 +502,13 @@ inspectOn: anInspector
 		}
 ! !
 
-!TTProxy methodsFor: 'converting'!
+!TDProxy methodsFor: 'converting'!
 
 asTideArgument
 	^ self xxxClient asTideArgument
 ! !
 
-!TTProxy methodsFor: 'error handling'!
+!TDProxy methodsFor: 'error handling'!
 
 doesNotUnderstand: aMessage
 	^ (self xxxClient respondsTo: aMessage selector)
@@ -516,7 +516,7 @@ doesNotUnderstand: aMessage
 		ifFalse: [ self xxxClient handleFutureMessage: aMessage ]
 ! !
 
-!TTProxy methodsFor: 'initialization'!
+!TDProxy methodsFor: 'initialization'!
 
 initialize
 	super initialize.
@@ -524,18 +524,18 @@ initialize
 		self removeSelector: each asSelector ]"
 ! !
 
-!TTProxy methodsFor: 'private'!
+!TDProxy methodsFor: 'private'!
 
 inheritedSelectors
 	^ self class allSelectors
-		reject: [ :each | TTProxy methodDictionary keys includes: each ]
+		reject: [ :each | TDProxy methodDictionary keys includes: each ]
 !
 
 removeSelector: aString
 	<delete self[aString];>
 ! !
 
-!TTProxy class methodsFor: 'instance creation'!
+!TDProxy class methodsFor: 'instance creation'!
 
 client: aClient
 	"Do not add yourself here.
@@ -560,7 +560,7 @@ on: aPath
 	It is not understood by the proxy after sending #initialize, therefore it returns aPath"
 
 	^ self basicNew
-		xxxClient: (TTClient on: aPath);
+		xxxClient: (TDClient on: aPath);
 		initialize
 ! !
 
@@ -573,8 +573,8 @@ asTideObject
 !BlockClosure methodsFor: '*Tide-Amber-Core'!
 
 onPromiseFailureDo: failureBlock
-	^ TTPromise
-		use: (TTAsyncPromiseFailureHandler action: failureBlock)
+	^ TDPromise
+		use: (TDAsyncPromiseFailureHandler action: failureBlock)
 		during: self
 ! !
 
@@ -592,7 +592,7 @@ asTideObject
 !JSObjectProxy methodsFor: '*Tide-Amber-Core'!
 
 asTideObject
-	^ TTProxy client: (TTClient fromJson: self)
+	^ TDProxy client: (TDClient fromJson: self)
 ! !
 
 !Object methodsFor: '*Tide-Amber-Core'!

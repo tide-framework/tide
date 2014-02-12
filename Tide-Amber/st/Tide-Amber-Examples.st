@@ -1,19 +1,19 @@
 Smalltalk createPackage: 'Tide-Amber-Examples'!
-Widget subclass: #TTCounterWidget
+Widget subclass: #TDCounterWidget
 	instanceVariableNames: 'counter header'
 	package: 'Tide-Amber-Examples'!
 
-!TTCounterWidget methodsFor: 'accessing'!
+!TDCounterWidget methodsFor: 'accessing'!
 
 counter
-	^ counter ifNil: [ counter := TTProxy on: '/counter' ]
+	^ counter ifNil: [ counter := TDProxy on: '/counter' ]
 !
 
 counter: aCounter
 	counter := aCounter
 ! !
 
-!TTCounterWidget methodsFor: 'actions'!
+!TDCounterWidget methodsFor: 'actions'!
 
 addNewCounter
 	self counter otherCounter then: [ :proxy | 
@@ -30,7 +30,7 @@ increase
 	self counter then: [ self update ]
 ! !
 
-!TTCounterWidget methodsFor: 'rendering'!
+!TDCounterWidget methodsFor: 'rendering'!
 
 render
 	self counter connect.
@@ -52,14 +52,14 @@ renderOn: html
 		onClick: [ self addNewCounter ]
 ! !
 
-!TTCounterWidget methodsFor: 'updating'!
+!TDCounterWidget methodsFor: 'updating'!
 
 update
 	header contents: [ :html |
 		html with: self counter count asString ]
 ! !
 
-!TTCounterWidget class methodsFor: 'not yet classified'!
+!TDCounterWidget class methodsFor: 'not yet classified'!
 
 initialize
 	"self new render"
