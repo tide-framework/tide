@@ -10,5 +10,6 @@ Tide's mission is to make Pharo/Amber communication a breeze:
 - Exposing JSON data is as simple as adding a pragma
 - On the Amber side, proxies are created with exact API defined on the Pharo side, and promises are used to transform the Async request/response communication into a sequential, simpler flow.
 
+In addition, Tide is a small layer built on top of Zinc. It is quite fast, simple to understand and improve.
 
 Handcrafted with love by Nico & Esteban @RMoD.
