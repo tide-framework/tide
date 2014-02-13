@@ -1,6 +1,6 @@
 {
 	"class" : {
-		 },
+		"initialize" : "NicolasPetton 2/13/2014 18:09" },
 	"instance" : {
 		"initialize" : "NicolasPetton 2/13/2014 18:00",
 		"todoList" : "NicolasPetton 2/13/2014 18:00" } }
