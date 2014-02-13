@@ -1,0 +1,1 @@
+I present my collection model as a literal collection. I should not be used directly. Instead, TDCollectionPresenter should be used.

@@ -1,0 +1,1 @@
+I answer the current request context for the current request processing.

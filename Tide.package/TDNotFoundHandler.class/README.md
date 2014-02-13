@@ -1,0 +1,1 @@
+I am used to handle requests where no other handler is found.

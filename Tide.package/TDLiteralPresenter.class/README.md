@@ -1,0 +1,1 @@
+I am the default presenter for all literal objects. The Amber client will receive an equivalent literal to my model (a Boolean, String, Number, etc.).

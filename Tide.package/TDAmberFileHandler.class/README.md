@@ -1,0 +1,1 @@
+I am a special handler for serving files from disks. I am a simple DAV hander, so I also handle Amber PUT requests required for saving Amber packages.
