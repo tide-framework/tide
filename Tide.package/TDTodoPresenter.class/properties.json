@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Examples",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"todoList" ],
+	"name" : "TDTodoPresenter",
+	"pools" : [
+		 ],
+	"super" : "TDPresenter",
+	"type" : "normal" }

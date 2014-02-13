@@ -1,0 +1,4 @@
+accessing
+label
+	<state>
+	^ label
