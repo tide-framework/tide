@@ -1,6 +1,6 @@
-define("timetravel/Tide-Amber-Examples", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Canvas"], function(smalltalk,nil,_st, globals){
+define("tide/Tide-Amber-Examples", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Web"], function(smalltalk,nil,_st, globals){
 smalltalk.addPackage('Tide-Amber-Examples');
-smalltalk.packages["Tide-Amber-Examples"].transport = {"type":"amd","amdNamespace":"timetravel"};
+smalltalk.packages["Tide-Amber-Examples"].transport = {"type":"amd","amdNamespace":"tide"};
 
 smalltalk.addClass('TDCounterWidget', globals.Widget, ['counter', 'header'], 'Tide-Amber-Examples');
 smalltalk.addMethod(

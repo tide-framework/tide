@@ -1,6 +1,6 @@
-define("timetravel/Tide-Amber-Exceptions", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Exceptions"], function(smalltalk,nil,_st, globals){
+define("tide/Tide-Amber-Exceptions", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Exceptions"], function(smalltalk,nil,_st, globals){
 smalltalk.addPackage('Tide-Amber-Exceptions');
-smalltalk.packages["Tide-Amber-Exceptions"].transport = {"type":"amd","amdNamespace":"timetravel"};
+smalltalk.packages["Tide-Amber-Exceptions"].transport = {"type":"amd","amdNamespace":"tide"};
 
 smalltalk.addClass('TDPromiseNotFound', globals.Error, ['selector'], 'Tide-Amber-Exceptions');
 smalltalk.addMethod(

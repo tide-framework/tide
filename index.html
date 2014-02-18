@@ -12,21 +12,20 @@
 <script type='text/javascript'>
 
   require.config({ paths: {
-        'timetravel': 'Tide-Amber/js',
-        'timetravel/_source': 'Tide-Amber/st'
+        'tide': 'Tide-Amber/src'
   }});
 
   require(
         [
   		"amber/devel", 
   		"amber/helpers",
-  		"timetravel/Tide-Amber-Core",
-  		"timetravel/Tide-Amber-Exceptions",
-  		"timetravel/Tide-Amber-Examples",
-  		"timetravel/Tide-Amber-Tests"
+  		"tide/Tide-Amber-Core",
+  		"tide/Tide-Amber-Exceptions",
+  		"tide/Tide-Amber-Examples",
+  		"tide/Tide-Amber-Tests"
   	],
         function (smalltalk) {
-            smalltalk.initialize({defaultAmdNamespace: 'timetravel'});
+            smalltalk.initialize({defaultAmdNamespace: 'tide'});
             smalltalk.popupHelios();
         }
   );

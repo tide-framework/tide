@@ -1,6 +1,6 @@
-define("timetravel/Tide-Amber-Tests", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/SUnit", "timetravel/Tide-Amber-Core"], function(smalltalk,nil,_st){
+define("tide/Tide-Amber-Tests", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_core/SUnit", "tide/Tide-Amber-Core"], function(smalltalk,nil,_st){
 smalltalk.addPackage('Tide-Amber-Tests');
-smalltalk.packages["Tide-Amber-Tests"].transport = {"type":"amd","amdNamespace":"timetravel"};
+smalltalk.packages["Tide-Amber-Tests"].transport = {"type":"amd","amdNamespace":"tide"};
 
 smalltalk.addClass('TDClientTest', smalltalk.TestCase, ['client'], 'Tide-Amber-Tests');
 smalltalk.addMethod(

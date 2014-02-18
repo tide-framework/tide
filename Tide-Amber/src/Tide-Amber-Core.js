@@ -1,6 +1,6 @@
-define("timetravel/Tide-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Objects", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st, globals){
+define("tide/Tide-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "amber_vm/globals", "amber_core/Kernel-Objects", "amber_core/Kernel-Methods", "amber_core/Kernel-Collections", "amber_core/Kernel-Infrastructure"], function(smalltalk,nil,_st, globals){
 smalltalk.addPackage('Tide-Amber-Core');
-smalltalk.packages["Tide-Amber-Core"].transport = {"type":"amd","amdNamespace":"timetravel"};
+smalltalk.packages["Tide-Amber-Core"].transport = {"type":"amd","amdNamespace":"tide"};
 
 smalltalk.addClass('TDAction', globals.Object, ['promise', 'resolved'], 'Tide-Amber-Core');
 smalltalk.addMethod(
