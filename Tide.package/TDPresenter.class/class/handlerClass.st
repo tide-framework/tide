@@ -1,3 +1,3 @@
 registration
 handlerClass
-	^ TDPresenterHandler
+	^ TDPresenterExceptionHandler
