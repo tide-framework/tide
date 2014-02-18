@@ -1,5 +1,5 @@
 sessions handling
 newSession
 	| session |
-	session := TDSession new.
+	session := self sessionClass new.
 	^ sessions at: session id put: session
