@@ -8,6 +8,9 @@
 		"startUp" : "NicolasPetton 10/10/2013 15:38",
 		"stop" : "NicolasPetton 10/10/2013 15:36" },
 	"instance" : {
+		"beDeploymentMode" : "NicolasPetton 2/19/2014 16:12",
+		"beDevelopmentMode" : "NicolasPetton 2/19/2014 16:11",
 		"dispatcher" : "NicolasPetton 2/12/2014 14:28",
 		"dispatcher:" : "NicolasPetton 7/26/2012 12:18",
-		"handleRequest:" : "NicolasPetton 10/17/2012 18:34" } }
+		"handleRequest:" : "NicolasPetton 10/17/2012 18:34",
+		"isDevelopmentMode" : "NicolasPetton 2/19/2014 16:11" } }

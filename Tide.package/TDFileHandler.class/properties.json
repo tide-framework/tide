@@ -7,7 +7,7 @@
 	"commentStamp" : "NicolasPetton 2/13/2014 17:50",
 	"instvars" : [
 		"directoryPath" ],
-	"name" : "TDAmberFileHandler",
+	"name" : "TDFileHandler",
 	"pools" : [
 		 ],
 	"super" : "TDHandler",
