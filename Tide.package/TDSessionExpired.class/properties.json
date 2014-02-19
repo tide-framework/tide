@@ -10,5 +10,5 @@
 	"name" : "TDSessionExpired",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Error",
 	"type" : "normal" }
