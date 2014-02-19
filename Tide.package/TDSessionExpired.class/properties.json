@@ -1,0 +1,14 @@
+{
+	"category" : "Tide-Exceptions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "NicolasPetton 2/19/2014 16:21",
+	"instvars" : [
+		"session" ],
+	"name" : "TDSessionExpired",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

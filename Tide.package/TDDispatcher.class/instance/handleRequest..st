@@ -4,7 +4,7 @@ handleRequest: aRequest
 		[
 			self dispatch: aRequest
 		]	
-			on: TTSessionNotFound 
+			on: TDSessionExpired
 			do: [ :ex | self handleExpired: aRequest ]
 	]
 		on: TDResponseNotification 
