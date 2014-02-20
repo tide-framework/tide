@@ -1,0 +1,3 @@
+registration
+registerDefault
+	TDDispatcher default registerDefaultHandler: self
