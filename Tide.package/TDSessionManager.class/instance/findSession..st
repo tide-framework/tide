@@ -9,6 +9,6 @@ findSession: anId
 		self removeSession: session.
 		TDSessionExpired new
 			session: session;
-			signal' ].
+			signal ].
 	
 	^ session
