@@ -6,7 +6,8 @@
 		"setupDefault" : "NicolasPetton 2/19/2014 16:09" },
 	"instance" : {
 		"callbackField" : "NicolasPetton 10/18/2012 14:37",
-		"dispatch:" : "NicolasPetton 10/17/2012 18:36",
+		"defaultHandler" : "NicolasPetton 2/20/2014 16:17",
+		"dispatch:" : "NicolasPetton 2/20/2014 16:18",
 		"handleExpired:" : "NicolasPetton 10/18/2012 16:43",
 		"handleRequest:" : "NicolasPetton 2/19/2014 16:22",
 		"handleResponse:" : "NicolasPetton 10/18/2012 14:12",
@@ -17,6 +18,7 @@
 		"preferenceAt:ifAbsentPut:" : "NicolasPetton 10/18/2012 14:07",
 		"preferenceAt:put:" : "NicolasPetton 10/18/2012 13:59",
 		"preferences" : "NicolasPetton 10/18/2012 13:58",
+		"registerDefaultHandler:" : "NicolasPetton 2/20/2014 16:17",
 		"registerHandler:" : "NicolasPetton 7/26/2012 17:38",
 		"sessionCookie" : "NicolasPetton 10/18/2012 14:07",
 		"sessionCookie:" : "NicolasPetton 10/18/2012 14:08",
