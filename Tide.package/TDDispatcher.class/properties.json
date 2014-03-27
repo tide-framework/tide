@@ -8,7 +8,6 @@
 	"instvars" : [
 		"sessionManager",
 		"handlers",
-		"defaultHandler",
 		"preferences" ],
 	"name" : "TDDispatcher",
 	"pools" : [
