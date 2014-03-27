@@ -2,10 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"collection" : "NicolasPetton 11/6/2013 18:03",
 		"count" : "NicolasPetton 9/19/2012 14:50",
 		"decrease" : "NicolasPetton 9/19/2012 15:10",
 		"increase" : "NicolasPetton 9/19/2012 15:10",
-		"increaseBy:" : "NicolasPetton 1/29/2014 18:10",
-		"initialize" : "NicolasPetton 11/6/2013 17:48",
-		"otherCounter" : "NicolasPetton 2/12/2014 14:25" } }
+		"initialize" : "NicolasPetton 11/6/2013 17:48" } }
