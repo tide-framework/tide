@@ -23,7 +23,7 @@ Tide is pretty young and probably not ready for prime-time yet. Here's how to in
     cd myproject
 
     # Get a Pharo image
-    curl get.pharo.org | bash
+    curl get.pharo.org/30+vm | bash
 
     # Clone the tide repository
     mkdir repository
