@@ -13,3 +13,39 @@ Tide's mission is to make Pharo/Amber communication a breeze:
 In addition, Tide is a small layer built on top of Zinc and Amber. It is quite fast and simple to understand.
 
 Handcrafted with love by Nico & Esteban @RMoD.
+
+##Installing
+
+Tide is pretty young and probably not ready for prime-time yet. Here's how to install it:
+
+    # Creates the project structure
+    mkdir myproject
+    cd myproject
+
+    # Get a Pharo image
+    curl get.pharo.org | bash
+
+    # Clone the tide repository
+    mkdir repository
+    cd repository
+    git clone git@github.com:tide-framework/tide.git
+
+    # Install all dependencies using Bower
+    cd tide
+    bower install
+
+
+Open the Pharo image, then evaluate:
+
+    BaselineOfTide load.
+    TDServer startOn: 7777.
+
+
+Open your web browser on http://localhost:7777/tide/repository/tide/index.html
+
+The Helios IDE will open. To try the counter example, evaluate in Helios:
+
+    TDCounterWidget new render
+
+
+
