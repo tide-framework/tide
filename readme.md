@@ -141,7 +141,7 @@ Open a workspace:
 * In that window, evaluate: (you type the thing, select the text and then right click and select "Do It" from the menu.
 
 
-    BaselineOfTide load.
+    `BaselineOfTide load.`
 
 * The code of Tide loads as the progress bar does show.
 
@@ -150,7 +150,7 @@ Start the Tide server:
 * In the workspace, proceed as for the previous workspace action but with:
 
 
-    TDServer startOn: 7777.
+    `TDServer startOn: 7777.`
 
 * The Tide server is now running on port 7777.
 
