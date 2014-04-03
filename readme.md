@@ -162,7 +162,7 @@ Save your Pharo image (otherwise, if you close it, you'll have to redo all of th
 
 Open your web browser and go to: 
 
-    http://localhost:7777/myproject/repository/tide/index.html
+    http://localhost:7777/tide/repository/tide/index.html
 
 The Helios IDE will open. To try the counter example, evaluate in Helios (Type it in a Workspace and choose to Do It.)
 
