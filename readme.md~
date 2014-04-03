@@ -120,15 +120,15 @@ You'll do that by using Monticello, the Pharo package and version control manage
 
 Open Monticello:
 
-* Click on the background of the Pharo window
-* In the World menu that appears, click on Monticello Browser)
-* Click on +Repository
-* Select "filetree://"
-* In the file/folder selection window that appears, select myproject/repository/tide
-* Click ok
-* A window opens with BaselineOfTide and Tide in the left column.  (if you do it wrong, these will be empty)
-* Click on "BaselineOfTide.package" in the right column
-* Click the "Load" button in the top bar (a little briefly shows up while BaselineOfTide loads inside the image)
+    * Click on the background of the Pharo window
+    * In the World menu that appears, click on Monticello Browser)
+    * Click on +Repository
+    * Select "filetree://"
+    * In the file/folder selection window that appears, select myproject/repository/tide
+    * Click ok
+    * A window opens with BaselineOfTide and Tide in the left column.  (if you do it wrong, these will be empty)
+    * Click on "BaselineOfTide.package" in the right column
+    * Click the "Load" button in the top bar (a little briefly shows up while BaselineOfTide loads inside the image)
 
 You are done with Monticello.
 
@@ -136,27 +136,26 @@ Now, let's install the code from the Baseline and repository you just configured
 
 Open a workspace:
 
-* Click on the background of the Pharo window
-* In the World menu that appears, click on Workspace
-* In that window, evaluate: (you type the thing, select the text and then right click and select "Do It" from the menu.
+    * Click on the background of the Pharo window
+    * In the World menu that appears, click on Workspace
+    * In that window, evaluate: (you type the thing, select the text and then right click and select "Do It" from the menu.
 
     BaselineOfTide load.
 
-* The code of Tide loads as the progress bar does show.
+    * The code of Tide loads as the progress bar does show.
 
 Start the Tide server:
 
-* In the workspace, proceed as for the previous workspace action but with:
-
+    * In the workspace, proceed as for the previous workspace action but with:
     TDServer startOn: 7777.
 
-* The Tide server is now running on port 7777.
+    * The Tide server is now running on port 7777.
 
 Save your Pharo image (otherwise, if you close it, you'll have to redo all of the install of code in the image:
 
-* Click on the background
-* In the World menu, choose Save
-* Your image is written to disk with the proper setup inside it
+    * Click on the background
+    * In the World menu, choose Save
+    * Your image is written to disk with the proper setup inside it
 
 Open your web browser and go to: 
 
