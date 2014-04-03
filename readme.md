@@ -140,6 +140,7 @@ Open a workspace:
 * In the World menu that appears, click on Workspace
 * In that window, evaluate: (you type the thing, select the text and then right click and select "Do It" from the menu.
 
+
     BaselineOfTide load.
 
 * The code of Tide loads as the progress bar does show.
@@ -147,6 +148,7 @@ Open a workspace:
 Start the Tide server:
 
 * In the workspace, proceed as for the previous workspace action but with:
+
 
     TDServer startOn: 7777.
 
