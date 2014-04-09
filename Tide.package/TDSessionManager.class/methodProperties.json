@@ -9,10 +9,10 @@
 		"initialize" : "NicolasPetton 7/26/2012 17:26",
 		"newSession" : "NicolasPetton 2/18/2014 16:25",
 		"removeAllSessions" : "NicolasPetton 7/26/2012 18:01",
-		"removeExpiredSession" : "NicolasPetton 10/17/2012 17:07",
-		"removeSession:" : "NicolasPetton 10/17/2012 17:34",
+		"removeExpiredSessions" : "NicolasPetton 4/9/2014 13:57",
+		"removeSession:" : "NicolasPetton 4/9/2014 13:59",
 		"sessionClass" : "NicolasPetton 2/18/2014 16:25",
 		"sessionClass:" : "NicolasPetton 2/18/2014 16:24",
 		"sessions" : "NicolasPetton 7/26/2012 18:02",
-		"startSessionExpirationProcess" : "NicolasPetton 10/17/2012 17:08",
-		"stopSessionExpirationProcess" : "NicolasPetton 10/17/2012 17:07" } }
+		"startSessionExpirationProcess" : "NicolasPetton 4/9/2014 13:57",
+		"stopSessionExpirationProcess" : "NicolasPetton 4/9/2014 13:57" } }

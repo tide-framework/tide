@@ -1,3 +1,3 @@
 sessions handling
 removeSession: aSession 
-	self sessions removeKey: aSession id ifAbsent: [ ]
+	sessions removeKey: aSession id ifAbsent: [ ]

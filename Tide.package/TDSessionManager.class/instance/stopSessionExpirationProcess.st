@@ -2,4 +2,5 @@ sessions handling
 stopSessionExpirationProcess 
 	sessionExpirationProcess 
 		ifNotNil: [ :process |
-			process terminate ]
+			process terminate.
+			process := nil ]
