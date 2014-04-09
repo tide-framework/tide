@@ -257,8 +257,9 @@ handleFutureMessage: aMessage
 	| selector |
 	selector := aMessage selector asString.
 	
-	(state at: selector) 
-		ifNotNil: [ ^ state at: selector ].
+	state 
+		at: selector 
+		ifPresent: [ :value | ^ value ].
 
 	(actions at: selector) 
 		ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].
@@ -273,7 +274,7 @@ then: aBlock
 !TDClient methodsFor: 'initialization'!
 
 connect
-	self isConnected ifFalse: [ self update ]
+	self isConnected ifFalse: [ self initialRequest ]
 !
 
 initialize
@@ -297,7 +298,7 @@ isConnected
 
 !TDClient methodsFor: 'updating'!
 
-update
+initialRequest
 	| promise |
 	promise := self future.
 	promise setAction: ((TDRequestAction on: promise)
@@ -492,16 +493,6 @@ xxxClient: aClient
 	client := aClient
 ! !
 
-!TDProxy methodsFor: 'as yet unclassified'!
-
-inspectOn: anInspector
-	anInspector
-		setLabel: self printString;
-		setVariables: #{
-			'client' -> client
-		}
-! !
-
 !TDProxy methodsFor: 'converting'!
 
 asTideArgument
@@ -522,6 +513,16 @@ initialize
 	super initialize.
 	"self inheritedSelectors do: [ :each |
 		self removeSelector: each asSelector ]"
+! !
+
+!TDProxy methodsFor: 'inspecting'!
+
+inspectOn: anInspector
+	anInspector
+		setLabel: self printString;
+		setVariables: #{
+			'client' -> client
+		}
 ! !
 
 !TDProxy methodsFor: 'private'!

@@ -577,12 +577,12 @@ return smalltalk.withContext(function($ctx1) {
 var $1;
 $1=self._isConnected();
 if(! smalltalk.assert($1)){
-self._update();
+self._initialRequest();
 };
-return self}, function($ctx1) {$ctx1.fill(self,"connect",{},smalltalk.TDClient)})},
+return self}, function($ctx1) {$ctx1.fill(self,"connect",{},globals.TDClient)})},
 args: [],
-source: "connect\x0a\x09self isConnected ifFalse: [ self update ]",
-messageSends: ["ifFalse:", "isConnected", "update"],
+source: "connect\x0a\x09self isConnected ifFalse: [ self initialRequest ]",
+messageSends: ["ifFalse:", "isConnected", "initialRequest"],
 referencedClasses: []
 }),
 globals.TDClient);
@@ -639,32 +639,30 @@ fn: function (aMessage){
 var self=this;
 var selector;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5,$6;
+var $1,$2,$3,$4,$receiver;
+var $early={};
+try {
 $1=_st(aMessage)._selector();
 $ctx1.sendIdx["selector"]=1;
 selector=_st($1)._asString();
-$2=_st(self["@state"])._at_(selector);
-$ctx1.sendIdx["at:"]=1;
+_st(self["@state"])._at_ifPresent_(selector,(function(value){
+throw $early=[value];
+}));
+$2=_st(self["@actions"])._at_(selector);
 if(($receiver = $2) == nil || $receiver == null){
 $2;
 } else {
-$3=_st(self["@state"])._at_(selector);
-$ctx1.sendIdx["at:"]=2;
+$3=_st(self._future())._setRequestActionFromMessage_(aMessage);
 return $3;
 };
-$4=_st(self["@actions"])._at_(selector);
-if(($receiver = $4) == nil || $receiver == null){
-$4;
-} else {
-$5=_st(self._future())._setRequestActionFromMessage_(aMessage);
-return $5;
-};
-$6=self._promiseNotFound_(_st(aMessage)._selector());
-return $6;
+$4=self._promiseNotFound_(_st(aMessage)._selector());
+return $4;
+}
+catch(e) {if(e===$early)return e[0]; throw e}
 }, function($ctx1) {$ctx1.fill(self,"handleFutureMessage:",{aMessage:aMessage,selector:selector},globals.TDClient)})},
 args: ["aMessage"],
-source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09(state at: selector) \x0a\x09\x09ifNotNil: [ ^ state at: selector ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self promiseNotFound: aMessage selector",
-messageSends: ["asString", "selector", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "promiseNotFound:"],
+source: "handleFutureMessage: aMessage\x0a\x09| selector |\x0a\x09selector := aMessage selector asString.\x0a\x09\x0a\x09state \x0a\x09\x09at: selector \x0a\x09\x09ifPresent: [ :value | ^ value ].\x0a\x0a\x09(actions at: selector) \x0a\x09\x09ifNotNil: [ ^ self future setRequestActionFromMessage: aMessage ].\x0a\x0a\x09^ self promiseNotFound: aMessage selector",
+messageSends: ["asString", "selector", "at:ifPresent:", "ifNotNil:", "at:", "setRequestActionFromMessage:", "future", "promiseNotFound:"],
 referencedClasses: []
 }),
 globals.TDClient);
@@ -683,6 +681,34 @@ args: [],
 source: "id\x0a\x09^ id",
 messageSends: [],
 referencedClasses: []
+}),
+globals.TDClient);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "initialRequest",
+protocol: 'updating',
+fn: function (){
+var self=this;
+var promise;
+function $TDRequestAction(){return globals.TDRequestAction||(typeof TDRequestAction=="undefined"?nil:TDRequestAction)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+promise=self._future();
+$ctx1.sendIdx["future"]=1;
+$1=_st($TDRequestAction())._on_(promise);
+_st($1)._requestUrl_(self._path());
+$2=_st($1)._yourself();
+_st(promise)._setAction_($2);
+_st(self._future())._then_((function(){
+self["@connected"]=true;
+return self["@connected"];
+}));
+return self}, function($ctx1) {$ctx1.fill(self,"initialRequest",{promise:promise},globals.TDClient)})},
+args: [],
+source: "initialRequest\x0a\x09| promise |\x0a\x09promise := self future.\x0a\x09promise setAction: ((TDRequestAction on: promise)\x0a\x09\x09requestUrl: self path;\x0a\x09\x09yourself).\x0a\x09self future then: [ connected := true ]",
+messageSends: ["future", "setAction:", "requestUrl:", "on:", "path", "yourself", "then:"],
+referencedClasses: ["TDRequestAction"]
 }),
 globals.TDClient);
 
@@ -863,34 +889,6 @@ args: ["aBlock"],
 source: "then: aBlock\x0a\x09self future then: aBlock",
 messageSends: ["then:", "future"],
 referencedClasses: []
-}),
-globals.TDClient);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "update",
-protocol: 'updating',
-fn: function (){
-var self=this;
-var promise;
-function $TDRequestAction(){return globals.TDRequestAction||(typeof TDRequestAction=="undefined"?nil:TDRequestAction)}
-return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
-promise=self._future();
-$ctx1.sendIdx["future"]=1;
-$1=_st($TDRequestAction())._on_(promise);
-_st($1)._requestUrl_(self._path());
-$2=_st($1)._yourself();
-_st(promise)._setAction_($2);
-_st(self._future())._then_((function(){
-self["@connected"]=true;
-return self["@connected"];
-}));
-return self}, function($ctx1) {$ctx1.fill(self,"update",{promise:promise},globals.TDClient)})},
-args: [],
-source: "update\x0a\x09| promise |\x0a\x09promise := self future.\x0a\x09promise setAction: ((TDRequestAction on: promise)\x0a\x09\x09requestUrl: self path;\x0a\x09\x09yourself).\x0a\x09self future then: [ connected := true ]",
-messageSends: ["future", "setAction:", "requestUrl:", "on:", "path", "yourself", "then:"],
-referencedClasses: ["TDRequestAction"]
 }),
 globals.TDClient);
 
@@ -1545,7 +1543,7 @@ globals.TDProxy);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "inspectOn:",
-protocol: 'as yet unclassified',
+protocol: 'inspecting',
 fn: function (anInspector){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
