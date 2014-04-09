@@ -1,6 +1,6 @@
 private
 actionsFor: anObject
-	^ ((self lookupSelectorsWithPragma: #action for: anObject)
-			collect: [ :each | 
-				each -> (self session registerCallback: each receiver: anObject) ])
-					asDictionary 
+	^(((Pragma allNamed: #action from: anObject class to: Object)
+		collect: [ :each | each method selector ]) asSet
+			collect: [ :each | each -> (self session registerCallback: each receiver: anObject) ])
+				asDictionary
