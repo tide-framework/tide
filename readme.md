@@ -27,7 +27,7 @@ On Windows, download the msi and execute it. Install in an easy location(e.g. c:
 
 Edit your ~/.profile file to add the nodejs path:
 
-    export PATH=/c/MinGW/bin:/c/nodejs:$PATH
+    $ export PATH=/c/MinGW/bin:/c/nodejs:$PATH
 
 so that node and npm can be found.
 
@@ -35,14 +35,14 @@ For using the tools from a Windows command prompt, your are on your own.
 
 ###Check that it works
 
-    node
+    $ node
 
 should lead you to the node REPL.
 
 Hit Ctrl-C twice to exit.
 
 
-    npm help
+    $ npm help
 
 should show you the help of npm.
 
@@ -54,18 +54,18 @@ You can either install it as a local component or a global one.
 
 To install as a global component (recommended option):
 
-    npm -g install bower@1.2.6
+    $ npm -g install bower@1.2.6
 
 The @1.2.6 suffix means that you want that very version.
 The newest version has a bug when it installs Amber.
 
 If you have a newer version, remove it with
 
-    npm -g remove bower
+    $ npm -g remove bower
 
 or 
 
-    npm -g uninstall bower
+    $ npm -g uninstall bower
 
 Omit the -g if you want to install in the current folder. (you are on your own then).
 
@@ -74,100 +74,65 @@ Omit the -g if you want to install in the current folder. (you are on your own t
 Tide is pretty young and probably not ready for prime-time yet. Here's how to install it:
 
 ### Create the project structure
-    mkdir myproject
-    cd myproject
+    $ mkdir myproject
+    $ cd myproject
 
 ### Get a Pharo image
-    curl get.pharo.org/30+vm | bash
+    $ curl get.pharo.org/30+vm | bash
 
-### Clone the tide repository
-    mkdir repository
-    cd repository
+### Open the Pharo image
 
-If you are a commiter do:
+Open the Pharo image (which lives in `myproject/`):
 
-    git clone git@github.com:tide-framework/tide.git
+    $ ./pharo-ui Pharo.image
 
-If not, do:
+(If there is only one .image file in the folder, `./pharo-ui` will work, but not if there are more than one).
 
-    git clone https://github.com:tide-framework/tide.git
-
-
-### Install all dependencies using Bower
-
-    cd tide
-    bower install
-
-Bower installs the dependencies in a subfolder named 
-
-    ./bower_components
-
-Don't mess with that folder.
-
-The frontend installation bit should be over.
-
-All of the definitions of the sample project are in
-
-Open the Pharo image (which lives in myproject/):
-
-    ./pharo-ui Pharo.image
-
-(If there is only one .image file in the folder, ./pharo-ui will work, but not if there are more than one).
+### Preparing the Pharo image
 
 Once you get the Pharo window open, you have to install the Tide backend part. This means bringing the Pharo code you cloned from GitHub into the Pharo image.
 
-You'll do that by using Monticello, the Pharo package and version control manager).
-
-Open Monticello:
-
 * Click on the background of the Pharo window
-* In the World menu that appears, click on Monticello Browser)
-* Click on +Repository
-* Select "filetree://"
-* In the file/folder selection window that appears, select myproject/repository/tide
-* Click ok
-* A window opens with BaselineOfTide and Tide in the left column.  (if you do it wrong, these will be empty)
-* Click on "BaselineOfTide.package" in the right column
-* Click the "Load" button in the top bar (a little briefly shows up while BaselineOfTide loads inside the image)
+* In the World menu that appears, click on `Workspace`
+* In that window, evaluate: (you type the thing, select the text and then right click and select "Do It" from the menu).
 
-You are done with Monticello.
+```
+Metacello new
+  configuration: 'Tide';
+  version: #development;
+  repository: 'http://www.smalltalkhub.com/mc/Pharo/MetaRepoForPharo30/main';
+  load.
+```
 
-Now, let's install the code from the Baseline and repository you just configured.
+When this is finished, evaluate:
 
-Open a workspace:
+    TDDispatcher tideIndexPageUrl inspect
 
-* Click on the background of the Pharo window
-* In the World menu that appears, click on Workspace
-* In that window, evaluate: (you type the thing, select the text and then right click and select "Do It" from the menu.
+When first executed, you will get an error saying you must execute `bower install` in a particular directory. Open a terminal, change to the right directory, and execute:
 
+    $ bower install
 
-    `BaselineOfTide load.`
+Back in the Pharo window, close the error message and evaluate the same instruction again:
 
-* The code of Tide loads as the progress bar does show.
+    TDDispatcher tideIndexPageUrl inspect
 
-Start the Tide server:
+This should give you the URL at which your web browser should be pointed to. Now copy this URL, open your web browser and paste it in the browser's address bar.
 
-* In the workspace, proceed as for the previous workspace action but with:
+The Helios IDE will open (if your web browser allows pop-ups). To try the counter example, evaluate in Helios (Type it in a Workspace and choose to `Do It`.)
 
+    TDCounterWidget new render
 
-    `TDServer startOn: 7777.`
+When you press the `Do It` button, the browser window at which you pasted the URL will now contain a counter. You now have a working install with Amber and Pharo talking together.
 
-* The Tide server is now running on port 7777.
+Save your Pharo image:
 
-Save your Pharo image (otherwise, if you close it, you'll have to redo all of the install of code in the image:
-
+* Switch back to the Pharo window
 * Click on the background
 * In the World menu, choose Save
 * Your image is written to disk with the proper setup inside it
 
-Open your web browser and go to: 
+### Changing the default port
 
-(http://localhost:7777/tide/repository/tide/index.html)
+If you don't like the default port, you can change it (to e.g., 7777) by evaluating:
 
-The Helios IDE will open. To try the counter example, evaluate in Helios (Type it in a Workspace and choose to Do It.)
-
-    TDCounterWidget new render
-
-You now have a working install with Amber and Pharo talking together.
-
-
+    TDServer startOn: 7777. "optional step"
