@@ -2,7 +2,10 @@
 	"class" : {
 		 },
 	"instance" : {
+		"asLiteralPresenter" : "NicolasPetton 4/10/2014 13:35",
 		"asPresenter" : "NicolasPetton 10/22/2013 22:41",
 		"isJsonObject" : "NicolasPetton 1/29/2014 17:51",
+		"literalPresenterClass" : "NicolasPetton 4/10/2014 13:42",
 		"presenterClass" : "NicolasPetton 2/12/2014 14:28",
-		"tidePresenter" : "NicolasPetton 2/12/2014 14:26" } }
+		"tideLiteralPresenter" : "NicolasPetton 4/10/2014 13:34",
+		"tidePresenter" : "NicolasPetton 4/10/2014 13:34" } }

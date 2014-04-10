@@ -1,0 +1,3 @@
+converting
+asLiteralPresenter
+	^ self asPresenter
