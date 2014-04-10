@@ -1,4 +1,6 @@
 private
 stateFor: anObject
-	^ ((self lookupSelectorsWithPragma: #state for:  anObject) collect: [ :each |
-			each -> (anObject perform: each) ]) asDictionary
+	^(((Pragma allNamed: #state from: anObject class to: Object)
+		collect: [ :each | each method selector ]) asSet collect: [ :each | 
+			each -> (anObject perform: each) ])
+				asDictionary

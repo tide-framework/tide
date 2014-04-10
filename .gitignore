@@ -2,3 +2,4 @@ package-cache
 bower_components
 Pharo*
 PharoDebug.log
+/readme.html
