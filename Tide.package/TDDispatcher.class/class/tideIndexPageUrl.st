@@ -10,6 +10,6 @@ tideIndexPageUrl
 	tideAmberLocation := self tideAmberLocation.
 	(tideAmberLocation childNames includes: 'bower_components')
 		ifFalse: [ self error: 'You must execute "bower install" in ' , tideAmberLocation pathString ].
-	tideFileHandlerServingDirectory := self fileHandler fileReference.
-	indexPagePath := String streamContents: [ :stream | (tideAmberLocation resolve relativeTo: tideFileHandlerServingDirectory absolutePath) segments do: [:segment | stream nextPutAll: segment ] separatedBy: [stream nextPut: $/]].
+	tideFileHandlerServingDirectory := FileSystem workingDirectory resolve: self fileHandler fileReference.
+	indexPagePath := String streamContents: [ :stream | (tideAmberLocation resolve relativeTo: tideFileHandlerServingDirectory) segments do: [:segment | stream nextPutAll: segment ] separatedBy: [stream nextPut: $/]].
 	^ self servedUrl / indexPagePath / 'index.html'
