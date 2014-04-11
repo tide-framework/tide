@@ -2,7 +2,24 @@ define("tide/Tide-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/
 smalltalk.addPackage('Tide-Amber-Core');
 smalltalk.packages["Tide-Amber-Core"].transport = {"type":"amd","amdNamespace":"tide"};
 
-smalltalk.addClass('TDAction', globals.Object, ['promise', 'resolved'], 'Tide-Amber-Core');
+smalltalk.addClass('TDAction', globals.Object, ['promise', 'resolved', 'failure'], 'Tide-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "beFailure",
+protocol: 'resolving',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self["@failure"]=true;
+_st(self._client())._flushPromises();
+return self}, function($ctx1) {$ctx1.fill(self,"beFailure",{},globals.TDAction)})},
+args: [],
+source: "beFailure\x0a\x09failure := true.\x0a\x09self client flushPromises",
+messageSends: ["flushPromises", "client"],
+referencedClasses: []
+}),
+globals.TDAction);
+
 smalltalk.addMethod(
 smalltalk.method({
 selector: "beResolved",
@@ -10,12 +27,17 @@ protocol: 'resolving',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@failure"];
+if(smalltalk.assert($1)){
+return self;
+};
 self["@resolved"]=true;
 _st(self._promise())._nextTravel();
 return self}, function($ctx1) {$ctx1.fill(self,"beResolved",{},globals.TDAction)})},
 args: [],
-source: "beResolved\x0a\x09resolved := true.\x0a\x09self promise nextTravel",
-messageSends: ["nextTravel", "promise", "beResolved", "beResolved"],
+source: "beResolved\x0a\x09failure ifTrue: [ ^ self ].\x0a\x09resolved := true.\x0a\x09self promise nextTravel",
+messageSends: ["ifTrue:", "nextTravel", "promise"],
 referencedClasses: []
 }),
 globals.TDAction);
@@ -34,6 +56,23 @@ return $1;
 args: [],
 source: "client\x0a\x09^ self promise client",
 messageSends: ["client", "promise", "client", "client"],
+referencedClasses: []
+}),
+globals.TDAction);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "initialize",
+protocol: 'initialization',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+globals.TDAction.superclass.fn.prototype._initialize.apply(_st(self), []);
+self["@failure"]=false;
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TDAction)})},
+args: [],
+source: "initialize\x0a\x09super initialize.\x0a\x0a\x09failure := false",
+messageSends: ["initialize"],
 referencedClasses: []
 }),
 globals.TDAction);
@@ -224,29 +263,13 @@ globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "flushPromises",
-protocol: 'error handling',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(_st(self._promise())._client())._flushPromises();
-return self}, function($ctx1) {$ctx1.fill(self,"flushPromises",{},globals.TDRequestAction)})},
-args: [],
-source: "flushPromises\x0a\x09self promise client flushPromises",
-messageSends: ["flushPromises", "client", "promise", "flushPromises"],
-referencedClasses: []
-}),
-globals.TDRequestAction);
-
-smalltalk.addMethod(
-smalltalk.method({
 selector: "handleError:",
 protocol: 'error handling',
 fn: function (anError){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1;
-self._flushPromises();
+var $1,$receiver;
+self._beFailure();
 $1=_st(self._promise())._errorHandler();
 if(($receiver = $1) == nil || $receiver == null){
 _st(anError)._signal();
@@ -257,8 +280,8 @@ _st(handler)._failure_(anError);
 };
 return self}, function($ctx1) {$ctx1.fill(self,"handleError:",{anError:anError},globals.TDRequestAction)})},
 args: ["anError"],
-source: "handleError: anError\x0a\x09self flushPromises.\x0a\x09self promise errorHandler \x0a\x09\x09ifNotNil: [ :handler | handler failure: anError ]\x0a\x09\x09ifNil: [ anError signal ]",
-messageSends: ["flushPromises", "ifNotNil:ifNil:", "errorHandler", "promise", "failure:", "signal", "handleError:"],
+source: "handleError: anError\x0a\x09self beFailure.\x0a\x09self promise errorHandler \x0a\x09\x09ifNotNil: [ :handler | handler failure: anError ]\x0a\x09\x09ifNil: [ anError signal ]",
+messageSends: ["beFailure", "ifNotNil:ifNil:", "errorHandler", "promise", "failure:", "signal"],
 referencedClasses: []
 }),
 globals.TDRequestAction);
