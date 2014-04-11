@@ -87,7 +87,12 @@ requestUrl: aString
 
 !TDRequestAction methodsFor: 'error handling'!
 
+flushPromises
+	self promise client flushPromises
+!
+
 handleError: anError
+	self flushPromises.
 	self promise errorHandler 
 		ifNotNil: [ :handler | handler failure: anError ]
 		ifNil: [ anError signal ]
@@ -100,9 +105,7 @@ requestError: anObject
 		xhr: anObject;
 		yourself.
 		
-	self promise errorHandler 
-		ifNotNil: [ :handler | handler failure: error ]
-		ifNil: [ error signal ].
+	self handleError: error
 !
 
 sessionNotFound
