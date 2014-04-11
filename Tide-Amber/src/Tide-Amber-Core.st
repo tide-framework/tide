@@ -87,10 +87,22 @@ requestUrl: aString
 
 !TDRequestAction methodsFor: 'error handling'!
 
+handleError: anError
+	self promise errorHandler 
+		ifNotNil: [ :handler | handler failure: anError ]
+		ifNil: [ anError signal ]
+!
+
 requestError: anObject
-	TDRequestError new
+	| error |
+	
+	error := TDRequestError new
 		xhr: anObject;
-		signal
+		yourself.
+		
+	self promise errorHandler 
+		ifNotNil: [ :handler | handler failure: error ]
+		ifNil: [ error signal ].
 !
 
 sessionNotFound
@@ -112,9 +124,7 @@ serverErrorFromJson: json
 		messageText: serverError messageText;
 		yourself.
 		
-	self promise errorHandler 
-		ifNotNil: [ :handler | handler failure: error ]
-		ifNil: [ error signal ].
+	self handleError: error
 !
 
 updateClientFromJson: json
