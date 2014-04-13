@@ -1,6 +1,6 @@
 Smalltalk createPackage: 'Tide-Amber-Core'!
 Object subclass: #TDAction
-	instanceVariableNames: 'promise resolved'
+	instanceVariableNames: 'promise resolved failure'
 	package: 'Tide-Amber-Core'!
 
 !TDAction methodsFor: 'accessing'!
@@ -17,9 +17,23 @@ promise: aPromise
 	promise := aPromise
 ! !
 
+!TDAction methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+
+	failure := false
+! !
+
 !TDAction methodsFor: 'resolving'!
 
+beFailure
+	failure := true.
+	self client flushPromises
+!
+
 beResolved
+	failure ifTrue: [ ^ self ].
 	resolved := true.
 	self promise nextTravel
 !
@@ -87,10 +101,21 @@ requestUrl: aString
 
 !TDRequestAction methodsFor: 'error handling'!
 
+handleError: anError
+	self beFailure.
+	self promise errorHandler 
+		ifNotNil: [ :handler | handler failure: anError ]
+		ifNil: [ anError signal ]
+!
+
 requestError: anObject
-	TDRequestError new
+	| error |
+	
+	error := TDRequestError new
 		xhr: anObject;
-		signal
+		yourself.
+		
+	self handleError: error
 !
 
 sessionNotFound
@@ -112,9 +137,7 @@ serverErrorFromJson: json
 		messageText: serverError messageText;
 		yourself.
 		
-	self promise errorHandler 
-		ifNotNil: [ :handler | handler failure: error ]
-		ifNil: [ error signal ].
+	self handleError: error
 !
 
 updateClientFromJson: json
