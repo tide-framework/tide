@@ -1,0 +1,1 @@
+I am an abstract handler that can create a context with a session during the request handling.

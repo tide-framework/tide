@@ -10,5 +10,5 @@
 	"name" : "TDPresenterHandler",
 	"pools" : [
 		 ],
-	"super" : "TDHandler",
+	"super" : "TDContextHandler",
 	"type" : "normal" }

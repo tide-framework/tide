@@ -1,7 +1,7 @@
 request handling
 handleRequest: aRequest
 	self 
-		withContext: (self contextForRequest: aRequest)
+		withContextForRequest: aRequest
 		do: [ 
 			self session setModifiedOn.
 			self handleCallbackForRequest: aRequest.

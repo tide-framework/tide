@@ -3,8 +3,9 @@
 		"path:" : "NicolasPetton 7/26/2012 12:15" },
 	"instance" : {
 		"canHandleRequest:" : "NicolasPetton 7/26/2012 12:10",
-		"handleRequest:" : "NicolasPetton 7/26/2012 12:14",
+		"handleRequest:" : "NicolasPetton 4/15/2014 13:54",
 		"path" : "NicolasPetton 7/26/2012 12:03",
 		"path:" : "NicolasPetton 7/26/2012 12:04",
 		"register" : "NicolasPetton 2/12/2014 14:28",
+		"respondOkTo:" : "NicolasPetton 4/15/2014 13:53",
 		"unregister" : "NicolasPetton 2/12/2014 14:28" } }
