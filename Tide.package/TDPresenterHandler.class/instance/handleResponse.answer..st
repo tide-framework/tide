@@ -2,7 +2,9 @@ request handling
 handleResponse: statusLine answer: answer
 	| entity response |
 	
-	entity := (ZnStringEntity type: ZnMimeType applicationJson)
+	entity := (ZnStringEntity type: (ZnMimeType applicationJson
+			setCharSetUTF8;
+			yourself))
 		string: answer tidePresenter asJsonString;
 		yourself.	
 	
