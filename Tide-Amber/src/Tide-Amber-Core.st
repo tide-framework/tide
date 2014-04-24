@@ -118,8 +118,8 @@ requestError: anObject
 	self handleError: error
 !
 
-sessionNotFound
-	TDSessionNotFound signal
+sessionError
+	TDSessionErrorHandler handleSessionError
 ! !
 
 !TDRequestAction methodsFor: 'private'!
@@ -166,7 +166,7 @@ request: aString
 				self beResolved ].
 			'error' -> [ :ex |
 				ex status = 408 
-					ifTrue: [ self sessionNotFound ]
+					ifTrue: [ self sessionError ]
 					ifFalse: [ self requestError: ex ] ]
 		}
 !
@@ -586,6 +586,49 @@ on: aPath
 	^ self basicNew
 		xxxClient: (TDClient on: aPath);
 		initialize
+! !
+
+Object subclass: #TDSessionErrorHandler
+	instanceVariableNames: 'hooks'
+	package: 'Tide-Amber-Core'!
+
+!TDSessionErrorHandler methodsFor: 'accessing'!
+
+hooks
+	^ hooks ifNil: [ hooks := OrderedCollection new ]
+! !
+
+!TDSessionErrorHandler methodsFor: 'adding'!
+
+addHook: aBlock
+	self hooks add: aBlock
+! !
+
+!TDSessionErrorHandler methodsFor: 'error handling'!
+
+handleSessionError
+	self hooks ifEmpty: [ TDSessionError signal ].
+	self hooks do: [ :each | each value ]
+! !
+
+TDSessionErrorHandler class instanceVariableNames: 'current'!
+
+!TDSessionErrorHandler class methodsFor: 'accessing'!
+
+current
+	^ current ifNil: [ current := self new ]
+! !
+
+!TDSessionErrorHandler class methodsFor: 'adding'!
+
+onSessionError: aBlock
+	self current addHook: aBlock
+! !
+
+!TDSessionErrorHandler class methodsFor: 'error handling'!
+
+handleSessionError
+	self current handleSessionError
 ! !
 
 !Array methodsFor: '*Tide-Amber-Core'!

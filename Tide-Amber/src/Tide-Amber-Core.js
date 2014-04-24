@@ -343,24 +343,26 @@ protocol: 'resolving',
 fn: function (aString){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1;
-_st(jQuery)._ajax_options_(self._requestUrl(),smalltalk.HashedCollection._from_(["type".__minus_gt("POST"),"dataType".__minus_gt("json"),"data".__minus_gt(smalltalk.HashedCollection._from_(["arguments".__minus_gt(self._data())])),"success".__minus_gt((function(json,textStatus,xhr){
+var $1,$2;
+_st(jQuery)._ajax_options_(self._requestUrl(),globals.HashedCollection._newFromPairs_(["type","POST","dataType","json","data",globals.HashedCollection._newFromPairs_(["arguments",self._data()]),"success",(function(json,textStatus,xhr){
 return smalltalk.withContext(function($ctx2) {
-self._handleResponse_status_(json,_st(xhr)._status());
+$1=_st(xhr)._status();
+$ctx2.sendIdx["status"]=1;
+self._handleResponse_status_(json,$1);
 return self._beResolved();
-}, function($ctx2) {$ctx2.fillBlock({json:json,textStatus:textStatus,xhr:xhr},$ctx1,1)})})),"error".__minus_gt((function(ex){
+}, function($ctx2) {$ctx2.fillBlock({json:json,textStatus:textStatus,xhr:xhr},$ctx1,1)})}),"error",(function(ex){
 return smalltalk.withContext(function($ctx2) {
-$1=_st(_st(ex)._status()).__eq((408));
-if(smalltalk.assert($1)){
-return self._sessionNotFound();
+$2=_st(_st(ex)._status()).__eq((408));
+if(smalltalk.assert($2)){
+return self._sessionError();
 } else {
 return self._requestError_(ex);
 };
-}, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,2)})}))]));
-return self}, function($ctx1) {$ctx1.fill(self,"request:",{aString:aString},smalltalk.TDRequestAction)})},
+}, function($ctx2) {$ctx2.fillBlock({ex:ex},$ctx1,2)})})]));
+return self}, function($ctx1) {$ctx1.fill(self,"request:",{aString:aString},globals.TDRequestAction)})},
 args: ["aString"],
-source: "request: aString\x0a\x09jQuery \x0a\x09\x09ajax: self requestUrl\x0a\x09\x09options: #{\x0a\x09\x09\x09'type' -> 'POST'.\x0a\x09\x09\x09'dataType' -> 'json'.\x0a\x09\x09\x09'data' -> #{ 'arguments' -> self data }.\x0a\x09\x09\x09'success' -> [ :json :textStatus :xhr |\x0a\x09\x09\x09\x09self handleResponse: json status: xhr status.\x0a\x09\x09\x09\x09self beResolved ].\x0a\x09\x09\x09'error' -> [ :ex |\x0a\x09\x09\x09\x09ex status = 408 \x0a\x09\x09\x09\x09\x09ifTrue: [ self sessionNotFound ]\x0a\x09\x09\x09\x09\x09ifFalse: [ self requestError: ex ] ]\x0a\x09\x09}",
-messageSends: ["ajax:options:", "requestUrl", "->", "data", "handleResponse:status:", "status", "beResolved", "ifTrue:ifFalse:", "=", "sessionNotFound", "requestError:", "request:", "request:"],
+source: "request: aString\x0a\x09jQuery \x0a\x09\x09ajax: self requestUrl\x0a\x09\x09options: #{\x0a\x09\x09\x09'type' -> 'POST'.\x0a\x09\x09\x09'dataType' -> 'json'.\x0a\x09\x09\x09'data' -> #{ 'arguments' -> self data }.\x0a\x09\x09\x09'success' -> [ :json :textStatus :xhr |\x0a\x09\x09\x09\x09self handleResponse: json status: xhr status.\x0a\x09\x09\x09\x09self beResolved ].\x0a\x09\x09\x09'error' -> [ :ex |\x0a\x09\x09\x09\x09ex status = 408 \x0a\x09\x09\x09\x09\x09ifTrue: [ self sessionError ]\x0a\x09\x09\x09\x09\x09ifFalse: [ self requestError: ex ] ]\x0a\x09\x09}",
+messageSends: ["ajax:options:", "requestUrl", "data", "handleResponse:status:", "status", "beResolved", "ifTrue:ifFalse:", "=", "sessionError", "requestError:"],
 referencedClasses: []
 }),
 globals.TDRequestAction);
@@ -465,18 +467,18 @@ globals.TDRequestAction);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "sessionNotFound",
+selector: "sessionError",
 protocol: 'error handling',
 fn: function (){
 var self=this;
-function $TDSessionNotFound(){return smalltalk.TDSessionNotFound||(typeof TDSessionNotFound=="undefined"?nil:TDSessionNotFound)}
+function $TDSessionErrorHandler(){return globals.TDSessionErrorHandler||(typeof TDSessionErrorHandler=="undefined"?nil:TDSessionErrorHandler)}
 return smalltalk.withContext(function($ctx1) { 
-_st($TDSessionNotFound())._signal();
-return self}, function($ctx1) {$ctx1.fill(self,"sessionNotFound",{},smalltalk.TDRequestAction)})},
+_st($TDSessionErrorHandler())._handleSessionError();
+return self}, function($ctx1) {$ctx1.fill(self,"sessionError",{},globals.TDRequestAction)})},
 args: [],
-source: "sessionNotFound\x0a\x09TDSessionNotFound signal",
-messageSends: ["signal", "sessionNotFound", "sessionNotFound"],
-referencedClasses: ["TDSessionNotFound"]
+source: "sessionError\x0a\x09TDSessionErrorHandler handleSessionError",
+messageSends: ["handleSessionError"],
+referencedClasses: ["TDSessionErrorHandler"]
 }),
 globals.TDRequestAction);
 
@@ -488,10 +490,10 @@ fn: function (json){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
 _st(self._client())._updateFromJson_(json);
-return self}, function($ctx1) {$ctx1.fill(self,"updateClientFromJson:",{json:json},smalltalk.TDRequestAction)})},
+return self}, function($ctx1) {$ctx1.fill(self,"updateClientFromJson:",{json:json},globals.TDRequestAction)})},
 args: ["json"],
 source: "updateClientFromJson: json\x0a\x09self client updateFromJson: json",
-messageSends: ["updateFromJson:", "client", "updateClientFromJson:", "updateClientFromJson:"],
+messageSends: ["updateFromJson:", "client"],
 referencedClasses: []
 }),
 globals.TDRequestAction);
@@ -1730,6 +1732,134 @@ messageSends: ["xxxClient:", "basicNew", "on:", "initialize", "on:", "on:"],
 referencedClasses: ["TDClient"]
 }),
 globals.TDProxy.klass);
+
+
+smalltalk.addClass('TDSessionErrorHandler', globals.Object, ['hooks'], 'Tide-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "addHook:",
+protocol: 'adding',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(self._hooks())._add_(aBlock);
+return self}, function($ctx1) {$ctx1.fill(self,"addHook:",{aBlock:aBlock},globals.TDSessionErrorHandler)})},
+args: ["aBlock"],
+source: "addHook: aBlock\x0a\x09self hooks add: aBlock",
+messageSends: ["add:", "hooks"],
+referencedClasses: []
+}),
+globals.TDSessionErrorHandler);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "handleSessionError",
+protocol: 'error handling',
+fn: function (){
+var self=this;
+function $TDSessionError(){return globals.TDSessionError||(typeof TDSessionError=="undefined"?nil:TDSessionError)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self._hooks();
+$ctx1.sendIdx["hooks"]=1;
+_st($1)._ifEmpty_((function(){
+return smalltalk.withContext(function($ctx2) {
+return _st($TDSessionError())._signal();
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+_st(self._hooks())._do_((function(each){
+return smalltalk.withContext(function($ctx2) {
+return _st(each)._value();
+}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,2)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"handleSessionError",{},globals.TDSessionErrorHandler)})},
+args: [],
+source: "handleSessionError\x0a\x09self hooks ifEmpty: [ TDSessionError signal ].\x0a\x09self hooks do: [ :each | each value ]",
+messageSends: ["ifEmpty:", "hooks", "signal", "do:", "value"],
+referencedClasses: ["TDSessionError"]
+}),
+globals.TDSessionErrorHandler);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "hooks",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+function $OrderedCollection(){return globals.OrderedCollection||(typeof OrderedCollection=="undefined"?nil:OrderedCollection)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@hooks"];
+if(($receiver = $2) == nil || $receiver == null){
+self["@hooks"]=_st($OrderedCollection())._new();
+$1=self["@hooks"];
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"hooks",{},globals.TDSessionErrorHandler)})},
+args: [],
+source: "hooks\x0a\x09^ hooks ifNil: [ hooks := OrderedCollection new ]",
+messageSends: ["ifNil:", "new"],
+referencedClasses: ["OrderedCollection"]
+}),
+globals.TDSessionErrorHandler);
+
+
+globals.TDSessionErrorHandler.klass.iVarNames = ['current'];
+smalltalk.addMethod(
+smalltalk.method({
+selector: "current",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$receiver;
+$2=self["@current"];
+if(($receiver = $2) == nil || $receiver == null){
+self["@current"]=self._new();
+$1=self["@current"];
+} else {
+$1=$2;
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"current",{},globals.TDSessionErrorHandler.klass)})},
+args: [],
+source: "current\x0a\x09^ current ifNil: [ current := self new ]",
+messageSends: ["ifNil:", "new"],
+referencedClasses: []
+}),
+globals.TDSessionErrorHandler.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "handleSessionError",
+protocol: 'error handling',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(self._current())._handleSessionError();
+return self}, function($ctx1) {$ctx1.fill(self,"handleSessionError",{},globals.TDSessionErrorHandler.klass)})},
+args: [],
+source: "handleSessionError\x0a\x09self current handleSessionError",
+messageSends: ["handleSessionError", "current"],
+referencedClasses: []
+}),
+globals.TDSessionErrorHandler.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "onSessionError:",
+protocol: 'adding',
+fn: function (aBlock){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+_st(self._current())._addHook_(aBlock);
+return self}, function($ctx1) {$ctx1.fill(self,"onSessionError:",{aBlock:aBlock},globals.TDSessionErrorHandler.klass)})},
+args: ["aBlock"],
+source: "onSessionError: aBlock\x0a\x09self current addHook: aBlock",
+messageSends: ["addHook:", "current"],
+referencedClasses: []
+}),
+globals.TDSessionErrorHandler.klass);
 
 smalltalk.addMethod(
 smalltalk.method({

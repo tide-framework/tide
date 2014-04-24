@@ -10,6 +10,6 @@ handleCallbackForRequest: aRequest
 	self 
 		handleCallback: (self session callbacks 
 			callbackAt: key 
-			ifAbsent: [  ^ self ])
+			ifAbsent: [  ^ self callbackNotFound ])
 		data: (aRequest entity ifNotNil: [ :entity | 
 			self readData: (Json readFrom: (entity fields at: 'arguments') readStream) ])

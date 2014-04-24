@@ -12,7 +12,8 @@
 		"createdOn",
 		"modifiedOn",
 		"expirySeconds",
-		"literalPresenters" ],
+		"literalPresenters",
+		"expired" ],
 	"name" : "TDSession",
 	"pools" : [
 		 ],

@@ -127,22 +127,21 @@ globals.TDServerError);
 
 
 
-smalltalk.addClass('TDSessionNotFound', globals.Error, [], 'Tide-Amber-Exceptions');
+smalltalk.addClass('TDSessionError', globals.Error, [], 'Tide-Amber-Exceptions');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageText",
 protocol: 'accessing',
 fn: function (){
 var self=this;
-return smalltalk.withContext(function($ctx1) { 
-return "Tide session not found";
-}, function($ctx1) {$ctx1.fill(self,"messageText",{},smalltalk.TDSessionNotFound)})},
+return "Tide session error";
+},
 args: [],
-source: "messageText\x0a\x09^ 'Tide session not found'",
+source: "messageText\x0a\x09^ 'Tide session error'",
 messageSends: [],
 referencedClasses: []
 }),
-globals.TDSessionNotFound);
+globals.TDSessionError);
 
 
 });

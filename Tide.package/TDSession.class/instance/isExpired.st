@@ -1,3 +1,4 @@
 testing
 isExpired
-	^ (self modifiedOn + (Duration seconds: self expirySeconds)) asSeconds < DateAndTime now asSeconds 
+	^ expired or: [
+		(self modifiedOn + (Duration seconds: self expirySeconds)) asSeconds < DateAndTime now asSeconds ]

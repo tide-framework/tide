@@ -13,9 +13,9 @@
 	"instance" : {
 		"callbackField" : "NicolasPetton 10/18/2012 14:37",
 		"dispatch:" : "NicolasPetton 10/17/2012 18:36",
-		"handleExpired:" : "NicolasPetton 10/18/2012 16:43",
-		"handleRequest:" : "NicolasPetton 2/19/2014 16:22",
+		"handleRequest:" : "NicolasPetton 4/24/2014 15:05",
 		"handleResponse:" : "NicolasPetton 10/18/2012 14:12",
+		"handleSessionError:" : "NicolasPetton 4/24/2014 15:05",
 		"handlerFor:" : "NicolasPetton 7/26/2012 12:18",
 		"handlers" : "NicolasPetton 7/26/2012 12:20",
 		"notFound:" : "NicolasPetton 2/12/2014 14:26",

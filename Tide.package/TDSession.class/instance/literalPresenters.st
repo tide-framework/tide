@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 literalPresenters
 	^ literalPresenters ifNil: [ literalPresenters := Dictionary new ]

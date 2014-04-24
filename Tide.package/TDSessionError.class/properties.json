@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "NicolasPetton 2/19/2014 16:21",
+	"commentStamp" : "",
 	"instvars" : [
-		"session" ],
-	"name" : "TDSessionExpired",
+		 ],
+	"name" : "TDSessionError",
 	"pools" : [
 		 ],
-	"super" : "TDSessionError",
+	"super" : "Error",
 	"type" : "normal" }

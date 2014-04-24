@@ -1,11 +1,11 @@
 request handling
-handleExpired: aRequest
+handleSessionError: aRequest
 	| response |
 	
 	response := ZnResponse new
 		statusLine: (ZnStatusLine code: 408);
 		headers: ZnHeaders defaultResponseHeaders;
-		entity: (ZnStringEntity text: 'Session expired');
+		entity: (ZnStringEntity text: 'Session error');
 		yourself.
 		
 	self useCookies ifTrue: [

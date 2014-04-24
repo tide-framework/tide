@@ -45,13 +45,13 @@ code: aString
 	code := aString.
 ! !
 
-Error subclass: #TDSessionNotFound
+Error subclass: #TDSessionError
 	instanceVariableNames: ''
 	package: 'Tide-Amber-Exceptions'!
 
-!TDSessionNotFound methodsFor: 'accessing'!
+!TDSessionError methodsFor: 'accessing'!
 
 messageText
-	^ 'Tide session not found'
+	^ 'Tide session error'
 ! !
 
