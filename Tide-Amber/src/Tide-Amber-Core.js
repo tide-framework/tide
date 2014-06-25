@@ -265,6 +265,41 @@ referencedClasses: ["TDClient"]
 globals.TDClientProxy.klass);
 
 
+smalltalk.addClass('TDPromiseProxy', globals.TDAbstractProxy, ['promise'], 'Tide-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "promise",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@promise"];
+return $1;
+},
+args: [],
+source: "promise\x0a\x09^ promise",
+messageSends: ["promise"],
+referencedClasses: []
+}),
+globals.TDPromiseProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "promise:",
+protocol: 'accessing',
+fn: function (aPromise){
+var self=this;
+self["@promise"]=aPromise;
+return self},
+args: ["aPromise"],
+source: "promise: aPromise\x0a\x09promise := aPromise",
+messageSends: ["promise:"],
+referencedClasses: []
+}),
+globals.TDPromiseProxy);
+
+
+
 smalltalk.addClass('TDAction', globals.Object, ['promise', 'resolved', 'failure'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
@@ -1355,6 +1390,28 @@ args: [],
 source: "action\x0a\x09^ action",
 messageSends: ["action", "action", "action"],
 referencedClasses: []
+}),
+globals.TDPromise);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asProxy",
+protocol: 'converting',
+fn: function (){
+var self=this;
+function $TDPromiseProxy(){return globals.TDPromiseProxy||(typeof TDPromiseProxy=="undefined"?nil:TDPromiseProxy)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=_st($TDPromiseProxy())._new();
+_st($2)._promise_(self);
+$3=_st($2)._yourself();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asProxy",{},globals.TDPromise)})},
+args: [],
+source: "asProxy\x0a\x09^ TDPromiseProxy new\x0a\x09\x09promise: self;\x0a\x09\x09yourself",
+messageSends: ["promise:", "new", "yourself", "asProxy"],
+referencedClasses: ["TDPromiseProxy"]
 }),
 globals.TDPromise);
 

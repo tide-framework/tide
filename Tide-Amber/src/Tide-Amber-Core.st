@@ -113,6 +113,20 @@ on: aPath
 		initialize
 ! !
 
+TDAbstractProxy subclass: #TDPromiseProxy
+	instanceVariableNames: 'promise'
+	package: 'Tide-Amber-Core'!
+
+!TDPromiseProxy methodsFor: 'accessing'!
+
+promise
+	^ promise
+!
+
+promise: aPromise
+	promise := aPromise
+! !
+
 Object subclass: #TDAction
 	instanceVariableNames: 'promise resolved failure'
 	package: 'Tide-Amber-Core'!
@@ -550,6 +564,14 @@ then: aBlock
 	self isAssigned
 		ifTrue: [ self client future then: aBlock ]
 		ifFalse: [ self setAction: ((TDCallbackAction on: self) callback: aBlock) ]
+! !
+
+!TDPromise methodsFor: 'converting'!
+
+asProxy
+	^ TDPromiseProxy new
+		promise: self;
+		yourself
 ! !
 
 !TDPromise methodsFor: 'initialization'!
