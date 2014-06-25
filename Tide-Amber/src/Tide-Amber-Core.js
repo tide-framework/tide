@@ -2,6 +2,269 @@ define("tide/Tide-Amber-Core", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/
 smalltalk.addPackage('Tide-Amber-Core');
 smalltalk.packages["Tide-Amber-Core"].transport = {"type":"amd","amdNamespace":"tide"};
 
+smalltalk.addClass('TDAbstractProxy', globals.ProtoObject, ['client'], 'Tide-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "doesNotUnderstand:",
+protocol: 'error handling',
+fn: function (aMessage){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self._shouldBeImplemented();
+return self}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},globals.TDAbstractProxy)})},
+args: ["aMessage"],
+source: "doesNotUnderstand: aMessage\x0a\x09self shouldBeImplemented",
+messageSends: ["shouldBeImplemented", "doesNotUnderstand:"],
+referencedClasses: []
+}),
+globals.TDAbstractProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "inspectOn:",
+protocol: 'inspecting',
+fn: function (anInspector){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+_st(anInspector)._setLabel_(self._printString());
+$1=_st(anInspector)._setVariables_(globals.HashedCollection._newFromPairs_([]));
+return self}, function($ctx1) {$ctx1.fill(self,"inspectOn:",{anInspector:anInspector},globals.TDAbstractProxy)})},
+args: ["anInspector"],
+source: "inspectOn: anInspector\x0a\x09anInspector\x0a\x09\x09setLabel: self printString;\x0a\x09\x09setVariables: #{}",
+messageSends: ["setLabel:", "printString", "setVariables:", "inspectOn:"],
+referencedClasses: []
+}),
+globals.TDAbstractProxy);
+
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "client:",
+protocol: 'instance creation',
+fn: function (aClient){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._basicNew();
+_st($2)._xxxClient_(aClient);
+$3=_st($2)._initialize();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},globals.TDAbstractProxy.klass)})},
+args: ["aClient"],
+source: "client: aClient\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aClient\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: aClient;\x0a\x09\x09initialize",
+messageSends: ["xxxClient:", "basicNew", "initialize", "client:"],
+referencedClasses: []
+}),
+globals.TDAbstractProxy.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "connectOn:",
+protocol: 'instance creation',
+fn: function (aPath){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._on_(aPath);
+_st($2)._connect();
+$3=_st($2)._yourself();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"connectOn:",{aPath:aPath},globals.TDAbstractProxy.klass)})},
+args: ["aPath"],
+source: "connectOn: aPath\x0a\x09\x22Creates a proxy on aPath and connect it. \x0a\x09 This is a convenience method.\x22\x0a\x09 \x0a\x09^ (self on: aPath) \x0a\x09\x09connect; \x0a\x09\x09yourself.",
+messageSends: ["connect", "on:", "yourself", "connectOn:"],
+referencedClasses: []
+}),
+globals.TDAbstractProxy.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "on:",
+protocol: 'instance creation',
+fn: function (aPath){
+var self=this;
+function $TDClient(){return globals.TDClient||(typeof TDClient=="undefined"?nil:TDClient)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._basicNew();
+_st($2)._xxxClient_(_st($TDClient())._on_(aPath));
+$3=_st($2)._initialize();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},globals.TDAbstractProxy.klass)})},
+args: ["aPath"],
+source: "on: aPath\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aPath\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: (TDClient on: aPath);\x0a\x09\x09initialize",
+messageSends: ["xxxClient:", "basicNew", "on:", "initialize", "on:"],
+referencedClasses: ["TDClient"]
+}),
+globals.TDAbstractProxy.klass);
+
+
+smalltalk.addClass('TDClientProxy', globals.TDAbstractProxy, ['client'], 'Tide-Amber-Core');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "asTideArgument",
+protocol: 'converting',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st(self._xxxClient())._asTideArgument();
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"asTideArgument",{},globals.TDClientProxy)})},
+args: [],
+source: "asTideArgument\x0a\x09^ self xxxClient asTideArgument",
+messageSends: ["asTideArgument", "xxxClient", "asTideArgument"],
+referencedClasses: []
+}),
+globals.TDClientProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "doesNotUnderstand:",
+protocol: 'error handling',
+fn: function (aMessage){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $3,$2,$4,$1;
+$3=self._xxxClient();
+$ctx1.sendIdx["xxxClient"]=1;
+$2=_st($3)._respondsTo_(_st(aMessage)._selector());
+if(smalltalk.assert($2)){
+$4=self._xxxClient();
+$ctx1.sendIdx["xxxClient"]=2;
+$1=_st(aMessage)._sendTo_($4);
+} else {
+$1=_st(self._xxxClient())._handleFutureMessage_(aMessage);
+};
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},globals.TDClientProxy)})},
+args: ["aMessage"],
+source: "doesNotUnderstand: aMessage\x0a\x09^ (self xxxClient respondsTo: aMessage selector)\x0a\x09\x09ifTrue: [ aMessage sendTo: self xxxClient ]\x0a\x09\x09ifFalse: [ self xxxClient handleFutureMessage: aMessage ]",
+messageSends: ["ifTrue:ifFalse:", "respondsTo:", "xxxClient", "selector", "sendTo:", "handleFutureMessage:", "doesNotUnderstand:"],
+referencedClasses: []
+}),
+globals.TDClientProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "inspectOn:",
+protocol: 'inspecting',
+fn: function (anInspector){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+_st(anInspector)._setLabel_(self._printString());
+$1=_st(anInspector)._setVariables_(globals.HashedCollection._newFromPairs_(["client",self["@client"]]));
+return self}, function($ctx1) {$ctx1.fill(self,"inspectOn:",{anInspector:anInspector},globals.TDClientProxy)})},
+args: ["anInspector"],
+source: "inspectOn: anInspector\x0a\x09anInspector\x0a\x09\x09setLabel: self printString;\x0a\x09\x09setVariables: #{\x0a\x09\x09\x09'client' -> client\x0a\x09\x09}",
+messageSends: ["setLabel:", "printString", "setVariables:", "inspectOn:"],
+referencedClasses: []
+}),
+globals.TDClientProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "xxxClient",
+protocol: 'accessing',
+fn: function (){
+var self=this;
+var $1;
+$1=self["@client"];
+return $1;
+},
+args: [],
+source: "xxxClient\x0a\x09^ client",
+messageSends: ["xxxClient"],
+referencedClasses: []
+}),
+globals.TDClientProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "xxxClient:",
+protocol: 'accessing',
+fn: function (aClient){
+var self=this;
+self["@client"]=aClient;
+return self},
+args: ["aClient"],
+source: "xxxClient: aClient\x0a\x09client := aClient",
+messageSends: ["xxxClient:"],
+referencedClasses: []
+}),
+globals.TDClientProxy);
+
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "client:",
+protocol: 'instance creation',
+fn: function (aClient){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._basicNew();
+_st($2)._xxxClient_(aClient);
+$3=_st($2)._initialize();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},globals.TDClientProxy.klass)})},
+args: ["aClient"],
+source: "client: aClient\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aClient\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: aClient;\x0a\x09\x09initialize",
+messageSends: ["xxxClient:", "basicNew", "initialize", "client:"],
+referencedClasses: []
+}),
+globals.TDClientProxy.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "connectOn:",
+protocol: 'instance creation',
+fn: function (aPath){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._on_(aPath);
+_st($2)._connect();
+$3=_st($2)._yourself();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"connectOn:",{aPath:aPath},globals.TDClientProxy.klass)})},
+args: ["aPath"],
+source: "connectOn: aPath\x0a\x09\x22Creates a proxy on aPath and connect it. \x0a\x09 This is a convenience method.\x22\x0a\x09 \x0a\x09^ (self on: aPath) \x0a\x09\x09connect; \x0a\x09\x09yourself.",
+messageSends: ["connect", "on:", "yourself", "connectOn:"],
+referencedClasses: []
+}),
+globals.TDClientProxy.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "on:",
+protocol: 'instance creation',
+fn: function (aPath){
+var self=this;
+function $TDClient(){return globals.TDClient||(typeof TDClient=="undefined"?nil:TDClient)}
+return smalltalk.withContext(function($ctx1) { 
+var $2,$3,$1;
+$2=self._basicNew();
+_st($2)._xxxClient_(_st($TDClient())._on_(aPath));
+$3=_st($2)._initialize();
+$1=$3;
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},globals.TDClientProxy.klass)})},
+args: ["aPath"],
+source: "on: aPath\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aPath\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: (TDClient on: aPath);\x0a\x09\x09initialize",
+messageSends: ["xxxClient:", "basicNew", "on:", "initialize", "on:"],
+referencedClasses: ["TDClient"]
+}),
+globals.TDClientProxy.klass);
+
+
 smalltalk.addClass('TDAction', globals.Object, ['promise', 'resolved', 'failure'], 'Tide-Amber-Core');
 smalltalk.addMethod(
 smalltalk.method({
@@ -1074,222 +1337,6 @@ messageSends: ["path:", "new", "yourself", "on:", "on:", "on:"],
 referencedClasses: []
 }),
 globals.TDClient.klass);
-
-
-smalltalk.addClass('TDClientProxy', globals.ProtoObject, ['client'], 'Tide-Amber-Core');
-smalltalk.addMethod(
-smalltalk.method({
-selector: "asTideArgument",
-protocol: 'converting',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(self._xxxClient())._asTideArgument();
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"asTideArgument",{},globals.TDClientProxy)})},
-args: [],
-source: "asTideArgument\x0a\x09^ self xxxClient asTideArgument",
-messageSends: ["asTideArgument", "xxxClient", "asTideArgument"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "doesNotUnderstand:",
-protocol: 'error handling',
-fn: function (aMessage){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $3,$2,$4,$1;
-$3=self._xxxClient();
-$ctx1.sendIdx["xxxClient"]=1;
-$2=_st($3)._respondsTo_(_st(aMessage)._selector());
-if(smalltalk.assert($2)){
-$4=self._xxxClient();
-$ctx1.sendIdx["xxxClient"]=2;
-$1=_st(aMessage)._sendTo_($4);
-} else {
-$1=_st(self._xxxClient())._handleFutureMessage_(aMessage);
-};
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"doesNotUnderstand:",{aMessage:aMessage},globals.TDClientProxy)})},
-args: ["aMessage"],
-source: "doesNotUnderstand: aMessage\x0a\x09^ (self xxxClient respondsTo: aMessage selector)\x0a\x09\x09ifTrue: [ aMessage sendTo: self xxxClient ]\x0a\x09\x09ifFalse: [ self xxxClient handleFutureMessage: aMessage ]",
-messageSends: ["ifTrue:ifFalse:", "respondsTo:", "xxxClient", "selector", "sendTo:", "handleFutureMessage:", "doesNotUnderstand:"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "inheritedSelectors",
-protocol: 'private',
-fn: function (){
-var self=this;
-function $TDClientProxy(){return globals.TDClientProxy||(typeof TDClientProxy=="undefined"?nil:TDClientProxy)}
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=_st(_st(self._class())._allSelectors())._reject_((function(each){
-return smalltalk.withContext(function($ctx2) {
-return _st(_st(_st($TDClientProxy())._methodDictionary())._keys())._includes_(each);
-}, function($ctx2) {$ctx2.fillBlock({each:each},$ctx1,1)})}));
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"inheritedSelectors",{},globals.TDClientProxy)})},
-args: [],
-source: "inheritedSelectors\x0a\x09^ self class allSelectors\x0a\x09\x09reject: [ :each | TDClientProxy methodDictionary keys includes: each ]",
-messageSends: ["reject:", "allSelectors", "class", "includes:", "keys", "methodDictionary", "inheritedSelectors"],
-referencedClasses: ["TDClientProxy"]
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "initialize",
-protocol: 'initialization',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-globals.TDClientProxy.superclass.fn.prototype._initialize.apply(_st(self), []);
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.TDClientProxy)})},
-args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09\x22self inheritedSelectors do: [ :each |\x0a\x09\x09self removeSelector: each asSelector ]\x22",
-messageSends: ["initialize", "initialize"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "inspectOn:",
-protocol: 'inspecting',
-fn: function (anInspector){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-_st(anInspector)._setLabel_(self._printString());
-$1=_st(anInspector)._setVariables_(globals.HashedCollection._newFromPairs_(["client",self["@client"]]));
-return self}, function($ctx1) {$ctx1.fill(self,"inspectOn:",{anInspector:anInspector},globals.TDClientProxy)})},
-args: ["anInspector"],
-source: "inspectOn: anInspector\x0a\x09anInspector\x0a\x09\x09setLabel: self printString;\x0a\x09\x09setVariables: #{\x0a\x09\x09\x09'client' -> client\x0a\x09\x09}",
-messageSends: ["setLabel:", "printString", "setVariables:", "inspectOn:"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "removeSelector:",
-protocol: 'private',
-fn: function (aString){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-delete self[aString];;
-return self}, function($ctx1) {$ctx1.fill(self,"removeSelector:",{aString:aString},globals.TDClientProxy)})},
-args: ["aString"],
-source: "removeSelector: aString\x0a\x09<delete self[aString];>",
-messageSends: ["removeSelector:"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "xxxClient",
-protocol: 'accessing',
-fn: function (){
-var self=this;
-var $1;
-$1=self["@client"];
-return $1;
-},
-args: [],
-source: "xxxClient\x0a\x09^ client",
-messageSends: ["xxxClient"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "xxxClient:",
-protocol: 'accessing',
-fn: function (aClient){
-var self=this;
-self["@client"]=aClient;
-return self},
-args: ["aClient"],
-source: "xxxClient: aClient\x0a\x09client := aClient",
-messageSends: ["xxxClient:"],
-referencedClasses: []
-}),
-globals.TDClientProxy);
-
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "client:",
-protocol: 'instance creation',
-fn: function (aClient){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $2,$3,$1;
-$2=self._basicNew();
-_st($2)._xxxClient_(aClient);
-$3=_st($2)._initialize();
-$1=$3;
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"client:",{aClient:aClient},globals.TDClientProxy.klass)})},
-args: ["aClient"],
-source: "client: aClient\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aClient\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: aClient;\x0a\x09\x09initialize",
-messageSends: ["xxxClient:", "basicNew", "initialize", "client:"],
-referencedClasses: []
-}),
-globals.TDClientProxy.klass);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "connectOn:",
-protocol: 'instance creation',
-fn: function (aPath){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $2,$3,$1;
-$2=self._on_(aPath);
-_st($2)._connect();
-$3=_st($2)._yourself();
-$1=$3;
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"connectOn:",{aPath:aPath},globals.TDClientProxy.klass)})},
-args: ["aPath"],
-source: "connectOn: aPath\x0a\x09\x22Creates a proxy on aPath and connect it. \x0a\x09 This is a convenience method.\x22\x0a\x09 \x0a\x09^ (self on: aPath) \x0a\x09\x09connect; \x0a\x09\x09yourself.",
-messageSends: ["connect", "on:", "yourself", "connectOn:"],
-referencedClasses: []
-}),
-globals.TDClientProxy.klass);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "on:",
-protocol: 'instance creation',
-fn: function (aPath){
-var self=this;
-function $TDClient(){return globals.TDClient||(typeof TDClient=="undefined"?nil:TDClient)}
-return smalltalk.withContext(function($ctx1) { 
-var $2,$3,$1;
-$2=self._basicNew();
-_st($2)._xxxClient_(_st($TDClient())._on_(aPath));
-$3=_st($2)._initialize();
-$1=$3;
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"on:",{aPath:aPath},globals.TDClientProxy.klass)})},
-args: ["aPath"],
-source: "on: aPath\x0a\x09\x22Do not add yourself here.\x0a\x09It is not understood by the proxy after sending #initialize, therefore it returns aPath\x22\x0a\x0a\x09^ self basicNew\x0a\x09\x09xxxClient: (TDClient on: aPath);\x0a\x09\x09initialize",
-messageSends: ["xxxClient:", "basicNew", "on:", "initialize", "on:"],
-referencedClasses: ["TDClient"]
-}),
-globals.TDClientProxy.klass);
 
 
 smalltalk.addClass('TDPromise', globals.Object, ['previous', 'next', 'client', 'action', 'errorHandler'], 'Tide-Amber-Core');
