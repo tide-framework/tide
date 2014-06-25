@@ -1,4 +1,4 @@
-Smalltalk current createPackage: 'Tide-Amber-Tests'!
+Smalltalk createPackage: 'Tide-Amber-Tests'!
 TestCase subclass: #TDClientTest
 	instanceVariableNames: 'client'
 	package: 'Tide-Amber-Tests'!
@@ -19,7 +19,7 @@ tearDown
 
 testForwarding
 	"| client |"
-	client := TDProxy client: (TDClient new).
+	client := TDClientProxy client: (TDClient new).
 
 	self should: [ client count ] raise: MessageNotUnderstood.	
 
@@ -47,7 +47,7 @@ testFuture
 	self assert: p3 next equals: nil
 ! !
 
-TDProxy subclass: #TDMockProxy
+TDClientProxy subclass: #TDMockProxy
 	instanceVariableNames: 'catchedSelectors'
 	package: 'Tide-Amber-Tests'!
 
@@ -90,7 +90,7 @@ testDNU
 testInheritedSelectors
 	| proxy |
 
-	proxy := TDProxy basicNew.
+	proxy := TDClientProxy basicNew.
 
 	self assert: (proxy inheritedSelectors includes: 'isNil').
 	self deny: (proxy inheritedSelectors includes: 'xxxClient')
@@ -100,7 +100,7 @@ testxxxClient
 	| proxy client |
 	
 	client := TDClient new.
-	proxy := TDProxy client: client.
+	proxy := TDClientProxy client: client.
 
 	self assert: proxy xxxClient == client.
 	self assert: proxy yourself == client.

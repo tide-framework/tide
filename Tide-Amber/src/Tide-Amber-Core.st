@@ -367,6 +367,92 @@ on: aString
 		yourself
 ! !
 
+ProtoObject subclass: #TDClientProxy
+	instanceVariableNames: 'client'
+	package: 'Tide-Amber-Core'!
+
+!TDClientProxy methodsFor: 'accessing'!
+
+xxxClient
+	^ client
+!
+
+xxxClient: aClient
+	client := aClient
+! !
+
+!TDClientProxy methodsFor: 'converting'!
+
+asTideArgument
+	^ self xxxClient asTideArgument
+! !
+
+!TDClientProxy methodsFor: 'error handling'!
+
+doesNotUnderstand: aMessage
+	^ (self xxxClient respondsTo: aMessage selector)
+		ifTrue: [ aMessage sendTo: self xxxClient ]
+		ifFalse: [ self xxxClient handleFutureMessage: aMessage ]
+! !
+
+!TDClientProxy methodsFor: 'initialization'!
+
+initialize
+	super initialize.
+	"self inheritedSelectors do: [ :each |
+		self removeSelector: each asSelector ]"
+! !
+
+!TDClientProxy methodsFor: 'inspecting'!
+
+inspectOn: anInspector
+	anInspector
+		setLabel: self printString;
+		setVariables: #{
+			'client' -> client
+		}
+! !
+
+!TDClientProxy methodsFor: 'private'!
+
+inheritedSelectors
+	^ self class allSelectors
+		reject: [ :each | TDClientProxy methodDictionary keys includes: each ]
+!
+
+removeSelector: aString
+	<delete self[aString];>
+! !
+
+!TDClientProxy class methodsFor: 'instance creation'!
+
+client: aClient
+	"Do not add yourself here.
+	It is not understood by the proxy after sending #initialize, therefore it returns aClient"
+
+	^ self basicNew
+		xxxClient: aClient;
+		initialize
+!
+
+connectOn: aPath
+	"Creates a proxy on aPath and connect it. 
+	 This is a convenience method."
+	 
+	^ (self on: aPath) 
+		connect; 
+		yourself.
+!
+
+on: aPath
+	"Do not add yourself here.
+	It is not understood by the proxy after sending #initialize, therefore it returns aPath"
+
+	^ self basicNew
+		xxxClient: (TDClient on: aPath);
+		initialize
+! !
+
 Object subclass: #TDPromise
 	instanceVariableNames: 'previous next client action errorHandler'
 	package: 'Tide-Amber-Core'!
@@ -502,92 +588,6 @@ on: aClient
 		yourself
 ! !
 
-ProtoObject subclass: #TDProxy
-	instanceVariableNames: 'client'
-	package: 'Tide-Amber-Core'!
-
-!TDProxy methodsFor: 'accessing'!
-
-xxxClient
-	^ client
-!
-
-xxxClient: aClient
-	client := aClient
-! !
-
-!TDProxy methodsFor: 'converting'!
-
-asTideArgument
-	^ self xxxClient asTideArgument
-! !
-
-!TDProxy methodsFor: 'error handling'!
-
-doesNotUnderstand: aMessage
-	^ (self xxxClient respondsTo: aMessage selector)
-		ifTrue: [ aMessage sendTo: self xxxClient ]
-		ifFalse: [ self xxxClient handleFutureMessage: aMessage ]
-! !
-
-!TDProxy methodsFor: 'initialization'!
-
-initialize
-	super initialize.
-	"self inheritedSelectors do: [ :each |
-		self removeSelector: each asSelector ]"
-! !
-
-!TDProxy methodsFor: 'inspecting'!
-
-inspectOn: anInspector
-	anInspector
-		setLabel: self printString;
-		setVariables: #{
-			'client' -> client
-		}
-! !
-
-!TDProxy methodsFor: 'private'!
-
-inheritedSelectors
-	^ self class allSelectors
-		reject: [ :each | TDProxy methodDictionary keys includes: each ]
-!
-
-removeSelector: aString
-	<delete self[aString];>
-! !
-
-!TDProxy class methodsFor: 'instance creation'!
-
-client: aClient
-	"Do not add yourself here.
-	It is not understood by the proxy after sending #initialize, therefore it returns aClient"
-
-	^ self basicNew
-		xxxClient: aClient;
-		initialize
-!
-
-connectOn: aPath
-	"Creates a proxy on aPath and connect it. 
-	 This is a convenience method."
-	 
-	^ (self on: aPath) 
-		connect; 
-		yourself.
-!
-
-on: aPath
-	"Do not add yourself here.
-	It is not understood by the proxy after sending #initialize, therefore it returns aPath"
-
-	^ self basicNew
-		xxxClient: (TDClient on: aPath);
-		initialize
-! !
-
 Object subclass: #TDSessionErrorHandler
 	instanceVariableNames: 'hooks'
 	package: 'Tide-Amber-Core'!
@@ -659,7 +659,7 @@ asTideObject
 !JSObjectProxy methodsFor: '*Tide-Amber-Core'!
 
 asTideObject
-	^ TDProxy client: (TDClient fromJson: self)
+	^ TDClientProxy client: (TDClient fromJson: self)
 ! !
 
 !Object methodsFor: '*Tide-Amber-Core'!

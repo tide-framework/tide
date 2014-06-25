@@ -6,7 +6,7 @@ Widget subclass: #TDCounterWidget
 !TDCounterWidget methodsFor: 'accessing'!
 
 counter
-	^ counter ifNil: [ counter := TDProxy on: '/counter' ]
+	^ counter ifNil: [ counter := TDClientProxy on: '/counter' ]
 !
 
 counter: aCounter
