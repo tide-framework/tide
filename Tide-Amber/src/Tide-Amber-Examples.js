@@ -5,25 +5,6 @@ smalltalk.packages["Tide-Amber-Examples"].transport = {"type":"amd","amdNamespac
 smalltalk.addClass('TDCounterWidget', globals.Widget, ['counter', 'header'], 'Tide-Amber-Examples');
 smalltalk.addMethod(
 smalltalk.method({
-selector: "addNewCounter",
-protocol: 'actions',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st(_st(self._counter())._otherCounter())._then_((function(proxy){
-return smalltalk.withContext(function($ctx2) {
-return _st(_st(self._class())._on_(proxy))._render();
-}, function($ctx2) {$ctx2.fillBlock({proxy:proxy},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"addNewCounter",{},smalltalk.TDCounterWidget)})},
-args: [],
-source: "addNewCounter\x0a\x09self counter otherCounter then: [ :proxy | \x0a\x09\x09(self class on: proxy) render ]",
-messageSends: ["then:", "otherCounter", "counter", "render", "on:", "class", "addNewCounter"],
-referencedClasses: []
-}),
-globals.TDCounterWidget);
-
-smalltalk.addMethod(
-smalltalk.method({
 selector: "counter",
 protocol: 'accessing',
 fn: function (){
@@ -42,7 +23,7 @@ return $1;
 }, function($ctx1) {$ctx1.fill(self,"counter",{},globals.TDCounterWidget)})},
 args: [],
 source: "counter\x0a\x09^ counter ifNil: [ counter := TDClientProxy on: '/counter' ]",
-messageSends: ["ifNil:", "on:", "counter"],
+messageSends: ["ifNil:", "on:", "counter", "counter"],
 referencedClasses: ["TDClientProxy"]
 }),
 globals.TDCounterWidget);
@@ -58,7 +39,7 @@ self["@counter"]=aCounter;
 return self}, function($ctx1) {$ctx1.fill(self,"counter:",{aCounter:aCounter},smalltalk.TDCounterWidget)})},
 args: ["aCounter"],
 source: "counter: aCounter\x0a\x09counter := aCounter",
-messageSends: ["counter:"],
+messageSends: ["counter:", "counter:"],
 referencedClasses: []
 }),
 globals.TDCounterWidget);
@@ -78,7 +59,7 @@ return self._update();
 return self}, function($ctx1) {$ctx1.fill(self,"decrease",{},smalltalk.TDCounterWidget)})},
 args: [],
 source: "decrease\x0a\x09self counter decrease.\x0a\x09self counter then: [ self update ]",
-messageSends: ["decrease", "counter", "then:", "update", "decrease"],
+messageSends: ["decrease", "counter", "then:", "update", "decrease", "decrease"],
 referencedClasses: []
 }),
 globals.TDCounterWidget);
@@ -98,7 +79,7 @@ return self._update();
 return self}, function($ctx1) {$ctx1.fill(self,"increase",{},smalltalk.TDCounterWidget)})},
 args: [],
 source: "increase\x0a\x09self counter increase.\x0a\x09self counter then: [ self update ]",
-messageSends: ["increase", "counter", "then:", "update", "increase"],
+messageSends: ["increase", "counter", "then:", "update", "increase", "increase"],
 referencedClasses: []
 }),
 globals.TDCounterWidget);
@@ -118,7 +99,7 @@ return self._appendToJQuery_("body"._asJQuery());
 return self}, function($ctx1) {$ctx1.fill(self,"render",{},smalltalk.TDCounterWidget)})},
 args: [],
 source: "render\x0a\x09self counter connect.\x0a\x09self counter then: [ \x0a\x09\x09self appendToJQuery: 'body' asJQuery ]",
-messageSends: ["connect", "counter", "then:", "appendToJQuery:", "asJQuery", "render"],
+messageSends: ["connect", "counter", "then:", "appendToJQuery:", "asJQuery", "render", "render"],
 referencedClasses: []
 }),
 globals.TDCounterWidget);
@@ -130,31 +111,28 @@ protocol: 'rendering',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5,$6;
+var $1,$2,$3,$4;
 self["@header"]=_st(_st(html)._h1())._with_(_st(_st(self._counter())._count())._asString());
+$ctx1.sendIdx["with:"]=1;
 $1=_st(html)._button();
+$ctx1.sendIdx["button"]=1;
 _st($1)._with_("++");
+$ctx1.sendIdx["with:"]=2;
 $2=_st($1)._onClick_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._increase();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+$ctx1.sendIdx["onClick:"]=1;
 $3=_st(html)._button();
 _st($3)._with_("--");
 $4=_st($3)._onClick_((function(){
 return smalltalk.withContext(function($ctx2) {
 return self._decrease();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
-_st(html)._br();
-$5=_st(html)._a();
-_st($5)._with_("add a new counter");
-$6=_st($5)._onClick_((function(){
-return smalltalk.withContext(function($ctx2) {
-return self._addNewCounter();
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,3)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.TDCounterWidget)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},globals.TDCounterWidget)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09header := html h1 with: self counter count asString.\x0a\x09html button \x0a\x09\x09with: '++';\x0a\x09\x09onClick: [ self increase ].\x0a\x09html button \x0a\x09\x09with: '--';\x0a\x09\x09onClick: [ self decrease ].\x0a\x09html br.\x0a\x09html a\x0a\x09\x09with: 'add a new counter';\x0a\x09\x09onClick: [ self addNewCounter ]",
-messageSends: ["with:", "h1", "asString", "count", "counter", "button", "onClick:", "increase", "decrease", "br", "a", "addNewCounter", "renderOn:"],
+source: "renderOn: html\x0a\x09header := html h1 with: self counter count asString.\x0a\x09html button \x0a\x09\x09with: '++';\x0a\x09\x09onClick: [ self increase ].\x0a\x09html button \x0a\x09\x09with: '--';\x0a\x09\x09onClick: [ self decrease ]",
+messageSends: ["with:", "h1", "asString", "count", "counter", "button", "onClick:", "increase", "decrease", "renderOn:"],
 referencedClasses: []
 }),
 globals.TDCounterWidget);
@@ -173,7 +151,7 @@ return _st(html)._with_(_st(_st(self._counter())._count())._asString());
 return self}, function($ctx1) {$ctx1.fill(self,"update",{},smalltalk.TDCounterWidget)})},
 args: [],
 source: "update\x0a\x09header contents: [ :html |\x0a\x09\x09html with: self counter count asString ]",
-messageSends: ["contents:", "with:", "asString", "count", "counter", "update"],
+messageSends: ["contents:", "with:", "asString", "count", "counter", "update", "update"],
 referencedClasses: []
 }),
 globals.TDCounterWidget);
@@ -188,7 +166,7 @@ var self=this;
 return self},
 args: [],
 source: "initialize\x0a\x09\x22self new render\x22",
-messageSends: ["initialize"],
+messageSends: ["initialize", "initialize"],
 referencedClasses: []
 }),
 globals.TDCounterWidget.klass);
@@ -209,7 +187,7 @@ return $1;
 }, function($ctx1) {$ctx1.fill(self,"on:",{aProxy:aProxy},smalltalk.TDCounterWidget.klass)})},
 args: ["aProxy"],
 source: "on: aProxy\x0a\x09^ self new\x0a\x09\x09counter: aProxy;\x0a\x09\x09yourself",
-messageSends: ["counter:", "new", "yourself", "on:"],
+messageSends: ["counter:", "new", "yourself", "on:", "on:"],
 referencedClasses: []
 }),
 globals.TDCounterWidget.klass);

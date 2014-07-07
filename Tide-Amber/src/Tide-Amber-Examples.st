@@ -15,11 +15,6 @@ counter: aCounter
 
 !TDCounterWidget methodsFor: 'actions'!
 
-addNewCounter
-	self counter otherCounter then: [ :proxy | 
-		(self class on: proxy) render ]
-!
-
 decrease
 	self counter decrease.
 	self counter then: [ self update ]
@@ -45,11 +40,7 @@ renderOn: html
 		onClick: [ self increase ].
 	html button 
 		with: '--';
-		onClick: [ self decrease ].
-	html br.
-	html a
-		with: 'add a new counter';
-		onClick: [ self addNewCounter ]
+		onClick: [ self decrease ]
 ! !
 
 !TDCounterWidget methodsFor: 'updating'!
