@@ -130,6 +130,8 @@ promise: aPromise
 Object subclass: #TDAction
 	instanceVariableNames: 'promise resolved failure'
 	package: 'Tide-Amber-Core'!
+!TDAction commentStamp!
+I am an abstract action to be performed as the fulfillment of a promise. In case of success, the chain of promises will be followed, to trigger the next action.!
 
 !TDAction methodsFor: 'accessing'!
 
@@ -187,6 +189,8 @@ on: aPromise
 TDAction subclass: #TDCallbackAction
 	instanceVariableNames: 'callback'
 	package: 'Tide-Amber-Core'!
+!TDCallbackAction commentStamp!
+I represent a client-side callback to be executed once my promise is fulfilled.!
 
 !TDCallbackAction methodsFor: 'accessing'!
 
@@ -208,6 +212,8 @@ resolve
 TDAction subclass: #TDRequestAction
 	instanceVariableNames: 'requestUrl data'
 	package: 'Tide-Amber-Core'!
+!TDRequestAction commentStamp!
+I represent a request to be carried on the server side. Since the request is asynchronous, I will only get resolved once the answer comes back.!
 
 !TDRequestAction methodsFor: 'accessing'!
 
@@ -341,6 +347,8 @@ new
 Object subclass: #TDClient
 	instanceVariableNames: 'state actions firstPromise promisedValue path id connected'
 	package: 'Tide-Amber-Core'!
+!TDClient commentStamp!
+I represent a known, global entry point to the server-side API.!
 
 !TDClient methodsFor: 'accessing'!
 
@@ -498,6 +506,12 @@ on: aString
 Object subclass: #TDPromise
 	instanceVariableNames: 'previous next client action errorHandler'
 	package: 'Tide-Amber-Core'!
+!TDPromise commentStamp!
+I am the promise for the eventual resolution of an asynchronous or deferred operation. I store an action to be carried once that happens.
+
+## API
+
+Use `then:` to chain subsequent actions.!
 
 !TDPromise methodsFor: 'accessing'!
 
