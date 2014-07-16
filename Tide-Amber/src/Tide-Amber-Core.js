@@ -170,6 +170,42 @@ globals.TDClientProxy);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "printOn:",
+protocol: 'printing',
+fn: function (aStream){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $2,$1,$3,$4,$receiver;
+$2=self._xxxClient();
+$ctx1.sendIdx["xxxClient"]=1;
+$1=_st($2)._path();
+$ctx1.sendIdx["path"]=1;
+if(($receiver = $1) == null || $receiver.isNil){
+_st(aStream)._nextPutAll_("a proxy on <");
+$ctx1.sendIdx["nextPutAll:"]=1;
+_st(aStream)._nextPutAll_(self._tidePresenterString());
+$ctx1.sendIdx["nextPutAll:"]=2;
+$3=_st(aStream)._nextPutAll_(">");
+$ctx1.sendIdx["nextPutAll:"]=3;
+$3;
+} else {
+_st(aStream)._nextPutAll_("a proxy on path \x22");
+$ctx1.sendIdx["nextPutAll:"]=4;
+_st(aStream)._nextPutAll_(_st(self._xxxClient())._path());
+$ctx1.sendIdx["nextPutAll:"]=5;
+$4=_st(aStream)._nextPutAll_("\x22");
+$4;
+};
+return self}, function($ctx1) {$ctx1.fill(self,"printOn:",{aStream:aStream},globals.TDClientProxy)})},
+args: ["aStream"],
+source: "printOn: aStream\x0a\x09self xxxClient path \x0a\x09\x09ifNil: [ \x0a\x09\x09\x09aStream \x0a\x09\x09\x09\x09nextPutAll: 'a proxy on <';\x0a\x09\x09\x09\x09nextPutAll: self tidePresenterString;\x0a\x09\x09\x09\x09nextPutAll: '>' ]\x0a\x09\x09ifNotNil: [ \x0a\x09\x09\x09aStream \x0a\x09\x09\x09\x09nextPutAll: 'a proxy on path \x22';\x0a\x09\x09\x09\x09nextPutAll: self xxxClient path;\x0a\x09\x09\x09\x09nextPutAll: '\x22' ]",
+messageSends: ["ifNil:ifNotNil:", "path", "xxxClient", "nextPutAll:", "tidePresenterString"],
+referencedClasses: []
+}),
+globals.TDClientProxy);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "xxxClient",
 protocol: 'accessing',
 fn: function () {

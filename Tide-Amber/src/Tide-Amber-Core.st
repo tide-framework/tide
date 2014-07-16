@@ -84,6 +84,22 @@ inspectOn: anInspector
 		}
 ! !
 
+!TDClientProxy methodsFor: 'printing'!
+
+printOn: aStream
+	self xxxClient path 
+		ifNil: [ 
+			aStream 
+				nextPutAll: 'a proxy on <';
+				nextPutAll: self tidePresenterString;
+				nextPutAll: '>' ]
+		ifNotNil: [ 
+			aStream 
+				nextPutAll: 'a proxy on path "';
+				nextPutAll: self xxxClient path;
+				nextPutAll: '"' ]
+! !
+
 !TDClientProxy class methodsFor: 'instance creation'!
 
 client: aClient
