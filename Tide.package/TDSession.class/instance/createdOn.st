@@ -1,3 +1,3 @@
 accessing timestamps
 createdOn
-	^ createdOn ifNil: [ createdOn := TimeStamp now ]
+	^ createdOn ifNil: [ createdOn := DateAndTime now ]

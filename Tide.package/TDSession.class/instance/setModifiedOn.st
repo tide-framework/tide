@@ -1,3 +1,3 @@
 accessing timestamps
 setModifiedOn
-	modifiedOn := TimeStamp now
+	modifiedOn := DateAndTime now
