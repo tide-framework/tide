@@ -54,18 +54,7 @@ You can either install it as a local component or a global one.
 
 To install as a global component (recommended option):
 
-    $ npm -g install bower@1.2.6
-
-The @1.2.6 suffix means that you want that very version.
-The newest version has a bug when it installs Amber.
-
-If you have a newer version, remove it with
-
-    $ npm -g remove bower
-
-or 
-
-    $ npm -g uninstall bower
+    $ npm -g install bower
 
 Omit the -g if you want to install in the current folder. (you are on your own then).
 
